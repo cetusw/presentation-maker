@@ -1,0 +1,8 @@
+.slide {
+    border: 1px solid #000000;
+    position: relative;
+}
+
+li {
+    margin: 0 20px 10px 40px;
+}
