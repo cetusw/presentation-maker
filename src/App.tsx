@@ -3,14 +3,24 @@ import {PresentationTitle} from "./components/PresentationTitle.tsx";
 import {updatePresentationTitle} from "./presentationUtils.ts";
 import {Presentation} from './presentationTypes';
 import { v4 as generateUuid } from 'uuid';
+import {SlideCollection} from "./components/SlideCollection.tsx";
 
 function App() {
     const [presentation, setPresentation] = useState<Presentation>({
         id: `presentation-${generateUuid()}`,
-        title: 'Название презентации',
-        author: 'Mikhail Kugelev',
-        createdAt: new Date(),
-        slides: [],
+        title: "Minimum Presentation",
+        author: "Mikhail",
+        createdAt: new Date("2024-09-05T00:00:00Z"),
+        slides: [
+            {
+                id: "slide-1",
+                background: {
+                    type: "color",
+                    color: "#FFFFFF"
+                },
+                objects: []
+            }
+        ]
     });
 
     function handleTitleChange(presentation: Presentation, newTitle: string) {
@@ -22,8 +32,10 @@ function App() {
         <div className="app">
             <PresentationTitle
                 presentation={presentation}
-                title={presentation.title}
                 onChangeTitle={handleTitleChange}
+            />
+            <SlideCollection
+                presentation={presentation}
             />
         </div>
     );

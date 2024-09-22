@@ -3,7 +3,6 @@ import TextField from '@mui/material/TextField';
 
 type PresentationTitleProps = {
     presentation: Presentation;
-    title: string;
     onChangeTitle: (presentation: Presentation, newTitle: string) => void;
 };
 
@@ -15,7 +14,7 @@ function PresentationTitle(props: PresentationTitleProps) {
                 variant="outlined"
                 type="text"
                 onChange={(e) => props.onChangeTitle(props.presentation, e.target.value)}
-                placeholder={props.title}
+                placeholder={props.presentation.title}
             />
         </div>
     )
