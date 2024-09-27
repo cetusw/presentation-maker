@@ -1,5 +1,5 @@
 import {defaultColor, defaultFontFamily, defaultFontSize, defaultPosition, defaultSize, defaultText} from "./constants";
-import {Presentation, Slide, SlideObject, ItemSelection, ImageObject, TextObject, Position, Size} from "./presentationTypes";
+import {Presentation, Slide, SlideObject, ItemSelection, ImageObject, TextObject, Position, Size, BackgroundType} from "./presentationTypes";
 import { v4 as generateUuid } from 'uuid';
 
 export function updatePresentationTitle(presentation: Presentation, newTitle: string): Presentation {
@@ -410,4 +410,17 @@ function findSlideById(slides: Slide[], slideId: string) {
         }
     }
     return {} as Slide
+}
+
+export function renderBackground(background: BackgroundType) {
+    switch (background.type) {
+        case 'color':
+            return background.color;
+        case 'image':
+            return `url(${background.imageUrl})`;
+        case 'gradient':
+            return `linear-gradient(${background.firstColor}, ${background.secondColor})`;
+        default:
+            return 'white';
+    }
 }

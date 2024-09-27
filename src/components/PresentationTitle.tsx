@@ -1,5 +1,5 @@
 import {Presentation} from "../presentationTypes.ts";
-import '../styles/presentation-title-style.css'
+import styles from '../styles/Header.module.css';
 import TextField from '@mui/material/TextField';
 
 type PresentationTitleProps = {
@@ -8,7 +8,7 @@ type PresentationTitleProps = {
 
 export function PresentationTitle(props: PresentationTitleProps) {
     return (
-        <div className="presentation-title">
+        <div className={styles.presentationTitle}>
             <TextField
                 id="outlined-basic"
                 variant="outlined"

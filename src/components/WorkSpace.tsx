@@ -1,16 +1,17 @@
-import {Slide} from "../presentationTypes.ts";
+import {Presentation} from "../presentationTypes.ts";
 import {SlideComponent} from "./SlideComponent.tsx";
 // import TextField from '@mui/material/TextField';
 
 type WorkSpaceProps = {
-    slide: Slide;
+    presentation: Presentation;
+    currentSlideIndex: number;
 };
 
 export function WorkSpace(props: WorkSpaceProps) {
     return (
         <div className="workspace">
             <SlideComponent
-                slide={props.slide}
+                slide={props.presentation.slides[props.currentSlideIndex]}
                 scale={1}
             />
         </div>
