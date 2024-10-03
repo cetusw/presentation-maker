@@ -1,6 +1,5 @@
-import {Presentation} from "../presentationTypes.ts";
-import {SlideComponent} from "./SlideComponent.tsx";
-// import TextField from '@mui/material/TextField';
+import {Presentation} from "../../presentationTypes.ts";
+import {SlideComponent} from "../../components/SlideComponent.tsx";
 
 type WorkSpaceProps = {
     presentation: Presentation;

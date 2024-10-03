@@ -1,7 +1,7 @@
-import {PresentationTitle} from "./components/PresentationTitle.tsx";
-import {SlideCollection} from "./components/SlideCollection.tsx";
-import {WorkSpace} from "./components/WorkSpace.tsx";
-import styles from './styles/App.module.css';
+import {PresentationTitle} from "./views/header/PresentationTitle.tsx";
+import {SlideCollection} from "./views/slideCollection/SlideCollection.tsx";
+import {WorkSpace} from "./views/workspace/WorkSpace.tsx";
+import styles from './App.module.css';
 import {defaultPresentation} from "./constants.ts";
 
 export default function App() {

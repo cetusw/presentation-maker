@@ -1,6 +1,6 @@
-import {Presentation} from "../presentationTypes.ts";
-import style from '../styles/SlideCollection.module.css';
-import {SlideComponent} from "./SlideComponent.tsx";
+import {Presentation} from "../../presentationTypes.ts";
+import style from './SlideCollection.module.css';
+import {SlideComponent} from "../../components/SlideComponent.tsx";
 
 type SlideCollectionProps = {
     presentation: Presentation;
