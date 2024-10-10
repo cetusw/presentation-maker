@@ -1,20 +1,21 @@
 import {Presentation} from "../../store/presentationTypes.ts";
-import styles from './PresentationTitle.module.css';
-import TextField from '@mui/material/TextField';
+import style from './PresentationTitle.module.css';
+import Logo from '../../assets/icons/logo.svg';
 
 type PresentationTitleProps = {
     presentation: Presentation;
 };
 
-export function PresentationTitle(props: PresentationTitleProps) {
+export function PresentationTitle({presentation}: PresentationTitleProps) {
     return (
-        <div className={styles.presentationTitle}>
-            <TextField
-                id="outlined-basic"
-                variant="outlined"
-                type="text"
-                placeholder={props.presentation.title}
-            />
+        <div className={style.presentationTitle}>
+            <img className={style.logo} src={Logo} alt={'logo'}/>
+            <input
+                className={style.input}
+                defaultValue={presentation.title}
+                placeholder={'Название презентации'}
+            >
+            </input>
         </div>
     )
 }

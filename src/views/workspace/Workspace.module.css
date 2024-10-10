@@ -3,8 +3,8 @@
 }
 
 .placeholderSlide {
-    width: calc(70vw);
-    height: calc(70vw * 9 / 16);
+    width: 900px;
+    height: calc(900px * 9 / 16);
     border: 1px dashed #000000;
     border-radius: 20px;
     padding: 20px;

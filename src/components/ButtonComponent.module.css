@@ -2,4 +2,13 @@
     background-color: transparent;
     border: none;
     border-radius: 5px;
+    padding: 5px;
+}
+
+.button:hover {
+    background-color: rgba(204, 204, 204, 0.8);
+}
+
+.buttonText {
+    font: 15px/20px 'Roboto', sans-serif;
 }

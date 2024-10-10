@@ -19,7 +19,7 @@ export function ButtonComponent({ text, onClick, icon, alt, className, disabled 
             disabled={disabled}
         >
             {icon && <img src={icon} alt={alt}/>}
-            <span>{text}</span>
+            <span className={style.buttonText}>{text}</span>
         </button>
     );
 }

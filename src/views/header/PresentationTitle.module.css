@@ -1,4 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    height: 40px;
+    width: 40px;
+    margin: 0 0 0 20px;
+}
+
 .presentationTitle {
-    margin: 0 0 0 0;
+    display: flex;
+    height: 40px;
     padding: 10px;
+}
+
+.input {
+    height: 20px;
+    width: 200px;
+    font: 16px/24px 'Roboto', sans-serif;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    margin: 0 0 0 20px;
 }

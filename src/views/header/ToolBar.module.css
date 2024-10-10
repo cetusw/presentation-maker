@@ -1,5 +1,7 @@
 .toolBar {
-    background-color: #edf2fa;
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(237, 242, 250, 1);
     height: 30px;
     border-radius: 25px;
     padding: 10px 40px;
@@ -8,10 +10,21 @@
 
 .undoButton,
 .redoButton {
-    width: 20px;
-    height: 20px;
-    margin: 5px;
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
     cursor: pointer;
+}
+
+.addSlideButton {
+    display: flex;
+    height: 30px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.addSlideButton span {
+    margin: 0 0 0 10px;
 }
 
 img {

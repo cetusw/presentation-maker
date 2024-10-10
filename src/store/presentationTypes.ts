@@ -64,3 +64,8 @@ export type ItemSelection = {
     selectedSlidesIds: string[];
     selectedObjectsIds: string[];
 }
+
+export type EditorType = {
+    presentation: Presentation;
+    selection: ItemSelection;
+}
