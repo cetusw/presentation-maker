@@ -8,6 +8,7 @@ export const defaultFontSize: number = 16;
 export const defaultColor: string = '#FFFFFF';
 export const defaultText: string = 'New text';
 export const defaultTitle: string = 'New title';
+export const slideCollectionScale: number = 5;
 
 export const defaultPresentation: Presentation = {
     "id": "presentation-1",
