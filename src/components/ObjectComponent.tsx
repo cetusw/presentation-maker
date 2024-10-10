@@ -6,25 +6,25 @@ type ObjectComponentProps = {
     scale: number,
 };
 
-export function ObjectComponent(props: ObjectComponentProps) {
+export function ObjectComponent({object, scale}: ObjectComponentProps) {
     return (
         <div
             className={style.object}
             style={{
-                left: props.object.position.x / props.scale,
-                top: props.object.position.y / props.scale,
-                width: props.object.size.width / props.scale,
-                height: props.object.size.height / props.scale,
+                left: object.position.x / scale,
+                top: object.position.y / scale,
+                width: object.size.width / scale,
+                height: object.size.height / scale,
             }}
         >
-            {props.object.type === 'text' ? (
-                <p style={{fontSize: props.object.fontSize / props.scale}}>
-                    {props.object.content}
+            {object.type === 'text' ? (
+                <p style={{fontSize: object.fontSize / scale}}>
+                    {object.content}
                 </p>
-            ) : props.object.type === 'image' ? (
+            ) : object.type === 'image' ? (
                 <img
                     className={style.image}
-                    src={props.object.imageUrl}
+                    src={object.imageUrl}
                     alt="Картинка"
                 />
             ) : null}

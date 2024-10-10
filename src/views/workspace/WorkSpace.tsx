@@ -7,13 +7,13 @@ type WorkSpaceProps = {
     currentSlideIndex: number;
 };
 
-export function WorkSpace(props: WorkSpaceProps) {
+export function WorkSpace({presentation, currentSlideIndex}: WorkSpaceProps) {
     return (
         <div className="workspace">
-            {props.presentation.slides.length > 0 ? (
+            {presentation.slides.length > 0 ? (
                 <div className={style.slide}>
                     <SlideComponent
-                        slide={props.presentation.slides[props.currentSlideIndex]}
+                        slide={presentation.slides[currentSlideIndex]}
                     />
                 </div>
             ) : (

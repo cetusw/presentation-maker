@@ -6,12 +6,12 @@ type SlideCollectionProps = {
     presentation: Presentation;
 };
 
-export function SlideCollection(props: SlideCollectionProps) {
+export function SlideCollection({presentation}: SlideCollectionProps) {
     return (
         <div>
-            {props.presentation.slides.length > 0 ? (
+            {presentation.slides.length > 0 ? (
                 <ol className={style.slideCollection}>
-                    {props.presentation.slides.map((slide) => (
+                    {presentation.slides.map((slide) => (
                         <li key={slide.id}>
                             <SlideComponent
                                 className={style.slideInCollection}
