@@ -4,15 +4,18 @@ import {ObjectComponent} from "./ObjectComponent.tsx";
 import {renderBackground} from "../store/presentationUtils.ts";
 
 type SlideComponentProps = {
+    className?: string;
     slide: Slide,
     scale?: number,
 };
 
-export function SlideComponent({slide, scale}: SlideComponentProps) {
+export function SlideComponent({className, slide, scale}: SlideComponentProps) {
     const newScale = scale ?? 1;
+    const slideClass = `${style.slide} ${className || ''}`;
+
     return (
         <div
-            className={style.slide}
+            className={slideClass}
             style={{
                 background: renderBackground(slide.background),
                 width: `calc(900px / ${newScale})`,

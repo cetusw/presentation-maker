@@ -14,6 +14,7 @@ export function SlideCollection(props: SlideCollectionProps) {
                     {props.presentation.slides.map((slide) => (
                         <li key={slide.id}>
                             <SlideComponent
+                                className={style.slideInCollection}
                                 slide={slide}
                                 scale={5}
                             />

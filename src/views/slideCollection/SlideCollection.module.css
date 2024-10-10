@@ -25,8 +25,17 @@
 }
 
 .slide {
-    border: 1px solid #000000;
+    border: 1px solid rgba(0, 0, 0, 1);
     position: relative;
+}
+
+.slideInCollection {
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.slideInCollection:hover {
+    border: 2px solid rgba(0, 0, 0, 1);
 }
 
 .object {
