@@ -1,5 +1,5 @@
-import {Presentation} from "../../presentationTypes.ts";
-import styles from './Header.module.css';
+import {Presentation} from "../../store/presentationTypes.ts";
+import styles from './PresentationTitle.module.css';
 import TextField from '@mui/material/TextField';
 
 type PresentationTitleProps = {

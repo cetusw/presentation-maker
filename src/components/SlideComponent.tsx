@@ -1,29 +1,31 @@
-import {Slide} from "../presentationTypes.ts";
+import {Slide} from "../store/presentationTypes.ts";
 import style from '../views/slideCollection/SlideCollection.module.css';
 import {ObjectComponent} from "./ObjectComponent.tsx";
-import {renderBackground} from "../presentationUtils.ts";
+import {renderBackground} from "../store/presentationUtils.ts";
 
 type SlideComponentProps = {
     slide: Slide,
-    scale: number,
+    scale?: number,
 };
 
-export function SlideComponent(props: SlideComponentProps) {
+export function SlideComponent({slide, scale}: SlideComponentProps) {
+    const newScale = scale ?? 1;
     return (
         <div
             className={style.slide}
             style={{
-                background: renderBackground(props.slide.background),
-                width: `calc(70vw / ${props.scale})`,
-                height: `calc((70vw * 9 / 16) / ${props.scale})`,
+                background: renderBackground(slide.background),
+                width: `calc(900px / ${newScale})`,
+                height: `calc((900px * 9 / 16) / ${newScale})`,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat'
             }}
         >
-            {props.slide.objects.map((object) => (
+            {slide.objects.map((object) => (
                 <ObjectComponent
+                    key={object.id}
                     object={object}
-                    scale={props.scale}
+                    scale={newScale}
                 />
             ))}
         </div>

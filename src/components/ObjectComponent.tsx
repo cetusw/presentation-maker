@@ -1,4 +1,4 @@
-import {SlideObject} from "../presentationTypes.ts";
+import {SlideObject} from "../store/presentationTypes.ts";
 import style from '../views/slideCollection/SlideCollection.module.css';
 
 type ObjectComponentProps = {

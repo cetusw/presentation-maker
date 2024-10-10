@@ -1,0 +1,20 @@
+.toolBar {
+    background-color: #edf2fa;
+    height: 30px;
+    border-radius: 25px;
+    padding: 10px 40px;
+    margin: 0 20px 10px 20px;
+}
+
+.undoButton,
+.redoButton {
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+img {
+    width: 20px;
+    height: 20px;
+}

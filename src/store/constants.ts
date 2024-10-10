@@ -1,4 +1,4 @@
-import {Position, Presentation, Size} from './presentationTypes';
+import {Position, Presentation, Size} from './presentationTypes.ts';
 // import {v4 as generateUuid} from "uuid";
 
 export const defaultPosition: Position = {x: 50, y: 50};
@@ -550,6 +550,13 @@ export const defaultPresentation: Presentation = {
             ]
         }
     ]
-}
+};
 
+export const minDefaultPresentation: Presentation = {
+    id: "1",
+    title: "Minimum Presentation",
+    author: "Mikhail",
+    createdAt: new Date("2024-09-05T00:00:00Z"),
+    slides: []
+};
 

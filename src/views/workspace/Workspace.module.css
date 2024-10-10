@@ -1,0 +1,19 @@
+.slide {
+    margin: 5vh 0 0 5vw;
+}
+
+.placeholderSlide {
+    width: calc(70vw);
+    height: calc(70vw * 9 / 16);
+    border: 1px dashed #000000;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.placeholderSlideText {
+    display: flex;
+    justify-content: center;
+    font: 40px/1.5 'Roboto', sans-serif;
+    position: relative;
+    top: 45%;
+}
