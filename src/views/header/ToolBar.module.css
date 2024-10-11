@@ -8,18 +8,6 @@
     margin: 0 20px 10px 20px;
 }
 
-.undoButton,
-.redoButton {
-    width: 30px;
-    height: 30px;
-    margin: 0 5px;
-    cursor: pointer;
-}
-
-.addSlideButton {
-    height: 30px;
-}
-
 .addSlideButton span {
     margin: 0 0 0 10px;
 }

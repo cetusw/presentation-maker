@@ -12,7 +12,7 @@ export const slideCollectionScale: number = 5;
 
 export const defaultPresentation: Presentation = {
     "id": "presentation-1",
-    "title": "Название презентации",
+    "title": "Новая презентация",
     "author": "Mikhail",
     "createdAt": new Date("2024-09-05T00:00:00Z"),
     "slides": [
