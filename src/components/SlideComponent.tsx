@@ -1,5 +1,5 @@
 import {Slide} from "../store/presentationTypes.ts";
-import style from '../views/slideCollection/SlideCollection.module.css';
+import style from './SlideComponent.module.css';
 import {ObjectComponent} from "./ObjectComponent.tsx";
 import {renderBackground} from "../store/presentationUtils.ts";
 
@@ -18,8 +18,8 @@ export function SlideComponent({className, slide, scale}: SlideComponentProps) {
             className={slideClass}
             style={{
                 background: renderBackground(slide.background),
-                width: `calc(900px / ${newScale})`,
-                height: `calc((900px * 9 / 16) / ${newScale})`,
+                width: `calc(960px / ${newScale})`,
+                height: `calc(540px / ${newScale})`,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat'
             }}

@@ -96,7 +96,7 @@ export const defaultPresentation: Presentation = {
             "id": "slide-4",
             "background": {
                 "type": "color",
-                "color": "#00FF00",
+                "color": "#ffffff",
             },
             "objects": [
                 {

@@ -13,6 +13,7 @@ export function WorkSpace({presentation, currentSlideIndex}: WorkSpaceProps) {
             {presentation.slides.length > 0 ? (
                 <div className={style.slide}>
                     <SlideComponent
+                        className={style.slideComponent}
                         slide={presentation.slides[currentSlideIndex]}
                     />
                 </div>

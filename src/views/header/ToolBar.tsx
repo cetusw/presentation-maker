@@ -2,6 +2,7 @@ import style from './ToolBar.module.css';
 import Undo from '../../assets/icons/undo.svg';
 import Redo from '../../assets/icons/redo.svg';
 import AddSlide from '../../assets/icons/add.svg';
+import AddText from '../../assets/icons/text.svg';
 import {ButtonComponent} from "../../components/ButtonComponent.tsx";
 
 export function ToolBar() {
@@ -17,10 +18,22 @@ export function ToolBar() {
                 className={style.redoButton}
             >
             </ButtonComponent>
+            <div className={style.divider}></div>
             <ButtonComponent
                 icon={AddSlide}
                 className={style.addSlideButton}
                 text={'Добавить слайд'}
+            >
+            </ButtonComponent>
+            <div className={style.divider}></div>
+            <ButtonComponent
+                icon={AddText}
+                className={style.addTextButton}
+            >
+            </ButtonComponent>
+            <ButtonComponent
+                className={style.addTextButton}
+                text={'Задний фон'}
             >
             </ButtonComponent>
         </div>

@@ -1,8 +1,11 @@
 .button {
+    display: flex;
     background-color: transparent;
     border: none;
     border-radius: 5px;
     padding: 5px;
+    margin: 0 5px;
+    cursor: pointer;
 }
 
 .button:hover {
