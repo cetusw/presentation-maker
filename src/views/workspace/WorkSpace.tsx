@@ -1,5 +1,5 @@
-import {Presentation} from "../../store/presentationTypes.ts";
-import {SlideComponent} from "../../components/SlideComponent.tsx";
+import {Presentation} from '../../store/presentationTypes.ts';
+import {SlideComponent} from '../../components/SlideComponent.tsx';
 import style from './Workspace.module.css';
 
 type WorkSpaceProps = {

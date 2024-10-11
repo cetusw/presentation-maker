@@ -1,7 +1,7 @@
-import {Slide} from "../store/presentationTypes.ts";
+import {Slide} from '../store/presentationTypes.ts';
 import style from './SlideComponent.module.css';
-import {ObjectComponent} from "./ObjectComponent.tsx";
-import {renderBackground} from "../store/presentationUtils.ts";
+import {ObjectComponent} from './ObjectComponent.tsx';
+import {renderBackground} from '../store/presentationUtils.ts';
 
 type SlideComponentProps = {
     className?: string;

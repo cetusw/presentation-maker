@@ -4,7 +4,7 @@ import Redo from '../../assets/icons/redo.svg';
 import AddSlide from '../../assets/icons/add.svg';
 import AddText from '../../assets/icons/text.svg';
 import AddImage from '../../assets/icons/image.svg';
-import {ButtonComponent} from "../../components/ButtonComponent.tsx";
+import {ButtonComponent} from '../../components/ButtonComponent.tsx';
 
 export function ToolBar() {
     return (
@@ -23,6 +23,7 @@ export function ToolBar() {
             <ButtonComponent
                 icon={AddSlide}
                 className={style.addSlideButton}
+                textClassName={style.buttonContent}
                 text={'Добавить слайд'}
             >
             </ButtonComponent>
@@ -39,6 +40,7 @@ export function ToolBar() {
             </ButtonComponent>
             <ButtonComponent
                 className={style.addTextButton}
+                textClassName={style.addTextButtonContent}
                 text={'Задний фон'}
             >
             </ButtonComponent>

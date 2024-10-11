@@ -2,6 +2,7 @@ import style from './ButtonComponent.module.css';
 
 type ButtonComponentProps = {
     text?: string;
+    textClassName?: string;
     onClick?: () => void;
     icon?: string;
     alt?: string;
@@ -9,7 +10,7 @@ type ButtonComponentProps = {
     disabled?: boolean;
 }
 
-export function ButtonComponent({ text, onClick, icon, alt, className, disabled = false }: ButtonComponentProps) {
+export function ButtonComponent({ text, onClick, icon, alt, className, disabled = false, textClassName }: ButtonComponentProps) {
     const buttonClass = `${style.button} ${className || ''}`;
 
     return (
@@ -18,8 +19,8 @@ export function ButtonComponent({ text, onClick, icon, alt, className, disabled 
             onClick={onClick}
             disabled={disabled}
         >
-            {icon && <img src={icon} alt={alt}/>}
-            <span className={style.buttonText}>{text}</span>
+            {icon && <img className={style.buttonIcon} src={icon} alt={alt}/>}
+            <span className={textClassName}>{text}</span>
         </button>
     );
 }

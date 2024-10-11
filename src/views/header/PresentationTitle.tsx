@@ -1,4 +1,4 @@
-import {Presentation} from "../../store/presentationTypes.ts";
+import {Presentation} from '../../store/presentationTypes.ts';
 import style from './PresentationTitle.module.css';
 import Logo from '../../assets/icons/logo.svg';
 

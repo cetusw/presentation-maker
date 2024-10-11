@@ -1,7 +1,7 @@
-import {Presentation} from "../../store/presentationTypes.ts";
+import {Presentation} from '../../store/presentationTypes.ts';
 import style from './SlideCollection.module.css';
-import {SlideComponent} from "../../components/SlideComponent.tsx";
-import {slideCollectionScale} from "../../store/constants.ts";
+import {SlideComponent} from '../../components/SlideComponent.tsx';
+import {slideCollectionScale} from '../../store/constants.ts';
 
 type SlideCollectionProps = {
     presentation: Presentation;
@@ -13,7 +13,10 @@ export function SlideCollection({presentation}: SlideCollectionProps) {
             {presentation.slides.length > 0 ? (
                 <ol className={style.slideCollection}>
                     {presentation.slides.map((slide) => (
-                        <li key={slide.id}>
+                        <li
+                            key={slide.id}
+                            className={style.slideCollectionElement}
+                        >
                             <SlideComponent
                                 className={style.slideInCollection}
                                 slide={slide}

@@ -1,25 +1,24 @@
 .toolBar {
     display: flex;
     flex-direction: row;
-    background-color: rgba(241, 241, 241, 1);
+    background-color: rgb(241, 241, 241);
     height: 30px;
     border-radius: 25px;
     padding: 10px 20px;
     margin: 0 20px 10px 20px;
 }
 
-.addSlideButton span {
-    margin: 0 0 0 10px;
+.buttonContent {
+    margin: auto 0 auto 10px;
 }
 
-img {
-    width: 20px;
-    height: 20px;
+.addTextButtonContent {
+    margin: auto 0;
 }
 
 .divider {
     width: 1px;
     height: 20px;
-    background-color: rgba(169, 169, 169, 1);
+    background-color: rgb(169, 169, 169);
     margin: 5px 10px;
 }

@@ -1,5 +1,5 @@
-import {defaultColor, defaultFontFamily, defaultFontSize, defaultPosition, defaultSize, defaultText} from "./constants.ts";
-import {Presentation, Slide, SlideObject, ItemSelection, ImageObject, TextObject, Position, Size, BackgroundType} from "./presentationTypes.ts";
+import {defaultColor, defaultFontFamily, defaultFontSize, defaultPosition, defaultSize, defaultText} from './constants.ts';
+import {Presentation, Slide, SlideObject, ItemSelection, ImageObject, TextObject, Position, Size, BackgroundType} from './presentationTypes.ts';
 import { v4 as generateUuid } from 'uuid';
 
 export function updatePresentationTitle(presentation: Presentation, newTitle: string): Presentation {
