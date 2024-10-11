@@ -1,7 +1,7 @@
 .toolBar {
     display: flex;
     flex-direction: row;
-    background-color: rgba(237, 242, 250, 1);
+    background-color: rgba(241, 241, 241, 1);
     height: 30px;
     border-radius: 25px;
     padding: 10px 20px;
