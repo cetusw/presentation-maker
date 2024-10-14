@@ -301,16 +301,3 @@ export function updateBackgroundGradient(presentation: Presentation, items: Item
         secondColor: newSecondColor,
     });
 }
-
-export function renderBackground(background: BackgroundType) {
-    switch (background.type) {
-        case 'color':
-            return background.color;
-        case 'image':
-            return `url(${background.imageUrl})`;
-        case 'gradient':
-            return `linear-gradient(${background.firstColor}, ${background.secondColor})`;
-        default:
-            return 'white';
-    }
-}

@@ -10,7 +10,7 @@ type ButtonComponentProps = {
     disabled?: boolean;
 }
 
-export function ButtonComponent({ text, onClick, icon, alt, className, disabled = false, textClassName }: ButtonComponentProps) {
+function ButtonComponent({ text, onClick, icon, alt, className, disabled = false, textClassName }: ButtonComponentProps) {
     const buttonClass = `${style.button} ${className || ''}`;
 
     return (
@@ -23,4 +23,8 @@ export function ButtonComponent({ text, onClick, icon, alt, className, disabled 
             <span className={textClassName}>{text}</span>
         </button>
     );
+}
+
+export {
+    ButtonComponent,
 }

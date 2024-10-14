@@ -5,8 +5,13 @@ import styles from './App.module.css';
 // import {minDefaultPresentation} from './store/constants.ts';
 import {defaultPresentation} from './store/constants.ts';
 import {ToolBar} from './views/header/ToolBar.tsx';
+import {EditorType} from './store/presentationTypes.ts';
 
-export default function App() {
+type AppProps = {
+    editor: EditorType,
+}
+
+export default function App({editor}: AppProps) {
     return (
         <div className={styles.app}>
             <PresentationTitle
@@ -20,7 +25,7 @@ export default function App() {
                 />
                 <WorkSpace
                     presentation={defaultPresentation}
-                    currentSlideIndex={1}
+                    currentSlideId={editor.selection.selectedSlidesIds[0]}
                 />
             </div>
         </div>

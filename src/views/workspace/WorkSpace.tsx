@@ -4,17 +4,18 @@ import style from './Workspace.module.css';
 
 type WorkSpaceProps = {
     presentation: Presentation;
-    currentSlideIndex: number;
+    currentSlideId: string;
 };
 
-export function WorkSpace({presentation, currentSlideIndex}: WorkSpaceProps) {
+function WorkSpace({presentation, currentSlideId}: WorkSpaceProps) {
+    const currentSlide = presentation.slides.find(slide => slide.id === currentSlideId);
     return (
         <div className="workspace">
-            {presentation.slides.length > 0 ? (
+            {currentSlide && presentation.slides.length > 0 ? (
                 <div className={style.slide}>
                     <SlideComponent
                         className={style.slideComponent}
-                        slide={presentation.slides[currentSlideIndex]}
+                        slide={currentSlide}
                     />
                 </div>
             ) : (
@@ -24,4 +25,8 @@ export function WorkSpace({presentation, currentSlideIndex}: WorkSpaceProps) {
             )}
         </div>
     );
+}
+
+export {
+    WorkSpace,
 }

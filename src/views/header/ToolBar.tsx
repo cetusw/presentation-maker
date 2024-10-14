@@ -6,7 +6,7 @@ import AddText from '../../assets/icons/text.svg';
 import AddImage from '../../assets/icons/image.svg';
 import {ButtonComponent} from '../../components/ButtonComponent.tsx';
 
-export function ToolBar() {
+function ToolBar() {
     return (
         <div className={style.toolBar}>
             <ButtonComponent
@@ -46,4 +46,8 @@ export function ToolBar() {
             </ButtonComponent>
         </div>
     )
+}
+
+export {
+    ToolBar,
 }

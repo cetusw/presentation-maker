@@ -6,7 +6,7 @@ type PresentationTitleProps = {
     presentation: Presentation;
 };
 
-export function PresentationTitle({presentation}: PresentationTitleProps) {
+function PresentationTitle({presentation}: PresentationTitleProps) {
     return (
         <div className={style.presentationTitle}>
             <img className={style.logo} src={Logo} alt={'logo'}/>
@@ -18,4 +18,8 @@ export function PresentationTitle({presentation}: PresentationTitleProps) {
             </input>
         </div>
     )
+}
+
+export {
+    PresentationTitle,
 }

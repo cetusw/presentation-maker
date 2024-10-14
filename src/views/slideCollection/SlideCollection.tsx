@@ -1,13 +1,22 @@
 import {Presentation} from '../../store/presentationTypes.ts';
 import style from './SlideCollection.module.css';
 import {SlideComponent} from '../../components/SlideComponent.tsx';
-import {slideCollectionScale} from '../../store/constants.ts';
+import {editor, slideCollectionScale} from '../../store/constants.ts';
+import {dispatch} from '../../store/editor.ts';
+import {setSelection} from '../../store/setSelection.ts';
 
 type SlideCollectionProps = {
     presentation: Presentation;
 };
 
-export function SlideCollection({presentation}: SlideCollectionProps) {
+function SlideCollection({presentation}: SlideCollectionProps) {
+    function onSlideClick(slideId: string) {
+        dispatch(setSelection, {
+            selectedSlidesIds: [slideId],
+            selectedObjectsIds: [],
+        });
+        console.log(editor.selection.selectedSlidesIds[0])
+    }
     return (
         <div>
             {presentation.slides.length > 0 ? (
@@ -16,6 +25,7 @@ export function SlideCollection({presentation}: SlideCollectionProps) {
                         <li
                             key={slide.id}
                             className={style.slideCollectionElement}
+                            onClick={() => onSlideClick(slide.id)}
                         >
                             <SlideComponent
                                 className={style.slideInCollection}
@@ -30,4 +40,8 @@ export function SlideCollection({presentation}: SlideCollectionProps) {
             )}
         </div>
     );
+}
+
+export {
+    SlideCollection,
 }

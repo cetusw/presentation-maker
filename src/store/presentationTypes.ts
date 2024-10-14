@@ -1,4 +1,4 @@
-export type Presentation = {
+type Presentation = {
     id: string;
     title: string;
     author: string;
@@ -6,66 +6,83 @@ export type Presentation = {
     slides: Slide[];
 }
 
-export type Slide = {
+type Slide = {
     id: string;
     background: BackgroundType;
     objects: SlideObject[];
 }
 
-export type BackgroundType = BackgroundColor | BackgroundImage | BackgroundGradient;
+type BackgroundType = BackgroundColor | BackgroundImage | BackgroundGradient;
 
-export type BackgroundColor = {
+type BackgroundColor = {
     type: 'color';
     color: string;
 };
 
-export type BackgroundImage = {
+type BackgroundImage = {
     type: 'image';
     imageUrl: string;
 };
 
-export type BackgroundGradient = {
+type BackgroundGradient = {
     type: 'gradient';
     firstColor: string;
     secondColor: string;
 };
 
-export type SlideObject = TextObject | ImageObject;
+type SlideObject = TextObject | ImageObject;
 
-export type SlideItem = {
+type SlideItem = {
     id: string;
     position: Position;
     size: Size;
 }
 
-export type TextObject = SlideItem & {
+type TextObject = SlideItem & {
     type: 'text';
     content: string;
     fontFamily: string;
     fontSize: number;
 };
 
-export type ImageObject = SlideItem & {
+type ImageObject = SlideItem & {
     type: 'image';
     imageUrl: string;
 };
 
-export type Position = {
+type Position = {
     x: number;
     y: number;
 }
 
-export type Size = {
+type Size = {
     width: number;
     height: number;
 }
 
-export type ItemSelection = {
+type ItemSelection = {
     selectedSlidesIds: string[];
     selectedObjectsIds: string[];
 }
 
-export type EditorType = {
+type EditorType = {
     presentation: Presentation;
     selection: ItemSelection;
+}
+
+export type {
+    Presentation,
+    Slide,
+    SlideObject,
+    ItemSelection,
+    ImageObject,
+    TextObject,
+    Position,
+    Size,
+    BackgroundType,
+    BackgroundImage,
+    SlideItem,
+    BackgroundColor,
+    BackgroundGradient,
+    EditorType,
 }

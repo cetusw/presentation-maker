@@ -6,7 +6,7 @@ type ObjectComponentProps = {
     scale: number,
 };
 
-export function ObjectComponent({object, scale}: ObjectComponentProps) {
+function ObjectComponent({object, scale}: ObjectComponentProps) {
     return (
         <div
             className={style.object}
@@ -30,4 +30,8 @@ export function ObjectComponent({object, scale}: ObjectComponentProps) {
             ) : null}
         </div>
     );
+}
+
+export {
+    ObjectComponent,
 }

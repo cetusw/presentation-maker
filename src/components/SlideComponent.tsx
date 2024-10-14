@@ -1,7 +1,6 @@
-import {Slide} from '../store/presentationTypes.ts';
+import {BackgroundType, Slide} from '../store/presentationTypes.ts';
 import style from './SlideComponent.module.css';
 import {ObjectComponent} from './ObjectComponent.tsx';
-import {renderBackground} from '../store/presentationUtils.ts';
 
 type SlideComponentProps = {
     className?: string;
@@ -9,15 +8,30 @@ type SlideComponentProps = {
     scale?: number,
 };
 
-export function SlideComponent({className, slide, scale}: SlideComponentProps) {
+function SlideComponent({className, slide, scale}: SlideComponentProps) {
     const newScale = scale ?? 1;
     const slideClass = `${style.slide} ${className || ''}`;
+
+    function renderBackground(background: BackgroundType) {
+        switch (background.type) {
+            case 'color':
+                return {backgroundColor: background.color};
+            case 'image':
+                return {backgroundImage: `url(${background.imageUrl})`};
+            case 'gradient':
+                return {backgroundImage: `linear-gradient(${background.firstColor}, ${background.secondColor})`};
+            default:
+                return {backgroundColor: 'white'};
+        }
+    }
+
+    const backgroundStyles = renderBackground(slide.background);
 
     return (
         <div
             className={slideClass}
             style={{
-                background: renderBackground(slide.background),
+                ...backgroundStyles,
                 width: `calc(960px / ${newScale})`,
                 height: `calc(540px / ${newScale})`,
                 backgroundSize: 'cover',
@@ -33,4 +47,8 @@ export function SlideComponent({className, slide, scale}: SlideComponentProps) {
             ))}
         </div>
     );
+}
+
+export {
+    SlideComponent,
 }

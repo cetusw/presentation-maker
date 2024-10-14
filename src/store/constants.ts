@@ -1,16 +1,16 @@
-import {Position, Presentation, Size} from './presentationTypes.ts';
+import {EditorType, Position, Presentation, Size} from './presentationTypes.ts';
 // import {v4 as generateUuid} from 'uuid';
 
-export const defaultPosition: Position = {x: 50, y: 50};
-export const defaultSize: Size = {width: 50, height: 50};
-export const defaultFontFamily: string = 'Arial';
-export const defaultFontSize: number = 16;
-export const defaultColor: string = '#FFFFFF';
-export const defaultText: string = 'New text';
-export const defaultTitle: string = 'New title';
-export const slideCollectionScale: number = 5;
+const defaultPosition: Position = {x: 50, y: 50};
+const defaultSize: Size = {width: 50, height: 50};
+const defaultFontFamily: string = 'Arial';
+const defaultFontSize: number = 16;
+const defaultColor: string = '#FFFFFF';
+const defaultText: string = 'New text';
+const defaultTitle: string = 'New title';
+const slideCollectionScale: number = 5;
 
-export const defaultPresentation: Presentation = {
+const defaultPresentation: Presentation = {
     'id': 'presentation-1',
     'title': 'Новая презентация',
     'author': 'Mikhail',
@@ -247,7 +247,7 @@ export const defaultPresentation: Presentation = {
     ]
 };
 
-export const minDefaultPresentation: Presentation = {
+const minDefaultPresentation: Presentation = {
     id: '1',
     title: 'Minimum Presentation',
     author: 'Mikhail',
@@ -255,3 +255,24 @@ export const minDefaultPresentation: Presentation = {
     slides: []
 };
 
+const editor: EditorType = {
+    presentation: defaultPresentation,
+    selection: {
+        selectedSlidesIds: [defaultPresentation.slides[1]?.id],
+        selectedObjectsIds: [],
+    }
+}
+
+export {
+    defaultPosition,
+    defaultSize,
+    defaultText,
+    defaultPresentation,
+    defaultFontSize,
+    defaultFontFamily,
+    minDefaultPresentation,
+    defaultColor,
+    defaultTitle,
+    slideCollectionScale,
+    editor,
+}
