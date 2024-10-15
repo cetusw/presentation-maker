@@ -3,8 +3,8 @@
     background-color: transparent;
     border: none;
     border-radius: 5px;
-    padding: 5px;
     margin: 0 5px;
+    padding: 3px;
     cursor: pointer;
 }
 
@@ -13,10 +13,12 @@
 }
 
 .buttonText {
-    font: 15px/20px 'Roboto', sans-serif;
+    font: 11px/14px 'Roboto', sans-serif;
+    margin: auto 0;
 }
 
 .buttonIcon {
-    width: 20px;
-    height: 20px;
+    margin: auto;
+    width: 14px;
+    height: 14px;
 }
