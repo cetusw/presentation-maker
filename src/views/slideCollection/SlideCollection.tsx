@@ -1,4 +1,4 @@
-import {Presentation} from '../../store/presentationTypes.ts';
+import {ItemSelection, Presentation} from '../../store/presentationTypes.ts';
 import style from './SlideCollection.module.css';
 import {SlideComponent} from '../../components/SlideComponent.tsx';
 import {editor, slideCollectionScale} from '../../store/constants.ts';
@@ -7,22 +7,23 @@ import {setSelection} from '../../store/setSelection.ts';
 
 type SlideCollectionProps = {
     presentation: Presentation;
+    selection: ItemSelection;
 };
 
-function SlideCollection({presentation}: SlideCollectionProps) {
+function SlideCollection({presentation, selection}: SlideCollectionProps) {
     function onSlideClick(slideId: string) {
         dispatch(setSelection, {
             selectedSlidesIds: [slideId],
             selectedObjectsIds: [],
         });
-        console.log(editor.selection.selectedSlidesIds[0])
     }
+
     return (
         <div>
             {presentation.slides.length > 0 ? (
-                <ol className={style.slideCollection}>
+                <div className={style.slideCollection}>
                     {presentation.slides.map((slide) => (
-                        <li
+                        <div
                             key={slide.id}
                             className={style.slideCollectionElement}
                             onClick={() => onSlideClick(slide.id)}
@@ -31,10 +32,12 @@ function SlideCollection({presentation}: SlideCollectionProps) {
                                 className={style.slideInCollection}
                                 slide={slide}
                                 scale={slideCollectionScale}
+                                isSelected={slide.id == selection.selectedSlidesIds[0]}
+                                selection={editor.selection}
                             />
-                        </li>
+                        </div>
                     ))}
-                </ol>
+                </div>
             ) : (
                 <ol className={style.slideCollection}></ol>
             )}

@@ -4,6 +4,7 @@ import {WorkSpace} from './views/workspace/WorkSpace.tsx';
 import styles from './App.module.css';
 import {ToolBar} from './views/header/ToolBar.tsx';
 import {EditorType} from './store/presentationTypes.ts';
+import {handleKeyPress} from './store/keyPressHandler.ts';
 
 type AppProps = {
     editor: EditorType,
@@ -11,7 +12,11 @@ type AppProps = {
 
 export default function App({editor}: AppProps) {
     return (
-        <div className={styles.app}>
+        <div
+            className={styles.app}
+            onKeyDown={handleKeyPress}
+            tabIndex={0}
+        >
             <PresentationTitle
                 presentation={editor.presentation}
             />
@@ -20,9 +25,10 @@ export default function App({editor}: AppProps) {
             <div className={styles.presentationPreview}>
                 <SlideCollection
                     presentation={editor.presentation}
+                    selection={editor.selection}
                 />
                 <WorkSpace
-                    presentation={editor.presentation}
+                    editor={editor}
                     currentSlideId={editor.selection.selectedSlidesIds[0]}
                 />
             </div>

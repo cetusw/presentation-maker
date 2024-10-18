@@ -1,16 +1,30 @@
-import {BackgroundType, Slide} from '../store/presentationTypes.ts';
+import {BackgroundType, ItemSelection, Slide} from '../store/presentationTypes.ts';
 import style from './SlideComponent.module.css';
 import {ObjectComponent} from './ObjectComponent.tsx';
+import {dispatch} from '../store/editor.ts';
+import {setSelection} from '../store/setSelection.ts';
 
 type SlideComponentProps = {
     className?: string;
     slide: Slide,
     scale?: number,
+    isSelected?: boolean,
+    selection: ItemSelection,
 };
 
-function SlideComponent({className, slide, scale}: SlideComponentProps) {
+function SlideComponent({className, slide, scale, isSelected, selection}: SlideComponentProps) {
     const newScale = scale ?? 1;
-    const slideClass = `${style.slide} ${className || ''}`;
+
+    const slideClass = isSelected
+        ? `${style.selectedSlide} ${className || ''}`
+        : `${style.slide} ${className || ''}`;
+
+    function onObjectClick(objectId: string) {
+        dispatch(setSelection, {
+            selectedSlidesIds: selection?.selectedSlidesIds,
+            selectedObjectsIds: [objectId],
+        });
+    }
 
     function renderBackground(background: BackgroundType) {
         switch (background.type) {
@@ -39,11 +53,16 @@ function SlideComponent({className, slide, scale}: SlideComponentProps) {
             }}
         >
             {slide.objects.map((object) => (
-                <ObjectComponent
+                <div
                     key={object.id}
-                    object={object}
-                    scale={newScale}
-                />
+                    onClick={() => onObjectClick(object.id)}
+                >
+                    <ObjectComponent
+                        object={object}
+                        scale={newScale}
+                        isSelected={object.id == selection?.selectedObjectsIds[0]}
+                    />
+                </div>
             ))}
         </div>
     );

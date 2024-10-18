@@ -9,14 +9,21 @@ import {ButtonComponent} from '../../components/ButtonComponent.tsx';
 import {addNewSlide} from '../../store/addNewSlide.ts';
 import {dispatch} from '../../store/editor.ts';
 import {removeSlides} from '../../store/removeSlide.ts';
+import {addTextToSlide} from '../../store/addObjectToSlide.ts';
+import {editor} from '../../store/constants.ts';
 
 function ToolBar() {
-    function onAddSlide () {
+    function onAddSlide() {
         dispatch(addNewSlide);
     }
 
-    function onRemoveSlide () {
+    function onRemoveSlide() {
         dispatch(removeSlides);
+    }
+
+    function onAddText() {
+        dispatch(addTextToSlide);
+        console.log(editor.selection.selectedObjectsIds)
     }
 
     return (
@@ -52,6 +59,7 @@ function ToolBar() {
             <ButtonComponent
                 icon={AddText}
                 className={style.addTextButton}
+                onClick={onAddText}
             >
             </ButtonComponent>
             <ButtonComponent

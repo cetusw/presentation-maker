@@ -1,0 +1,19 @@
+.selectedObject {
+    position: absolute;
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.object {
+    border: 2px solid transparent;
+    position: absolute;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+}
+
+.textField:focus {
+    border: none;
+    outline: none;
+}

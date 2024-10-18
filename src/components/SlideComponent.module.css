@@ -1,3 +1,9 @@
 .slide {
     position: relative;
 }
+
+.selectedSlide {
+    position: relative;
+    margin: 0;
+    border: 2px solid rgb(11, 87, 208);
+}

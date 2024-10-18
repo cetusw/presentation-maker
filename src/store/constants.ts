@@ -1,13 +1,13 @@
 import {EditorType, Position, Presentation, Size} from './presentationTypes.ts';
 // import {v4 as generateUuid} from 'uuid';
 
-const defaultPosition: Position = {x: 50, y: 50};
-const defaultSize: Size = {width: 50, height: 50};
-const defaultFontFamily: string = 'Arial';
-const defaultFontSize: number = 16;
+const defaultPosition: Position = {x: 225, y: 270};
+const defaultSize: Size = {width: 500, height: 100};
+const defaultFontFamily: string = 'Roboto';
+const defaultFontSize: number = 24;
 const defaultColor: string = '#FFFFFF';
-const defaultText: string = 'New text';
-const defaultTitle: string = 'New title';
+const defaultText: string = 'Введите текст';
+const defaultTitle: string = 'Введите заголовок';
 const slideCollectionScale: number = 5;
 
 const defaultPresentation: Presentation = {
@@ -29,9 +29,9 @@ const defaultPresentation: Presentation = {
                     'type': 'text',
                     'content': 'Text on slide 1',
                     'fontFamily': 'Arial',
-                    'fontSize': 72,
+                    'fontSize': 300,
                     'position': {'x': 0, 'y': 0},
-                    'size': {'width': 1920, 'height': 100}
+                    'size': {'width': 500, 'height': 80}
                 },
                 {
                     'id': 'image-1',
