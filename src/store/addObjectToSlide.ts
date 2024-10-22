@@ -42,16 +42,19 @@ function addTextToSlide(editor: EditorType) {
     return addObjectToSlide(editor, editSlideId, textForSlide);
 }
 
-function addImageToSlide(editor: EditorType, url: string) {
+function addImageToSlide(editor: EditorType, image: HTMLImageElement) {
     const editSlideId: string = editor.selection.selectedSlidesIds[0];
 
     const imageForSlide: ImageObject = {
         id: `image-${generateUuid()}`,
         type: 'image',
-        imageUrl: url,
-        position: defaultPosition,
-        size: defaultSize,
-    }
+        imageUrl: image.src,
+        position: {x: -2, y: -2},
+        size: {
+            width: image.naturalWidth,
+            height: image.naturalHeight,
+        },
+    };
 
     return addObjectToSlide(editor, editSlideId, imageForSlide);
 }

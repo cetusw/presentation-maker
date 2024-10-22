@@ -22,3 +22,7 @@
     width: 14px;
     height: 14px;
 }
+
+.inputBlock {
+    display: none;
+}

@@ -12,7 +12,8 @@ function setEditor(newEditor: EditorType) {
     _editor = newEditor;
 }
 
-function dispatch(modifyFn: Function, payload?: object): void {
+// eslint-disable-next-line
+function dispatch(modifyFn: Function, payload?: Object): void {
     const newEditor = modifyFn(_editor, payload);
     setEditor(newEditor);
 

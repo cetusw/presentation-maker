@@ -1,4 +1,4 @@
-import style from './ButtonComponent.module.css';
+import style from './ButtonInputComponent.module.css';
 
 type ButtonComponentProps = {
     text?: string;

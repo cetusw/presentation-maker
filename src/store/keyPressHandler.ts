@@ -8,9 +8,7 @@ function onRemoveObject() {
 function handleKeyPress(event: React.KeyboardEvent<HTMLDivElement>) {
     if (event.key === 'Delete') {
         onRemoveObject();
-        console.log('delete')
     }
-    console.log('delete')
 }
 
 export {

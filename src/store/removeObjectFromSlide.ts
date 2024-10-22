@@ -27,7 +27,10 @@ function removeObjectFromSlide(editor: EditorType): EditorType {
             ...editor.presentation,
             slides: updatedSlides,
         },
-        selection: editor.selection
+        selection: {
+            selectedSlidesIds: editor.selection.selectedSlidesIds,
+            selectedObjectsIds: [],
+        }
     };
 }
 
