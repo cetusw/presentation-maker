@@ -13,10 +13,12 @@ import {addImageToSlide, addTextToSlide} from '../../store/addObjectToSlide.ts';
 import {InputComponent} from '../../components/InputComponent.tsx';
 import React from 'react';
 import {loadImage} from '../../store/loadImage.ts';
+import {editor} from '../../store/constants.ts';
 
 function ToolBar() {
     function onAddSlide() {
         dispatch(addNewSlide);
+        console.log(editor.presentation.slides)
     }
 
     function onRemoveSlide() {
