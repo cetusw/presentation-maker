@@ -33,6 +33,7 @@ function ObjectComponent({object, scale, isSelected}: ObjectComponentProps) {
             className={selectedObject}
             style={{ ...objectStyles }}
             onKeyDown={() => handleKeyPress}
+            tabIndex={0}
         >
             {object.type === 'text' ? (
                 <textarea

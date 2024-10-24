@@ -15,7 +15,6 @@ export default function App({editor}: AppProps) {
         <div
             className={styles.app}
             onKeyDown={handleKeyPress}
-            tabIndex={0}
         >
             <PresentationTitle
                 presentation={editor.presentation}
