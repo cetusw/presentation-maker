@@ -14,7 +14,7 @@ import {InputComponent} from '../../components/InputComponent.tsx';
 import React from 'react';
 import {loadImage} from '../../store/loadImage.ts';
 import {editor} from '../../store/constants.ts';
-import {updateBackgroundColor} from '../../store/updateSlideBackground.ts';
+import {updateBackgroundColor, updateBackgroundImage} from '../../store/updateSlideBackground.ts';
 
 function ToolBar() {
     function onAddSlide() {
@@ -40,11 +40,25 @@ function ToolBar() {
             })
     }
 
+    function onChangeBackgroundImage(imageUrl: string) {
+        loadImage(imageUrl)
+            .then((image) => {
+                dispatch(updateBackgroundImage, image)
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+    }
+
     function handleImageUpload(event: React.ChangeEvent<HTMLInputElement>) {
         const file = event.target.files?.[0];
         if (file) {
             const imageUrl = URL.createObjectURL(file);
-            onAddImage(imageUrl)
+            if (event.target.id === 'add-image') {
+                onAddImage(imageUrl)
+            } else if (event.target.id === 'change-background-image') {
+                onChangeBackgroundImage(imageUrl)
+            }
         }
     }
 
@@ -103,12 +117,20 @@ function ToolBar() {
             >
             </InputComponent>
             <InputComponent
-                inputId={'change-color'}
+                inputId={'change-background-color'}
                 type={'color'}
                 className={style.addTextButton}
                 textClassName={style.addTextButtonContent}
                 text={'Цвет фона'}
                 onChange={onChangeBackgroundColor}
+            >
+            </InputComponent>
+            <InputComponent
+                inputId={'change-background-image'}
+                type={'file'}
+                text={'Картинка фона'}
+                className={style.addImageButton}
+                onChange={handleImageUpload}
             >
             </InputComponent>
         </div>

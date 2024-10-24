@@ -31,10 +31,10 @@ function updateBackgroundColor(editor: EditorType, newColor: string): EditorType
     });
 }
 
-function updateBackgroundImage(editor: EditorType, newUrl: string): EditorType {
+function updateBackgroundImage(editor: EditorType, image: HTMLImageElement): EditorType {
     return updateSlideBackground(editor, {
         type: 'image',
-        imageUrl: newUrl,
+        imageUrl: image.src,
     });
 }
 
