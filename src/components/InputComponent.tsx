@@ -3,6 +3,7 @@ import React from 'react';
 
 type InputComponentProps = {
     inputId: string;
+    type: string;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     text?: string;
     textClassName?: string;
@@ -12,7 +13,7 @@ type InputComponentProps = {
     disabled?: boolean;
 }
 
-function InputComponent({ inputId, onChange, text, icon, alt, className, disabled = false, textClassName }: InputComponentProps) {
+function InputComponent({ inputId, type, onChange, text, icon, alt, className, disabled = false, textClassName }: InputComponentProps) {
     const buttonClass = `${style.button} ${className || ''}`;
 
     function triggerInput() {
@@ -33,7 +34,7 @@ function InputComponent({ inputId, onChange, text, icon, alt, className, disable
             <input
                 id={inputId}
                 className={style.inputBlock}
-                type={'file'}
+                type={type}
                 onChange={onChange}
             />
         </>

@@ -14,6 +14,7 @@ import {InputComponent} from '../../components/InputComponent.tsx';
 import React from 'react';
 import {loadImage} from '../../store/loadImage.ts';
 import {editor} from '../../store/constants.ts';
+import {updateBackgroundColor} from '../../store/updateSlideBackground.ts';
 
 function ToolBar() {
     function onAddSlide() {
@@ -45,6 +46,10 @@ function ToolBar() {
             const imageUrl = URL.createObjectURL(file);
             onAddImage(imageUrl)
         }
+    }
+
+    function onChangeBackgroundColor(event: React.ChangeEvent<HTMLInputElement>) {
+        dispatch(updateBackgroundColor, event.target.value);
     }
 
     return (
@@ -90,18 +95,22 @@ function ToolBar() {
             </ButtonComponent>
             <InputComponent
                 inputId={'add-image'}
+                type={'file'}
                 icon={AddImage}
                 alt={'add image'}
                 className={style.addImageButton}
                 onChange={handleImageUpload}
             >
             </InputComponent>
-            <ButtonComponent
+            <InputComponent
+                inputId={'change-color'}
+                type={'color'}
                 className={style.addTextButton}
                 textClassName={style.addTextButtonContent}
-                text={'Задний фон'}
+                text={'Цвет фона'}
+                onChange={onChangeBackgroundColor}
             >
-            </ButtonComponent>
+            </InputComponent>
         </div>
     )
 }
