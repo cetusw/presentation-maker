@@ -20,6 +20,7 @@ function ObjectComponent({objectId, object, scale, isSelected}: ObjectComponentP
         left: object.position.x / scale,
         top: object.position.y / scale,
         width: `${object.size.width / scale}px`,
+        height: object.type === 'image' ? `${object.size.height / scale}px` : 'auto',
     };
 
     function resizeTextArea(event: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -28,7 +29,8 @@ function ObjectComponent({objectId, object, scale, isSelected}: ObjectComponentP
         textarea.style.height = 'auto';
         textarea.style.height = `${textarea.scrollHeight}px`;
         if (objectElement) {
-            objectElement.style.height = `${textarea.scrollHeight}px`
+            objectElement.style.height = 'auto';
+            objectElement.style.height = `${textarea.scrollHeight}px`;
         }
     }
 
