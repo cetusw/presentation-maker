@@ -29,7 +29,6 @@ function ObjectComponent({objectId, object, scale, isSelected}: ObjectComponentP
         textarea.style.height = 'auto';
         textarea.style.height = `${textarea.scrollHeight}px`;
         if (objectElement) {
-            objectElement.style.height = 'auto';
             objectElement.style.height = `${textarea.scrollHeight}px`;
         }
     }
