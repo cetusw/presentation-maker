@@ -29,7 +29,7 @@ const defaultPresentation: Presentation = {
                     'type': 'text',
                     'content': 'Text on slide 1',
                     'fontFamily': 'Arial',
-                    'fontSize': 300,
+                    'fontSize': 24,
                     'position': {'x': 0, 'y': 0},
                     'size': {'width': 500, 'height': 80}
                 },

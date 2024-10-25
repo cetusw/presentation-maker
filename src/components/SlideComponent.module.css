@@ -5,5 +5,5 @@
 .selectedSlide {
     position: relative;
     margin: 0;
-    border: 2px solid rgb(11, 87, 208);
+    outline: 3px solid rgb(11, 87, 208);
 }

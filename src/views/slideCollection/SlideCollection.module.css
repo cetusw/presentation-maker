@@ -21,16 +21,17 @@
 }
 
 .slideCollectionElement {
-    margin: 0 0 10px 20px;
+    margin: 10px 0 10px 20px;
 }
 
 .slideInCollection {
     border-radius: 10px;
-    border: 2px solid rgb(169, 169, 169);
+    outline: 1px solid rgb(169, 169, 169);
     overflow: hidden;
     pointer-events: none;
 }
 
-.slideInCollection:hover {
-    border: 2px solid rgb(11, 87, 208);
+.slideCollectionElement:hover .slideInCollection {
+    outline: 3px solid rgb(169, 169, 169);
+    cursor: pointer;
 }
