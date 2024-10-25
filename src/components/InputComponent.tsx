@@ -21,23 +21,20 @@ function InputComponent({ inputId, type, onChange, text, icon, alt, className, d
     }
 
     return (
-        <>
-            <button
-                className={buttonClass}
-                onClick={triggerInput}
-                disabled={disabled}
-            >
-                {icon && <img className={style.buttonIcon} src={icon} alt={alt}/>}
-                <span className={textClassName}>{text}</span>
-            </button>
-
+        <button
+            className={buttonClass}
+            onClick={triggerInput}
+            disabled={disabled}
+        >
+            {icon && <img className={style.buttonIcon} src={icon} alt={alt}/>}
+            <span className={textClassName}>{text}</span>
             <input
                 id={inputId}
                 className={style.inputBlock}
                 type={type}
                 onChange={onChange}
             />
-        </>
+        </button>
     );
 }
 

@@ -1,5 +1,6 @@
 .button {
     display: flex;
+    position: relative;
     background-color: transparent;
     border: none;
     border-radius: 5px;
@@ -24,5 +25,7 @@
 }
 
 .inputBlock {
-    display: none;
+    position: absolute;
+    visibility: hidden;
+    width: 0;
 }

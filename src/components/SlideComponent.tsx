@@ -58,6 +58,7 @@ function SlideComponent({className, slide, scale, isSelected, selection}: SlideC
                     onClick={() => onObjectClick(object.id)}
                 >
                     <ObjectComponent
+                        objectId={object.id}
                         object={object}
                         scale={newScale}
                         isSelected={object.id == selection?.selectedObjectsIds[0]}

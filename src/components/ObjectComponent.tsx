@@ -5,12 +5,13 @@ import {defaultText} from '../store/constants.ts';
 import React from 'react';
 
 type ObjectComponentProps = {
+    objectId: string,
     object: SlideObject,
     scale: number,
     isSelected: boolean,
 };
 
-function ObjectComponent({object, scale, isSelected}: ObjectComponentProps) {
+function ObjectComponent({objectId, object, scale, isSelected}: ObjectComponentProps) {
     const selectedObject = isSelected
         ? `${style.selectedObject}`
         : `${style.object}`;
@@ -19,17 +20,21 @@ function ObjectComponent({object, scale, isSelected}: ObjectComponentProps) {
         left: object.position.x / scale,
         top: object.position.y / scale,
         width: `${object.size.width / scale}px`,
-        height: `${object.size.height / scale}px`,
     };
 
     function resizeTextArea(event: React.ChangeEvent<HTMLTextAreaElement>) {
         const textarea = event.target;
+        const objectElement = document.getElementById(objectId)
         textarea.style.height = 'auto';
         textarea.style.height = `${textarea.scrollHeight}px`;
+        if (objectElement) {
+            objectElement.style.height = `${textarea.scrollHeight}px`
+        }
     }
 
     return (
         <div
+            id={objectId}
             className={selectedObject}
             style={{ ...objectStyles }}
             onKeyDown={() => handleKeyPress}
