@@ -1,9 +1,8 @@
 import {ItemSelection, Presentation} from '../../store/presentationTypes.ts';
 import style from './SlideCollection.module.css';
-import {SlideComponent} from '../../components/SlideComponent.tsx';
-import {editor, slideCollectionScale} from '../../store/constants.ts';
 import {dispatch} from '../../store/editor.ts';
 import {setSelection} from '../../store/setSelection.ts';
+import {DraggableSlideComponent} from '../../components/DraggableSlideComponent.tsx';
 
 type SlideCollectionProps = {
     presentation: Presentation;
@@ -23,19 +22,13 @@ function SlideCollection({presentation, selection}: SlideCollectionProps) {
             {presentation.slides.length > 0 ? (
                 <div className={style.slideCollection}>
                     {presentation.slides.map((slide) => (
-                        <div
+                        <DraggableSlideComponent
                             key={slide.id}
-                            className={style.slideCollectionElement}
+                            slide={slide}
+                            isSelected={slide.id == selection.selectedSlidesIds[0]}
                             onClick={() => onSlideClick(slide.id)}
                         >
-                            <SlideComponent
-                                className={style.slideInCollection}
-                                slide={slide}
-                                scale={slideCollectionScale}
-                                isSelected={slide.id == selection.selectedSlidesIds[0]}
-                                selection={editor.selection}
-                            />
-                        </div>
+                        </DraggableSlideComponent>
                     ))}
                 </div>
             ) : (

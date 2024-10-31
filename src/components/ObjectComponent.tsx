@@ -3,6 +3,7 @@ import style from './ObjectComponent.module.css';
 import {handleKeyPress} from '../store/keyPressHandler.ts';
 import {defaultText} from '../store/constants.ts';
 import React from 'react';
+import {useDragAndDrop} from '../store/hooks/useDragAndDrop.tsx';
 
 type ObjectComponentProps = {
     objectId: string,
@@ -12,6 +13,8 @@ type ObjectComponentProps = {
 };
 
 function ObjectComponent({objectId, object, scale, isSelected}: ObjectComponentProps) {
+    const { elementRef, position } = useDragAndDrop();
+
     const selectedObject = isSelected
         ? `${style.selectedObject}`
         : `${style.object}`;
@@ -36,8 +39,9 @@ function ObjectComponent({objectId, object, scale, isSelected}: ObjectComponentP
     return (
         <div
             id={objectId}
+            ref={elementRef}
             className={selectedObject}
-            style={{ ...objectStyles }}
+            style={{ ...objectStyles, transform: `translate(${position.x}px, ${position.y}px)` }}
             onKeyDown={() => handleKeyPress}
             tabIndex={0}
         >

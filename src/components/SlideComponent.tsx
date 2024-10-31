@@ -49,7 +49,7 @@ function SlideComponent({className, slide, scale, isSelected, selection}: SlideC
                 width: `calc(960px / ${newScale})`,
                 height: `calc(540px / ${newScale})`,
                 backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat'
+                backgroundRepeat: 'no-repeat',
             }}
         >
             {slide.objects.map((object) => (
