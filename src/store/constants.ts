@@ -6,8 +6,8 @@ const defaultSize: Size = {width: 500, height: 100};
 const defaultFontFamily: string = 'Roboto';
 const defaultFontSize: number = 24;
 const defaultColor: string = '#FFFFFF';
-const defaultText: string = 'Введите текст';
-const defaultTitle: string = 'Введите заголовок';
+const defaultText: string = 'Добавьте текст';
+const defaultTitle: string = 'Презентация без названия';
 const slideCollectionScale: number = 5;
 
 const defaultPresentation: Presentation = {
