@@ -1,5 +1,4 @@
 import style from './ButtonInputComponent.module.css';
-import React from 'react';
 
 type InputComponentProps = {
     inputId: string;

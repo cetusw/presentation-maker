@@ -1,7 +1,8 @@
-import {editor} from './constants.ts'
 import {EditorType} from './presentationTypes.ts';
+import {loadFromLocalStorage, saveToLocalStorage} from './localStorage.ts';
+import {editor} from './constants.ts';
 
-let _editor = editor;
+let _editor = loadFromLocalStorage() !== null ? loadFromLocalStorage() : editor;
 let _handler: () => void;
 
 function getEditor() {
@@ -10,6 +11,7 @@ function getEditor() {
 
 function setEditor(newEditor: EditorType) {
     _editor = newEditor;
+    saveToLocalStorage();
 }
 
 // eslint-disable-next-line

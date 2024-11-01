@@ -18,7 +18,6 @@ function useDragAndDrop({ initialPosition = { x: 0, y: 0 } }: DragAndDropOptions
 
     useEffect(() => {
         function handleMouseDown(e: MouseEvent) {
-            console.log('d')
             startPos.current = { x: e.pageX, y: e.pageY };
             document.addEventListener('mousemove', handleMouseMove);
             document.addEventListener('mouseup', handleMouseUp);
