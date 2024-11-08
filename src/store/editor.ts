@@ -32,4 +32,5 @@ export {
     getEditor,
     dispatch,
     addEditorChangeHandler,
+    setEditor,
 }

@@ -5,21 +5,23 @@ import AddSlide from '../../assets/icons/add.svg';
 import AddText from '../../assets/icons/text.svg';
 import AddImage from '../../assets/icons/image.svg';
 import RemoveSlide from '../../assets/icons/remove.png';
+import DownloadPresentation from '../../assets/icons/download.svg';
+import ImportPresentation from '../../assets/icons/import.svg';
 import {ButtonComponent} from '../../components/ButtonComponent.tsx';
 import {addNewSlide} from '../../store/addNewSlide.ts';
-import {dispatch} from '../../store/editor.ts';
+import {dispatch, getEditor, setEditor} from '../../store/editor.ts';
 import {removeSlides} from '../../store/removeSlide.ts';
 import {addImageToSlide, addTextToSlide} from '../../store/addObjectToSlide.ts';
 import {InputComponent} from '../../components/InputComponent.tsx';
 import React from 'react';
 import {loadImage} from '../../store/loadImage.ts';
-import {editor} from '../../store/constants.ts';
 import {updateBackgroundColor, updateBackgroundImage} from '../../store/updateSlideBackground.ts';
+import {exportToJson} from '../../store/exportToJson.ts';
+import {render} from '../../main.tsx';
 
 function ToolBar() {
     function onAddSlide() {
         dispatch(addNewSlide);
-        console.log(editor.presentation.slides)
     }
 
     function onRemoveSlide() {
@@ -60,6 +62,27 @@ function ToolBar() {
                 onChangeBackgroundImage(imageUrl)
             }
         }
+    }
+
+    function onDownloadPresentation() {
+        exportToJson(getEditor(), getEditor()?.presentation.title);
+    }
+
+    function onImportPresentation(event: React.ChangeEvent<HTMLInputElement>) {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const editorData = JSON.parse(e.target?.result as string);
+                setEditor(editorData);
+                render();
+            } catch (error) {
+                console.error('Ошибка при загрузке файла:', error);
+            }
+        };
+        reader.readAsText(file);
     }
 
     function onChangeBackgroundColor(event: React.ChangeEvent<HTMLInputElement>) {
@@ -131,6 +154,21 @@ function ToolBar() {
                 text={'Картинка фона'}
                 className={style.addImageButton}
                 onChange={handleImageUpload}
+            >
+            </InputComponent>
+            <ButtonComponent
+                icon={DownloadPresentation}
+                alt={'download presentation'}
+                className={style.downloadButton}
+                onClick={onDownloadPresentation}
+            >
+            </ButtonComponent>
+            <InputComponent
+                inputId={'import-presentation'}
+                type={'file'}
+                icon={ImportPresentation}
+                className={style.importButton}
+                onChange={onImportPresentation}
             >
             </InputComponent>
         </div>

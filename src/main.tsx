@@ -18,3 +18,7 @@ function render(): void {
 
 addEditorChangeHandler(render);
 render();
+
+export {
+    render,
+}
