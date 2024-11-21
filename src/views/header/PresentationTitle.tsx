@@ -19,7 +19,7 @@ function PresentationTitle({presentation}: PresentationTitleProps) {
             <img className={style.logo} src={Logo} alt={'logo'}/>
             <input
                 className={style.input}
-                defaultValue={presentation.title}
+                value={presentation.title}
                 placeholder={'Название презентации'}
                 onChange={onTitleChange}
             >

@@ -13,13 +13,20 @@ import {dispatch, getEditor, setEditor} from '../../store/editor.ts';
 import {removeSlides} from '../../store/removeSlide.ts';
 import {addImageToSlide, addTextToSlide} from '../../store/addObjectToSlide.ts';
 import {InputComponent} from '../../components/InputComponent.tsx';
-import React from 'react';
 import {loadImage} from '../../store/loadImage.ts';
 import {updateBackgroundColor, updateBackgroundImage} from '../../store/updateSlideBackground.ts';
 import {exportToJson} from '../../store/exportToJson.ts';
 import {render} from '../../main.tsx';
+import Ajv from 'ajv';
+import {editorSchema} from '../../store/constants.ts';
+import {EditorType} from '../../store/presentationTypes.ts';
+import addFormats from 'ajv-formats';
 
-function ToolBar() {
+type ToolBarProps = {
+    setError: (message: string) => void;
+}
+
+function ToolBar({ setError }: ToolBarProps) {
     function onAddSlide() {
         dispatch(addNewSlide);
     }
@@ -75,13 +82,25 @@ function ToolBar() {
         const reader = new FileReader();
         reader.onload = (e) => {
             try {
-                const editorData = JSON.parse(e.target?.result as string);
+                const editorData: EditorType = JSON.parse(e.target?.result as string);
+
+                const ajv = new Ajv();
+                addFormats(ajv);
+                const validate = ajv.compile(editorSchema);
+
+                if (!validate(editorData)) {
+                    setError('Произошла ошибка при чтении файла');
+                    return;
+                }
+
+                editorData.presentation.title = file.name.replace(/\.[^/.]+$/, '');
                 setEditor(editorData);
                 render();
-            } catch (error) {
-                console.error('Ошибка при загрузке файла:', error);
+            } catch {
+                setError('Произошла ошибка при загрузке файла');
             }
         };
+        event.target.value = '';
         reader.readAsText(file);
     }
 

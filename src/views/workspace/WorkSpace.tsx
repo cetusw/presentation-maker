@@ -10,7 +10,7 @@ type WorkSpaceProps = {
 function WorkSpace({editor, currentSlideId}: WorkSpaceProps) {
     const currentSlide = editor.presentation.slides.find(slide => slide.id === currentSlideId);
     return (
-        <div className="workspace">
+        <div className={style.workspace}>
             {currentSlide && editor.presentation.slides.length > 0 ? (
                 <div className={style.slide}>
                     <SlideComponent

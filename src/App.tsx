@@ -5,12 +5,15 @@ import styles from './App.module.css';
 import {ToolBar} from './views/header/ToolBar.tsx';
 import {EditorType} from './store/presentationTypes.ts';
 import {handleKeyPress} from './store/keyPressHandler.ts';
+import {useState} from 'react';
+import {Toast} from './views/utils/Toast.tsx';
 
 type AppProps = {
     editor: EditorType,
 }
 
 export default function App({editor}: AppProps) {
+    const [error, setError] = useState<string | null>(null);
     return (
         <div
             className={styles.app}
@@ -20,6 +23,7 @@ export default function App({editor}: AppProps) {
                 presentation={editor.presentation}
             />
             <ToolBar
+                setError={setError}
             />
             <div className={styles.presentationPreview}>
                 <SlideCollection
@@ -31,6 +35,7 @@ export default function App({editor}: AppProps) {
                     currentSlideId={editor.selection.selectedSlidesIds[0]}
                 />
             </div>
+            {error && <Toast message={error} onClose={() => setError(null)} />}
         </div>
     );
 }
