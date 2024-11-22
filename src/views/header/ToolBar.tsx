@@ -1,16 +1,14 @@
 import style from './ToolBar.module.css';
 import Undo from '../../assets/icons/undo.svg';
 import Redo from '../../assets/icons/redo.svg';
-import AddSlide from '../../assets/icons/add.svg';
-import AddText from '../../assets/icons/text.svg';
-import AddImage from '../../assets/icons/image.svg';
-import RemoveSlide from '../../assets/icons/remove.png';
+import AddSlide from '../../assets/icons/add-slide.svg';
+import AddText from '../../assets/icons/add-text.svg';
+import AddImage from '../../assets/icons/add-image.svg';
 import DownloadPresentation from '../../assets/icons/download.svg';
 import ImportPresentation from '../../assets/icons/import.svg';
 import {ButtonComponent} from '../../components/ButtonComponent.tsx';
 import {addNewSlide} from '../../store/addNewSlide.ts';
 import {dispatch, getEditor, setEditor} from '../../store/editor.ts';
-import {removeSlides} from '../../store/removeSlide.ts';
 import {addImageToSlide, addTextToSlide} from '../../store/addObjectToSlide.ts';
 import {InputComponent} from '../../components/InputComponent.tsx';
 import {loadImage} from '../../store/loadImage.ts';
@@ -29,10 +27,6 @@ type ToolBarProps = {
 function ToolBar({ setError }: ToolBarProps) {
     function onAddSlide() {
         dispatch(addNewSlide);
-    }
-
-    function onRemoveSlide() {
-        dispatch(removeSlides);
     }
 
     function onAddText() {
@@ -130,15 +124,6 @@ function ToolBar({ setError }: ToolBarProps) {
                 textClassName={style.buttonContent}
                 onClick={onAddSlide}
                 text={'Добавить слайд'}
-            >
-            </ButtonComponent>
-            <ButtonComponent
-                icon={RemoveSlide}
-                alt={'remove slide'}
-                className={style.addSlideButton}
-                textClassName={style.buttonContent}
-                onClick={onRemoveSlide}
-                text={'Удалить слайд'}
             >
             </ButtonComponent>
             <div className={style.divider}></div>

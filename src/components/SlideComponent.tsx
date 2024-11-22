@@ -3,6 +3,7 @@ import style from './SlideComponent.module.css';
 import {ObjectComponent} from './ObjectComponent.tsx';
 import {dispatch} from '../store/editor.ts';
 import {setSelection} from '../store/setSelection.ts';
+import {handleKeyPress} from '../store/keyPressHandler.ts';
 
 type SlideComponentProps = {
     className?: string;
@@ -51,6 +52,8 @@ function SlideComponent({className, slide, scale, isSelected, selection}: SlideC
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
             }}
+            onKeyDown={() => handleKeyPress}
+            tabIndex={0}
         >
             {slide.objects.map((object) => (
                 <div

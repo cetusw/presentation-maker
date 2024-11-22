@@ -14,6 +14,7 @@ type AppProps = {
 
 export default function App({editor}: AppProps) {
     const [error, setError] = useState<string | null>(null);
+
     return (
         <div
             className={styles.app}

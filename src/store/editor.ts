@@ -2,7 +2,8 @@ import {EditorType} from './presentationTypes.ts';
 import {loadFromLocalStorage, saveToLocalStorage} from './localStorage.ts';
 import {editor} from './constants.ts';
 
-let _editor = loadFromLocalStorage() !== null ? loadFromLocalStorage() : editor;
+const editorFromLocalStorage = loadFromLocalStorage();
+let _editor = editorFromLocalStorage !== null ? editorFromLocalStorage : editor;
 let _handler: () => void;
 
 function getEditor() {

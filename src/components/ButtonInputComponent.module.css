@@ -14,14 +14,14 @@
 }
 
 .buttonText {
-    font: 11px/14px 'Roboto', sans-serif;
+    font: 14px/18px 'Roboto', sans-serif;
     margin: auto 0;
 }
 
 .buttonIcon {
     margin: auto;
-    width: 14px;
-    height: 14px;
+    width: 18px;
+    height: 18px;
 }
 
 .inputBlock {
