@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import {Position} from '../presentationTypes.ts';
 
-type DragAndDropOptions = {
+type DragAndDropProps = {
     initialPosition?: Position;
 };
 
@@ -11,7 +11,7 @@ type DragAndDropResult = {
     setPosition: React.Dispatch<React.SetStateAction<Position>>;
 };
 
-function useDragAndDrop({ initialPosition = { x: 0, y: 0 } }: DragAndDropOptions = {}): DragAndDropResult {
+function useDragAndDrop({ initialPosition = { x: 0, y: 0 } }: DragAndDropProps = {}): DragAndDropResult {
     const [position, setPosition] = useState<Position>(initialPosition);
     const elementRef = useRef<HTMLDivElement | null>(null);
     const startPos = useRef<Position>({ x: 0, y: 0 });

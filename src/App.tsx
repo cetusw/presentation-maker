@@ -5,8 +5,9 @@ import styles from './App.module.css';
 import {ToolBar} from './views/header/ToolBar.tsx';
 import {EditorType} from './store/presentationTypes.ts';
 import {handleKeyPress} from './store/keyPressHandler.ts';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Toast} from './views/utils/Toast.tsx';
+import {loadFromLocalStorage} from './store/localStorage.ts';
 
 type AppProps = {
     editor: EditorType,
@@ -14,6 +15,13 @@ type AppProps = {
 
 export default function App({editor}: AppProps) {
     const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const data = loadFromLocalStorage();
+        if (!data) {
+            setError('Ошибка при загрузке данных из local storage');
+        }
+    }, []);
 
     return (
         <div

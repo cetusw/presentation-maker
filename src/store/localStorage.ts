@@ -19,7 +19,6 @@ function loadFromLocalStorage(): EditorType | null {
     const validate = ajv.compile(editorSchema);
 
     if (!validate(editorData)) {
-        console.error('Ошибка при загрузке данных из local storage');
         return null;
     }
 
