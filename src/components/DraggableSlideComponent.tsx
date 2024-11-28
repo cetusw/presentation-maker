@@ -1,7 +1,7 @@
 import {Slide} from '../store/presentationTypes.ts';
 import {useDragAndDrop} from '../store/hooks/useDragAndDrop.tsx';
 import {SlideComponent} from './SlideComponent.tsx';
-import {editor, slideCollectionScale} from '../store/constants.ts';
+import {editor, slideCollectionScale} from '../store/data/editorData.ts';
 import style from './DraggableSlideComponent.module.css';
 import {handleKeyPress} from '../store/keyPressHandler.ts';
 import {useEffect} from 'react';
@@ -19,7 +19,7 @@ function DraggableSlideComponent({ slide, isSelected, onClick }: DraggableSlideC
         if (isSelected && elementRef.current) {
             elementRef.current.focus();
         }
-    }, [isSelected]);
+    }, [isSelected, elementRef]);
 
     return (
         <div

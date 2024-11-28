@@ -1,7 +1,7 @@
 import {SlideObject} from '../store/presentationTypes.ts';
 import style from './ObjectComponent.module.css';
 import {handleKeyPress} from '../store/keyPressHandler.ts';
-import {defaultText} from '../store/constants.ts';
+import {defaultText} from '../store/data/editorData.ts';
 import React from 'react';
 import {useDragAndDrop} from '../store/hooks/useDragAndDrop.tsx';
 

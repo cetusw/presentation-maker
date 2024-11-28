@@ -1,4 +1,4 @@
-import {EditorType, Position, Presentation, Size} from './presentationTypes.ts';
+import {EditorType, Position, Presentation, Size} from '../presentationTypes.ts';
 
 const defaultPosition: Position = {x: 225, y: 270};
 const defaultSize: Size = {width: 500, height: 100};
@@ -8,179 +8,6 @@ const defaultColor: string = '#FFFFFF';
 const defaultText: string = 'Добавьте текст';
 const defaultTitle: string = 'Презентация без названия';
 const slideCollectionScale: number = 5;
-
-const colorBackground = {
-    type: 'object',
-    properties: {
-        type: {
-            const: 'color'
-        },
-        color: {
-            type: 'string'
-        }
-    },
-    required: ['type', 'color']
-};
-
-const imageBackground = {
-    type: 'object',
-    properties: {
-        type: {
-            const: 'image'
-        },
-        imageUrl: {
-            type: 'string'
-        }
-    },
-    required: ['type', 'imageUrl']
-};
-
-const gradientBackground = {
-    type: 'object',
-    properties: {
-        type: {
-            const: 'gradient'
-        },
-        firstColor: {
-            type: 'string'
-        },
-        secondColor: {
-            type: 'string'
-        }
-    },
-    required: ['type', 'firstColor', 'secondColor']
-};
-
-const position = {
-    type: 'object',
-    properties: {
-        x: {
-            type: 'number'
-        },
-        y: {
-            type: 'number'
-        }
-    },
-    required: ['x', 'y']
-};
-
-const size = {
-    type: 'object',
-    properties: {
-        width: {
-            type: 'number'
-        },
-        height: {
-            type: 'number'
-        }
-    },
-    required: ['width', 'height']
-};
-
-const textObject = {
-    type: 'object',
-    properties: {
-        id: {
-            type: 'string'
-        },
-        position: position,
-        size: size,
-        type: {
-            const: 'text'
-        },
-        content: {
-            type: 'string'
-        },
-        fontFamily: {
-            type: 'string'
-        },
-        fontSize: {
-            type: 'number'
-        }
-    },
-    required: ['id', 'position', 'size', 'type', 'content', 'fontFamily', 'fontSize']
-};
-
-const imageObject = {
-    type: 'object',
-    properties: {
-        id: {
-            type: 'string'
-        },
-        position: position,
-        size: size,
-        type: {
-            const: 'image'
-        },
-        imageUrl: {
-            type: 'string'
-        }
-    },
-    required: ['id', 'position', 'size', 'type', 'imageUrl']
-};
-
-const editorSchema = {
-    type: 'object',
-    properties: {
-        presentation: {
-            type: 'object',
-            properties: {
-                id: {
-                    type: 'string'
-                },
-                title: {
-                    type: 'string'
-                },
-                author: {
-                    type: 'string'
-                },
-                createdAt: {
-                    type: 'string', format: 'date-time'
-                },
-                slides: {
-                    type: 'array',
-                    items: {
-                        type: 'object',
-                        properties: {
-                            id: {
-                                type: 'string'
-                            },
-                            background: {
-                                oneOf: [colorBackground, imageBackground, gradientBackground]
-                            },
-                            objects: {
-                                type: 'array',
-                                items: {
-                                    oneOf: [textObject, imageObject]
-                                }
-                            }
-                        },
-                        required: ['id', 'background'],
-                    },
-                },
-            },
-            required: ['id', 'title', 'author', 'createdAt', 'slides'],
-        },
-        selection: {
-            type: 'object',
-            properties: {
-                selectedSlidesIds: {
-                    type: 'array',
-                    items: {
-                        type: 'string'
-                    }
-                },
-                selectedObjectsIds: {
-                    type: 'array',
-                    items: {
-                        type: 'string'
-                    },
-                },
-            },
-        },
-    },
-    required: ['presentation'],
-};
 
 const defaultPresentation: Presentation = {
     'id': 'presentation-1',
@@ -419,14 +246,6 @@ const defaultPresentation: Presentation = {
     ]
 };
 
-const minDefaultPresentation: Presentation = {
-    id: '1',
-    title: 'Minimum Presentation',
-    author: 'Mikhail',
-    createdAt: new Date('2024-09-05T00:00:00Z'),
-    slides: []
-};
-
 const editor: EditorType = {
     presentation: defaultPresentation,
     selection: {
@@ -436,14 +255,12 @@ const editor: EditorType = {
 }
 
 export {
-    editorSchema,
     defaultPosition,
     defaultSize,
     defaultText,
     defaultPresentation,
     defaultFontSize,
     defaultFontFamily,
-    minDefaultPresentation,
     defaultColor,
     defaultTitle,
     slideCollectionScale,

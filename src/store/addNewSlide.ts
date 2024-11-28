@@ -1,6 +1,6 @@
 import {EditorType, Slide} from './presentationTypes.ts';
 import {v4 as generateUuid} from 'uuid';
-import {defaultColor} from './constants.ts';
+import {defaultColor} from './data/editorData.ts';
 
 function addNewSlide(editor: EditorType): EditorType {
     const newSlide: Slide = {
