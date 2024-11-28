@@ -35,14 +35,8 @@ export default function App({editor}: AppProps) {
                 setError={setError}
             />
             <div className={styles.presentationPreview}>
-                <SlideCollection
-                    presentation={editor.presentation}
-                    selection={editor.selection}
-                />
-                <WorkSpace
-                    editor={editor}
-                    currentSlideId={editor.selection.selectedSlidesIds[0]}
-                />
+                <SlideCollection/>
+                <WorkSpace/>
             </div>
             {error && <Toast message={error} onClose={() => setError(null)} />}
         </div>

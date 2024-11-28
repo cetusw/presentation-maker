@@ -2,7 +2,7 @@ import {EditorType, Slide} from './presentationTypes.ts';
 import {v4 as generateUuid} from 'uuid';
 import {defaultColor} from './data/editorData.ts';
 
-function addNewSlide(editor: EditorType): EditorType {
+function addSlide(editor: EditorType): EditorType {
     const newSlide: Slide = {
         id: `slide-${generateUuid()}`,
         background: {
@@ -24,5 +24,5 @@ function addNewSlide(editor: EditorType): EditorType {
 }
 
 export {
-    addNewSlide,
+    addSlide,
 }

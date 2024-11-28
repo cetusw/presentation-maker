@@ -1,6 +1,6 @@
 import {EditorType, Slide} from './presentationTypes.ts';
 
-function removeSlides(editor: EditorType): EditorType {
+function removeSlide(editor: EditorType): EditorType {
     const removeSlideId = editor.selection.selectedSlidesIds;
 
     const updatedSlides: Slide[] = editor.presentation.slides.filter(slide => !removeSlideId.some(toRemove => slide.id === toRemove));
@@ -26,5 +26,5 @@ function removeSlides(editor: EditorType): EditorType {
 }
 
 export {
-    removeSlides,
+    removeSlide,
 }

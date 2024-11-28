@@ -1,30 +1,33 @@
-import {BackgroundType, ItemSelection, Slide} from '../store/presentationTypes.ts';
+import {BackgroundType, Slide} from '../store/presentationTypes.ts';
 import style from './SlideComponent.module.css';
 import {ObjectComponent} from './ObjectComponent.tsx';
-import {dispatch} from '../store/editor.ts';
-import {setSelection} from '../store/setSelection.ts';
 import {handleKeyPress} from '../store/keyPressHandler.ts';
+import {useAppSelector} from '../views/hooks/useAppSelector.ts';
+import {useAppActions} from '../views/hooks/useAppActions.ts';
 
 type SlideComponentProps = {
     className?: string;
     slide: Slide,
     scale?: number,
     isSelected?: boolean,
-    selection: ItemSelection,
 };
 
-function SlideComponent({className, slide, scale, isSelected, selection}: SlideComponentProps) {
+function SlideComponent({className, slide, scale, isSelected}: SlideComponentProps) {
+    const editor = useAppSelector((editor => editor));
+    const selection = editor.selection;
+
     const newScale = scale ?? 1;
 
     const slideClass = isSelected
         ? `${style.selectedSlide} ${className || ''}`
         : `${style.slide} ${className || ''}`;
 
+    const {setSelection} = useAppActions()
     function onObjectClick(objectId: string) {
-        dispatch(setSelection, {
-            selectedSlidesIds: selection?.selectedSlidesIds,
+        setSelection({
+            selectedSlidesIds: selection.selectedSlidesIds,
             selectedObjectsIds: [objectId],
-        });
+        })
     }
 
     function renderBackground(background: BackgroundType) {
@@ -64,7 +67,7 @@ function SlideComponent({className, slide, scale, isSelected, selection}: SlideC
                         objectId={object.id}
                         object={object}
                         scale={newScale}
-                        isSelected={object.id == selection?.selectedObjectsIds[0]}
+                        isSelected={object.id === selection.selectedObjectsIds[0]}
                     />
                 </div>
             ))}

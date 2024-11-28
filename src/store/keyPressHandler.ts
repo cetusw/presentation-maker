@@ -1,13 +1,13 @@
 import {dispatch, getEditor} from './editor.ts';
 import {removeObjectFromSlide} from './removeObjectFromSlide.ts';
 import React from 'react';
-import {removeSlides} from './removeSlide.ts';
+import {removeSlide} from './removeSlide.ts';
 function onRemoveObject() {
     dispatch(removeObjectFromSlide)
 }
 
 function onRemoveSlide() {
-    dispatch(removeSlides);
+    dispatch(removeSlide);
 }
 
 function handleKeyPress(event: React.KeyboardEvent<HTMLDivElement>) {

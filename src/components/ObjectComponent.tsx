@@ -3,16 +3,16 @@ import style from './ObjectComponent.module.css';
 import {handleKeyPress} from '../store/keyPressHandler.ts';
 import {defaultText} from '../store/data/editorData.ts';
 import React from 'react';
-import {useDragAndDrop} from '../store/hooks/useDragAndDrop.tsx';
+import {useDragAndDrop} from '../views/hooks/useDragAndDrop.tsx';
 
 type ObjectComponentProps = {
     objectId: string,
     object: SlideObject,
-    scale: number,
     isSelected: boolean,
+    scale: number,
 };
 
-function ObjectComponent({objectId, object, scale, isSelected}: ObjectComponentProps) {
+function ObjectComponent({objectId, object, isSelected, scale}: ObjectComponentProps) {
     const { elementRef, position } = useDragAndDrop();
 
     const selectedObject = isSelected

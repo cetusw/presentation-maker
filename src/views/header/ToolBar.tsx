@@ -1,3 +1,4 @@
+import React from 'react';
 import style from './ToolBar.module.css';
 import Undo from '../../assets/icons/undo.svg';
 import Redo from '../../assets/icons/redo.svg';
@@ -7,14 +8,12 @@ import AddImage from '../../assets/icons/add-image.svg';
 import DownloadPresentation from '../../assets/icons/download.svg';
 import ImportPresentation from '../../assets/icons/import.svg';
 import {ButtonComponent} from '../../components/ButtonComponent.tsx';
-import {addNewSlide} from '../../store/addNewSlide.ts';
-import {dispatch, getEditor} from '../../store/editor.ts';
-import {addImageToSlide, addTextToSlide} from '../../store/addObjectToSlide.ts';
 import {InputComponent} from '../../components/InputComponent.tsx';
 import {loadImage} from '../../store/loadImage.ts';
-import {updateBackgroundColor, updateBackgroundImage} from '../../store/updateSlideBackground.ts';
 import {exportToJson} from '../../store/exportToJson.ts';
-import {useImportPresentation} from '../../store/hooks/useImportPresentation.tsx';
+import {useImportPresentation} from '../hooks/useImportPresentation.tsx';
+import {useAppActions} from '../hooks/useAppActions.ts';
+import {useAppSelector} from '../hooks/useAppSelector.ts';
 
 type ToolBarProps = {
     setError: (message: string) => void;
@@ -22,18 +21,20 @@ type ToolBarProps = {
 
 function ToolBar({ setError } : ToolBarProps) {
     const { onImportPresentation } = useImportPresentation({ setError });
+    const editor = useAppSelector((editor => editor));
+    const { addSlide, addTextToSlide, addImageToSlide, updateBackgroundImage, updateBackgroundColor } = useAppActions();
     function onAddSlide() {
-        dispatch(addNewSlide);
+        addSlide();
     }
 
     function onAddText() {
-        dispatch(addTextToSlide);
+        addTextToSlide();
     }
 
     function onAddImage(imageUrl: string) {
         loadImage(imageUrl)
             .then((image) => {
-                dispatch(addImageToSlide, image);
+                addImageToSlide(image);
             })
             .catch((error) => {
                 console.error(error);
@@ -43,7 +44,7 @@ function ToolBar({ setError } : ToolBarProps) {
     function onChangeBackgroundImage(imageUrl: string) {
         loadImage(imageUrl)
             .then((image) => {
-                dispatch(updateBackgroundImage, image)
+                updateBackgroundImage(image)
             })
             .catch((error) => {
                 console.error(error);
@@ -62,12 +63,12 @@ function ToolBar({ setError } : ToolBarProps) {
         }
     }
 
-    function onDownloadPresentation() {
-        exportToJson(getEditor(), getEditor()?.presentation.title);
+    function onDownloadPresentation() {   // TODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODO
+        exportToJson(editor, editor?.presentation.title);
     }
 
     function onChangeBackgroundColor(event: React.ChangeEvent<HTMLInputElement>) {
-        dispatch(updateBackgroundColor, event.target.value);
+        updateBackgroundColor(event.target.value);
     }
 
     return (

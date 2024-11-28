@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import {Position} from '../presentationTypes.ts';
+import {Position} from '../../store/presentationTypes.ts';
 
 type DragAndDropProps = {
     initialPosition?: Position;

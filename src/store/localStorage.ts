@@ -1,5 +1,5 @@
 import {EditorType} from './presentationTypes.ts';
-import {validateEditor} from './utils/ajv.ts';
+import {validateEditor} from '../utils/ajv.ts';
 
 const KEY = 'editorState';
 

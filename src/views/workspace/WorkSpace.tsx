@@ -1,22 +1,21 @@
-import {EditorType} from '../../store/presentationTypes.ts';
+import {Slide} from '../../store/presentationTypes.ts';
 import {SlideComponent} from '../../components/SlideComponent.tsx';
 import style from './Workspace.module.css';
+import {useAppSelector} from '../hooks/useAppSelector.ts';
 
-type WorkSpaceProps = {
-    editor: EditorType;
-    currentSlideId: string;
-};
+function WorkSpace() {
+    const editor = useAppSelector((editor => editor))
+    const slides = editor.presentation.slides
+    const selection = editor.selection
+    const selectedSlide: Slide = slides.find(slide => slide.id === selection?.selectedSlidesIds[0]) || slides[0]
 
-function WorkSpace({editor, currentSlideId}: WorkSpaceProps) {
-    const currentSlide = editor.presentation.slides.find(slide => slide.id === currentSlideId);
     return (
         <div className={style.workspace}>
-            {currentSlide && editor.presentation.slides.length > 0 ? (
+            {selectedSlide && slides.length > 0 ? (
                 <div className={style.slide}>
                     <SlideComponent
                         className={style.slideComponent}
-                        slide={currentSlide}
-                        selection={editor.selection}
+                        slide={selectedSlide}
                     />
                 </div>
             ) : (

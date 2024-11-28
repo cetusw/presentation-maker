@@ -1,7 +1,7 @@
 import {EditorType} from './presentationTypes.ts';
 
-function exportToJson(data: EditorType | null, filename: string | undefined) {
-    const json = JSON.stringify(data);
+function exportToJson(editor: EditorType | null, filename: string | undefined) {
+    const json = JSON.stringify(editor);
 
     const blob = new Blob([json], { type: 'application/json' });
 

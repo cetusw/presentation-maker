@@ -1,7 +1,7 @@
-import { EditorType } from '../presentationTypes';
-import {setEditor} from '../editor.ts';
+import { EditorType } from '../../store/presentationTypes.ts';
+import {setEditor} from '../../store/editor.ts';
 import {render} from '../../main.tsx';
-import {validateEditor} from '../utils/ajv.ts';
+import {validateEditor} from '../../utils/ajv.ts';
 import React from 'react';
 
 type UseImportPresentationProps  = {

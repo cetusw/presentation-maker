@@ -246,7 +246,7 @@ const defaultPresentation: Presentation = {
     ]
 };
 
-const editor: EditorType = {
+const defaultEditor: EditorType = {
     presentation: defaultPresentation,
     selection: {
         selectedSlidesIds: [defaultPresentation.slides[1]?.id],
@@ -264,5 +264,5 @@ export {
     defaultColor,
     defaultTitle,
     slideCollectionScale,
-    editor,
+    defaultEditor,
 }

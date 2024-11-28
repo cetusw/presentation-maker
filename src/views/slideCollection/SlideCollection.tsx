@@ -1,27 +1,27 @@
-import {ItemSelection, Presentation} from '../../store/presentationTypes.ts';
 import style from './SlideCollection.module.css';
-import {dispatch} from '../../store/editor.ts';
-import {setSelection} from '../../store/setSelection.ts';
 import {DraggableSlideComponent} from '../../components/DraggableSlideComponent.tsx';
+import {useAppActions} from '../hooks/useAppActions.ts';
+import {useAppSelector} from '../hooks/useAppSelector.ts';
 
-type SlideCollectionProps = {
-    presentation: Presentation;
-    selection: ItemSelection;
-};
 
-function SlideCollection({presentation, selection}: SlideCollectionProps) {
+function SlideCollection() {
+    const editor = useAppSelector((editor => editor))
+    const slides = editor.presentation.slides
+    const selection = editor.selection
+
+    const {setSelection} = useAppActions()
     function onSlideClick(slideId: string) {
-        dispatch(setSelection, {
+        setSelection({
             selectedSlidesIds: [slideId],
             selectedObjectsIds: [],
-        });
+        })
     }
 
     return (
         <div>
-            {presentation.slides.length > 0 ? (
+            {slides.length > 0 ? (
                 <div className={style.slideCollection}>
-                    {presentation.slides.map((slide) => (
+                    {slides.map((slide) => (
                         <DraggableSlideComponent
                             key={slide.id}
                             slide={slide}

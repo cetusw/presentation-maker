@@ -1,9 +1,10 @@
-import {EditorType, ItemSelection} from './presentationTypes.ts';
+import {EditorType} from './presentationTypes.ts';
+import {SetSelectionAction} from './redux/actions.ts';
 
-function setSelection(editor: EditorType, newSelection: ItemSelection): EditorType {
+function setSelection(editor: EditorType, action: SetSelectionAction): EditorType {
     return {
         ...editor,
-        selection: newSelection,
+        selection: action.payload,
     }
 }
 
