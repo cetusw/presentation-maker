@@ -12,7 +12,7 @@ function getEditor() {
 
 function setEditor(newEditor: EditorType) {
     _editor = newEditor;
-    saveToLocalStorage();
+    saveToLocalStorage(getEditor());
 }
 
 // eslint-disable-next-line

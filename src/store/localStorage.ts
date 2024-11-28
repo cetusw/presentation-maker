@@ -1,24 +1,17 @@
 import {EditorType} from './presentationTypes.ts';
-import {getEditor} from './editor.ts';
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
-import {editorSchema} from './constants.ts';
+import {validateEditor} from './utils/ajv.ts';
 
 const KEY = 'editorState';
 
-function saveToLocalStorage() {
-    localStorage.setItem(KEY, JSON.stringify(getEditor()));
+function saveToLocalStorage(editor: EditorType) {
+    localStorage.setItem(KEY, JSON.stringify(editor));
 }
 
 function loadFromLocalStorage(): EditorType | null {
     const savedState = localStorage.getItem(KEY);
     const editorData = savedState ? JSON.parse(savedState) : null;
 
-    const ajv = new Ajv();
-    addFormats(ajv);
-    const validate = ajv.compile(editorSchema);
-
-    if (!validate(editorData)) {
+    if (!validateEditor(editorData)){
         return null;
     }
 

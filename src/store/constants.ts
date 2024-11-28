@@ -1,5 +1,4 @@
 import {EditorType, Position, Presentation, Size} from './presentationTypes.ts';
-// import {v4 as generateUuid} from 'uuid';
 
 const defaultPosition: Position = {x: 225, y: 270};
 const defaultSize: Size = {width: 500, height: 100};

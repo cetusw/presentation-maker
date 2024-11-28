@@ -8,23 +8,20 @@ import DownloadPresentation from '../../assets/icons/download.svg';
 import ImportPresentation from '../../assets/icons/import.svg';
 import {ButtonComponent} from '../../components/ButtonComponent.tsx';
 import {addNewSlide} from '../../store/addNewSlide.ts';
-import {dispatch, getEditor, setEditor} from '../../store/editor.ts';
+import {dispatch, getEditor} from '../../store/editor.ts';
 import {addImageToSlide, addTextToSlide} from '../../store/addObjectToSlide.ts';
 import {InputComponent} from '../../components/InputComponent.tsx';
 import {loadImage} from '../../store/loadImage.ts';
 import {updateBackgroundColor, updateBackgroundImage} from '../../store/updateSlideBackground.ts';
 import {exportToJson} from '../../store/exportToJson.ts';
-import {render} from '../../main.tsx';
-import Ajv from 'ajv';
-import {editorSchema} from '../../store/constants.ts';
-import {EditorType} from '../../store/presentationTypes.ts';
-import addFormats from 'ajv-formats';
+import {useImportPresentation} from '../../store/hooks/useImportPresentation.tsx';
 
 type ToolBarProps = {
     setError: (message: string) => void;
 }
 
-function ToolBar({ setError }: ToolBarProps) {
+function ToolBar({ setError } : ToolBarProps) {
+    const { onImportPresentation } = useImportPresentation({ setError });
     function onAddSlide() {
         dispatch(addNewSlide);
     }
@@ -67,35 +64,6 @@ function ToolBar({ setError }: ToolBarProps) {
 
     function onDownloadPresentation() {
         exportToJson(getEditor(), getEditor()?.presentation.title);
-    }
-
-    function onImportPresentation(event: React.ChangeEvent<HTMLInputElement>) {
-        const file = event.target.files?.[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            try {
-                const editorData: EditorType = JSON.parse(e.target?.result as string);
-
-                const ajv = new Ajv();
-                addFormats(ajv);
-                const validate = ajv.compile(editorSchema);
-
-                if (!validate(editorData)) {
-                    setError('Произошла ошибка при чтении файла');
-                    return;
-                }
-
-                editorData.presentation.title = file.name.replace(/\.[^/.]+$/, '');
-                setEditor(editorData);
-                render();
-            } catch {
-                setError('Произошла ошибка при загрузке файла');
-            }
-        };
-        event.target.value = '';
-        reader.readAsText(file);
     }
 
     function onChangeBackgroundColor(event: React.ChangeEvent<HTMLInputElement>) {
