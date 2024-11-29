@@ -39,7 +39,7 @@ function ToolBar({ setError } : ToolBarProps) {
         return () => {
             window.removeEventListener('keydown', handleKeyPress)
         }
-    }, [editor.selection])
+    })
 
     function onRemoveObject() {
         removeObjectFromSlide()
