@@ -3,7 +3,6 @@ import {useDragAndDrop} from '../views/hooks/useDragAndDrop.tsx';
 import {SlideComponent} from './SlideComponent.tsx';
 import {slideCollectionScale} from '../store/data/editorData.ts';
 import style from './DraggableSlideComponent.module.css';
-import {handleKeyPress} from '../store/keyPressHandler.ts';
 import {useEffect} from 'react';
 
 type DraggableSlideComponentProps = {
@@ -27,7 +26,6 @@ function DraggableSlideComponent({ slide, isSelected, onClick }: DraggableSlideC
             onClick={onClick}
             style={{ transform: `translate(0, ${position.y}px)` }}
             className={style.slideCollectionElement}
-            onKeyDown={() => handleKeyPress}
             tabIndex={0}
         >
             <SlideComponent

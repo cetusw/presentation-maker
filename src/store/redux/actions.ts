@@ -9,6 +9,9 @@ enum ActionType {
     ADD_IMAGE_TO_SLIDE = 'addImageToSlide',
     UPDATE_BACKGROUND_IMAGE = 'updateBackgroundImage',
     UPDATE_BACKGROUND_COLOR = 'updateBackgroundColor',
+    REMOVE_OBJECT_FROM_SLIDE = 'removeObjectFromSlide',
+    UPDATE_PRESENTATION_TITLE = 'updatePresentationTitle',
+    SAVE_IMPORTED_EDITOR_DATA = 'saveImportedEditorDataAction',
 }
 
 type AddSlideAction = {
@@ -38,15 +41,28 @@ type AddImageToSlideAction = {
     payload: HTMLImageElement,
 }
 
-type UpdateBackgroundImage = {
+type UpdateBackgroundImageAction = {
     type: ActionType.UPDATE_BACKGROUND_IMAGE,
     payload: HTMLImageElement,
 }
 
-type UpdateBackgroundColor = {
+type UpdateBackgroundColorAction = {
     type: ActionType.UPDATE_BACKGROUND_COLOR,
     payload: string,
 }
+
+type RemoveObjectFromSlideAction = {
+    type: ActionType.REMOVE_OBJECT_FROM_SLIDE,
+}
+
+type UpdatePresentationTitleAction = {
+    type: ActionType.UPDATE_PRESENTATION_TITLE,
+    payload: string
+}
+
+// type SaveImportedEditorDataAction = {
+//     type: ActionType.SAVE_IMPORTED_EDITOR_DATA,
+// }
 
 type EditorAction =
     AddSlideAction |
@@ -55,8 +71,10 @@ type EditorAction =
     SetEditorAction |
     AddTextToSlideAction |
     AddImageToSlideAction |
-    UpdateBackgroundImage |
-    UpdateBackgroundColor
+    UpdateBackgroundImageAction |
+    UpdateBackgroundColorAction |
+    RemoveObjectFromSlideAction |
+    UpdatePresentationTitleAction
 
 export {
     ActionType,

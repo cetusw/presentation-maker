@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import style from './ToolBar.module.css';
 import Undo from '../../assets/icons/undo.svg';
 import Redo from '../../assets/icons/redo.svg';
@@ -12,8 +12,9 @@ import {InputComponent} from '../../components/InputComponent.tsx';
 import {loadImage} from '../../store/loadImage.ts';
 import {exportToJson} from '../../store/exportToJson.ts';
 import {useImportPresentation} from '../hooks/useImportPresentation.tsx';
-import {useAppActions} from '../hooks/useAppActions.ts';
-import {useAppSelector} from '../hooks/useAppSelector.ts';
+import {useAppActions} from '../hooks/useAppActions.tsx';
+import {useAppSelector} from '../hooks/useAppSelector.tsx';
+import {store} from '../../store/redux/store.ts';
 
 type ToolBarProps = {
     setError: (message: string) => void;
@@ -22,7 +23,46 @@ type ToolBarProps = {
 function ToolBar({ setError } : ToolBarProps) {
     const { onImportPresentation } = useImportPresentation({ setError });
     const editor = useAppSelector((editor => editor));
-    const { addSlide, addTextToSlide, addImageToSlide, updateBackgroundImage, updateBackgroundColor } = useAppActions();
+
+    const {
+        addSlide,
+        addTextToSlide,
+        addImageToSlide,
+        updateBackgroundImage,
+        updateBackgroundColor,
+        removeObjectFromSlide,
+        removeSlide,
+    } = useAppActions();
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyPress);
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+        };
+    }, [editor.selection]);
+
+    function onRemoveObject() {
+        removeObjectFromSlide();
+    }
+
+    function onRemoveSlide() {
+        removeSlide();
+    }
+
+    function handleKeyPress(event: KeyboardEvent) {
+        if (event.key === 'Delete') {
+            const state = store.getState();
+            const hasSelectedObjects = state.selection.selectedObjectsIds?.length !== 0;
+            const hasSelectedSlides = state.selection.selectedSlidesIds?.length !== 0;
+
+            if (hasSelectedObjects && hasSelectedSlides) {
+                onRemoveObject();
+            } else if (!hasSelectedObjects && hasSelectedSlides) {
+                onRemoveSlide();
+            }
+        }
+    }
+
     function onAddSlide() {
         addSlide();
     }

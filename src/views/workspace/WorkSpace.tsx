@@ -1,7 +1,7 @@
 import {Slide} from '../../store/presentationTypes.ts';
 import {SlideComponent} from '../../components/SlideComponent.tsx';
 import style from './Workspace.module.css';
-import {useAppSelector} from '../hooks/useAppSelector.ts';
+import {useAppSelector} from '../hooks/useAppSelector.tsx';
 
 function WorkSpace() {
     const editor = useAppSelector((editor => editor))

@@ -1,17 +1,14 @@
-import {Presentation} from '../../store/presentationTypes.ts';
 import style from './PresentationTitle.module.css';
 import Logo from '../../assets/icons/logo.svg';
 import React from 'react';
-import {dispatch} from '../../store/editor.ts';
-import {updatePresentationTitle} from '../../store/updatePresentationTitle.ts';
+import {useAppActions} from '../hooks/useAppActions.tsx';
+import {useAppSelector} from '../hooks/useAppSelector.tsx';
 
-type PresentationTitleProps = {
-    presentation: Presentation;
-};
-
-function PresentationTitle({presentation}: PresentationTitleProps) {
+function PresentationTitle() {
+    const presentation = useAppSelector((editor => editor.presentation))
+    const { updatePresentationTitle } = useAppActions();
     function onTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
-        dispatch(updatePresentationTitle, event.target.value);
+        updatePresentationTitle(event.target.value);
     }
 
     return (

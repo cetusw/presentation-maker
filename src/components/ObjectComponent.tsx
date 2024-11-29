@@ -1,6 +1,5 @@
 import {SlideObject} from '../store/presentationTypes.ts';
 import style from './ObjectComponent.module.css';
-import {handleKeyPress} from '../store/keyPressHandler.ts';
 import {defaultText} from '../store/data/editorData.ts';
 import React from 'react';
 import {useDragAndDrop} from '../views/hooks/useDragAndDrop.tsx';
@@ -42,7 +41,6 @@ function ObjectComponent({objectId, object, isSelected, scale}: ObjectComponentP
             ref={elementRef}
             className={selectedObject}
             style={{ ...objectStyles, transform: `translate(${position.x}px, ${position.y}px)` }}
-            onKeyDown={() => handleKeyPress}
             tabIndex={0}
         >
             {object.type === 'text' ? (

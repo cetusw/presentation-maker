@@ -3,17 +3,11 @@ import {SlideCollection} from './views/slideCollection/SlideCollection.tsx';
 import {WorkSpace} from './views/workspace/WorkSpace.tsx';
 import styles from './App.module.css';
 import {ToolBar} from './views/header/ToolBar.tsx';
-import {EditorType} from './store/presentationTypes.ts';
-import {handleKeyPress} from './store/keyPressHandler.ts';
 import {useEffect, useState} from 'react';
 import {Toast} from './views/utils/Toast.tsx';
 import {loadFromLocalStorage} from './store/localStorage.ts';
 
-type AppProps = {
-    editor: EditorType,
-}
-
-export default function App({editor}: AppProps) {
+export default function App() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -26,11 +20,8 @@ export default function App({editor}: AppProps) {
     return (
         <div
             className={styles.app}
-            onKeyDown={handleKeyPress}
         >
-            <PresentationTitle
-                presentation={editor.presentation}
-            />
+            <PresentationTitle/>
             <ToolBar
                 setError={setError}
             />

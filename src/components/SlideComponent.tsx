@@ -1,9 +1,8 @@
 import {BackgroundType, Slide} from '../store/presentationTypes.ts';
 import style from './SlideComponent.module.css';
 import {ObjectComponent} from './ObjectComponent.tsx';
-import {handleKeyPress} from '../store/keyPressHandler.ts';
-import {useAppSelector} from '../views/hooks/useAppSelector.ts';
-import {useAppActions} from '../views/hooks/useAppActions.ts';
+import {useAppSelector} from '../views/hooks/useAppSelector.tsx';
+import {useAppActions} from '../views/hooks/useAppActions.tsx';
 
 type SlideComponentProps = {
     className?: string;
@@ -55,7 +54,6 @@ function SlideComponent({className, slide, scale, isSelected}: SlideComponentPro
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
             }}
-            onKeyDown={() => handleKeyPress}
             tabIndex={0}
         >
             {slide.objects.map((object) => (

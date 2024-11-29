@@ -1,8 +1,7 @@
 import { EditorType } from '../../store/presentationTypes.ts';
-import {setEditor} from '../../store/editor.ts';
-import {render} from '../../main.tsx';
 import {validateEditor} from '../../utils/ajv.ts';
 import React from 'react';
+import {useAppActions} from './useAppActions.tsx';
 
 type UseImportPresentationProps  = {
     setError: (message: string) => void;
@@ -12,10 +11,13 @@ type UseImportPresentationResult = {
     onImportPresentation: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export function useImportPresentation({ setError }: UseImportPresentationProps): UseImportPresentationResult {
+function useImportPresentation({ setError }: UseImportPresentationProps): UseImportPresentationResult {
+    const { setEditor } = useAppActions();
     function onImportPresentation(event: React.ChangeEvent<HTMLInputElement>) {
         const file = event.target.files?.[0];
-        if (!file) return;
+        if (!file) {
+            return;
+        }
 
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -29,16 +31,19 @@ export function useImportPresentation({ setError }: UseImportPresentationProps):
 
                 editorData.presentation.title = file.name.replace(/\.[^/.]+$/, '');
                 setEditor(editorData);
-                render();
             } catch {
                 setError('Произошла ошибка при загрузке файла');
             }
         };
         event.target.value = '';
-        reader.readAsText(file);
+        reader.readAsText(file)
     }
 
     return {
         onImportPresentation,
     };
+}
+
+export {
+    useImportPresentation,
 }

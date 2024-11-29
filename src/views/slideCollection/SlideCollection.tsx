@@ -1,7 +1,7 @@
 import style from './SlideCollection.module.css';
 import {DraggableSlideComponent} from '../../components/DraggableSlideComponent.tsx';
-import {useAppActions} from '../hooks/useAppActions.ts';
-import {useAppSelector} from '../hooks/useAppSelector.ts';
+import {useAppActions} from '../hooks/useAppActions.tsx';
+import {useAppSelector} from '../hooks/useAppSelector.tsx';
 
 
 function SlideCollection() {
