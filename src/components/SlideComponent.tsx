@@ -1,8 +1,8 @@
-import {BackgroundType, Slide} from '../store/presentationTypes.ts';
-import style from './SlideComponent.module.css';
-import {ObjectComponent} from './ObjectComponent.tsx';
-import {useAppSelector} from '../views/hooks/useAppSelector.tsx';
-import {useAppActions} from '../views/hooks/useAppActions.tsx';
+import {BackgroundType, Slide} from '../store/presentationTypes.ts'
+import style from './SlideComponent.module.css'
+import {ObjectComponent} from './ObjectComponent.tsx'
+import {useAppSelector} from '../views/hooks/useAppSelector.tsx'
+import {useAppActions} from '../views/hooks/useAppActions.tsx'
 
 type SlideComponentProps = {
     className?: string;
@@ -12,16 +12,15 @@ type SlideComponentProps = {
 };
 
 function SlideComponent({className, slide, scale, isSelected}: SlideComponentProps) {
-    const editor = useAppSelector((editor => editor));
-    const selection = editor.selection;
+    const selection = useAppSelector(editor => editor.selection)
 
-    const newScale = scale ?? 1;
+    const newScale = scale ?? 1
 
     const slideClass = isSelected
         ? `${style.selectedSlide} ${className || ''}`
-        : `${style.slide} ${className || ''}`;
+        : `${style.slide} ${className || ''}`
 
-    const {setSelection} = useAppActions()
+    const { setSelection } = useAppActions()
     function onObjectClick(objectId: string) {
         setSelection({
             selectedSlidesIds: selection.selectedSlidesIds,
@@ -32,17 +31,17 @@ function SlideComponent({className, slide, scale, isSelected}: SlideComponentPro
     function renderBackground(background: BackgroundType) {
         switch (background.type) {
             case 'color':
-                return {backgroundColor: background.color};
+                return {backgroundColor: background.color}
             case 'image':
-                return {backgroundImage: `url(${background.imageUrl})`};
+                return {backgroundImage: `url(${background.imageUrl})`}
             case 'gradient':
-                return {backgroundImage: `linear-gradient(${background.firstColor}, ${background.secondColor})`};
+                return {backgroundImage: `linear-gradient(${background.firstColor}, ${background.secondColor})`}
             default:
-                return {backgroundColor: 'white'};
+                return {backgroundColor: 'white'}
         }
     }
 
-    const backgroundStyles = renderBackground(slide.background);
+    const backgroundStyles = renderBackground(slide.background)
 
     return (
         <div
@@ -70,7 +69,7 @@ function SlideComponent({className, slide, scale, isSelected}: SlideComponentPro
                 </div>
             ))}
         </div>
-    );
+    )
 }
 
 export {

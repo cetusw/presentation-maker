@@ -1,8 +1,8 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './App.tsx';
-import {Provider} from 'react-redux';
-import {store} from './store/redux/store.ts';
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './App.tsx'
+import {Provider} from 'react-redux'
+import {store} from './store/redux/store.ts'
 
 const root = createRoot(document.getElementById('root')!)
 
@@ -13,11 +13,10 @@ function render(): void {
                 <App/>
             </Provider>
         </StrictMode>,
-
     )
 }
 
-render();
+render()
 
 export {
     render,

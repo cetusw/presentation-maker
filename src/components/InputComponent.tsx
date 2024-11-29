@@ -1,5 +1,5 @@
-import style from './ButtonInputComponent.module.css';
-import React from 'react';
+import style from './ButtonInputComponent.module.css'
+import React from 'react'
 
 type InputComponentProps = {
     inputId: string;
@@ -14,10 +14,10 @@ type InputComponentProps = {
 }
 
 function InputComponent({ inputId, type, onChange, text, icon, alt, className, disabled = false, textClassName }: InputComponentProps) {
-    const buttonClass = `${style.button} ${className || ''}`;
+    const buttonClass = `${style.button} ${className || ''}`
 
     function triggerInput() {
-        document.getElementById(inputId)?.click();
+        document.getElementById(inputId)?.click()
     }
 
     return (
@@ -35,7 +35,7 @@ function InputComponent({ inputId, type, onChange, text, icon, alt, className, d
                 onChange={onChange}
             />
         </button>
-    );
+    )
 }
 
 export {

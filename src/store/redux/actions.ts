@@ -11,7 +11,6 @@ enum ActionType {
     UPDATE_BACKGROUND_COLOR = 'updateBackgroundColor',
     REMOVE_OBJECT_FROM_SLIDE = 'removeObjectFromSlide',
     UPDATE_PRESENTATION_TITLE = 'updatePresentationTitle',
-    SAVE_IMPORTED_EDITOR_DATA = 'saveImportedEditorDataAction',
 }
 
 type AddSlideAction = {
@@ -59,10 +58,6 @@ type UpdatePresentationTitleAction = {
     type: ActionType.UPDATE_PRESENTATION_TITLE,
     payload: string
 }
-
-// type SaveImportedEditorDataAction = {
-//     type: ActionType.SAVE_IMPORTED_EDITOR_DATA,
-// }
 
 type EditorAction =
     AddSlideAction |

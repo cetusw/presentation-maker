@@ -1,9 +1,9 @@
-import {EditorType} from './presentationTypes.ts';
-import {defaultTitle} from './data/editorData.ts';
+import {EditorType} from './presentationTypes.ts'
+import {defaultTitle} from './data/editorData.ts'
 
 function updatePresentationTitle(editor: EditorType, newTitle: string): EditorType {
     if (newTitle == '') {
-        newTitle = defaultTitle;
+        newTitle = defaultTitle
     }
     return {
         ...editor,
@@ -11,7 +11,7 @@ function updatePresentationTitle(editor: EditorType, newTitle: string): EditorTy
             ...editor.presentation,
             title: newTitle,
         }
-    };
+    }
 }
 
 export {

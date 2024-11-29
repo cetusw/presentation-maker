@@ -1,13 +1,12 @@
-import style from './SlideCollection.module.css';
-import {DraggableSlideComponent} from '../../components/DraggableSlideComponent.tsx';
-import {useAppActions} from '../hooks/useAppActions.tsx';
-import {useAppSelector} from '../hooks/useAppSelector.tsx';
+import style from './SlideCollection.module.css'
+import {DraggableSlideComponent} from '../../components/DraggableSlideComponent.tsx'
+import {useAppActions} from '../hooks/useAppActions.tsx'
+import {useAppSelector} from '../hooks/useAppSelector.tsx'
 
 
 function SlideCollection() {
-    const editor = useAppSelector((editor => editor))
-    const slides = editor.presentation.slides
-    const selection = editor.selection
+    const slides = useAppSelector(editor => editor.presentation.slides)
+    const selection = useAppSelector(editor => editor.selection)
 
     const {setSelection} = useAppActions()
     function onSlideClick(slideId: string) {
@@ -35,7 +34,7 @@ function SlideCollection() {
                 <ol className={style.slideCollection}></ol>
             )}
         </div>
-    );
+    )
 }
 
 export {

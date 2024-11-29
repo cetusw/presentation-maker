@@ -1,17 +1,17 @@
-import style from './ButtonInputComponent.module.css';
+import style from './ButtonInputComponent.module.css'
 
 type ButtonComponentProps = {
-    text?: string;
-    textClassName?: string;
-    onClick?: () => void;
-    icon?: string;
-    alt?: string;
+    text?: string
+    textClassName?: string
+    onClick?: () => void
+    icon?: string
+    alt?: string
     className?: string
-    disabled?: boolean;
+    disabled?: boolean
 }
 
 function ButtonComponent({ text, onClick, icon, alt, className, disabled = false, textClassName }: ButtonComponentProps) {
-    const buttonClass = `${style.button} ${className || ''}`;
+    const buttonClass = `${style.button} ${className || ''}`
 
     return (
         <button
@@ -22,7 +22,7 @@ function ButtonComponent({ text, onClick, icon, alt, className, disabled = false
             {icon && <img className={style.buttonIcon} src={icon} alt={alt}/>}
             <span className={textClassName}>{text}</span>
         </button>
-    );
+    )
 }
 
 export {

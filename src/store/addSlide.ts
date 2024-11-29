@@ -1,6 +1,6 @@
-import {EditorType, Slide} from './presentationTypes.ts';
-import {v4 as generateUuid} from 'uuid';
-import {defaultColor} from './data/editorData.ts';
+import {EditorType, Slide} from './presentationTypes.ts'
+import {v4 as generateUuid} from 'uuid'
+import {defaultColor} from './data/editorData.ts'
 
 function addSlide(editor: EditorType): EditorType {
     const newSlide: Slide = {
@@ -10,9 +10,9 @@ function addSlide(editor: EditorType): EditorType {
             color: defaultColor,
         },
         objects: [],
-    };
+    }
 
-    const updatedSlides: Slide[] = [...editor.presentation.slides, newSlide];
+    const updatedSlides: Slide[] = [...editor.presentation.slides, newSlide]
 
     return {
         ...editor,
@@ -20,7 +20,7 @@ function addSlide(editor: EditorType): EditorType {
             ...editor.presentation,
             slides: updatedSlides,
         },
-    };
+    }
 }
 
 export {

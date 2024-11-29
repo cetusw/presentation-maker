@@ -1,14 +1,14 @@
-const object: string = 'object';
-const array: string = 'array';
-const string: string = 'string';
-const text: string = 'text';
-const color: string = 'color';
-const gradient: string = 'gradient';
-const image: string = 'image';
-const number: string = 'number';
-const x: string = 'x';
-const y: string = 'y';
-const dateTime: string = 'date-time';
+const object: string = 'object'
+const array: string = 'array'
+const string: string = 'string'
+const text: string = 'text'
+const color: string = 'color'
+const gradient: string = 'gradient'
+const image: string = 'image'
+const number: string = 'number'
+const x: string = 'x'
+const y: string = 'y'
+const dateTime: string = 'date-time'
 
 const colorBackground = {
     type: object,
@@ -21,7 +21,7 @@ const colorBackground = {
         }
     },
     required: ['type', 'color']
-};
+}
 
 const imageBackground = {
     type: object,
@@ -34,7 +34,7 @@ const imageBackground = {
         }
     },
     required: ['type', 'imageUrl']
-};
+}
 
 const gradientBackground = {
     type: object,
@@ -50,7 +50,7 @@ const gradientBackground = {
         }
     },
     required: ['type', 'firstColor', 'secondColor']
-};
+}
 
 const position = {
     type: object,
@@ -63,7 +63,7 @@ const position = {
         }
     },
     required: [x, y]
-};
+}
 
 const size = {
     type: object,
@@ -76,7 +76,7 @@ const size = {
         }
     },
     required: ['width', 'height']
-};
+}
 
 const textObject = {
     type: object,
@@ -100,7 +100,7 @@ const textObject = {
         }
     },
     required: ['id', 'position', 'size', 'type', 'content', 'fontFamily', 'fontSize']
-};
+}
 
 const imageObject = {
     type: object,
@@ -118,7 +118,7 @@ const imageObject = {
         }
     },
     required: ['id', 'position', 'size', 'type', 'imageUrl']
-};
+}
 
 const editorScheme = {
     type: object,
@@ -181,7 +181,7 @@ const editorScheme = {
         },
     },
     required: ['presentation'],
-};
+}
 
 export {
     editorScheme,

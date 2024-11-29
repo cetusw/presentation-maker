@@ -1,5 +1,5 @@
-import { ItemSelection } from '../presentationTypes.ts';
-import { ActionType } from './actions';
+import { ItemSelection } from '../presentationTypes.ts'
+import { ActionType } from './actions'
 
 function setSelection(newSelection: ItemSelection) {
     return {

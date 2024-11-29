@@ -1,37 +1,37 @@
-import {SlideObject} from '../store/presentationTypes.ts';
-import style from './ObjectComponent.module.css';
-import {defaultText} from '../store/data/editorData.ts';
-import React from 'react';
-import {useDragAndDrop} from '../views/hooks/useDragAndDrop.tsx';
+import {SlideObject} from '../store/presentationTypes.ts'
+import style from './ObjectComponent.module.css'
+import {defaultText} from '../store/data/editorData.ts'
+import React from 'react'
+import {useDragAndDrop} from '../views/hooks/useDragAndDrop.tsx'
 
 type ObjectComponentProps = {
-    objectId: string,
-    object: SlideObject,
-    isSelected: boolean,
-    scale: number,
+    objectId: string
+    object: SlideObject
+    isSelected: boolean
+    scale: number
 };
 
 function ObjectComponent({objectId, object, isSelected, scale}: ObjectComponentProps) {
-    const { elementRef, position } = useDragAndDrop();
+    const { elementRef, position } = useDragAndDrop()
 
     const selectedObject = isSelected
         ? `${style.selectedObject}`
-        : `${style.object}`;
+        : `${style.object}`
 
     const objectStyles = {
         left: object.position.x / scale,
         top: object.position.y / scale,
         width: `${object.size.width / scale}px`,
         height: object.type === 'image' ? `${object.size.height / scale}px` : 'auto',
-    };
+    }
 
     function resizeTextArea(event: React.ChangeEvent<HTMLTextAreaElement>) {
-        const textarea = event.target;
+        const textarea = event.target
         const objectElement = document.getElementById(objectId)
-        textarea.style.height = 'auto';
-        textarea.style.height = `${textarea.scrollHeight}px`;
+        textarea.style.height = 'auto'
+        textarea.style.height = `${textarea.scrollHeight}px`
         if (objectElement) {
-            objectElement.style.height = `${textarea.scrollHeight}px`;
+            objectElement.style.height = `${textarea.scrollHeight}px`
         }
     }
 
@@ -61,7 +61,7 @@ function ObjectComponent({objectId, object, isSelected, scale}: ObjectComponentP
                 />
             ) : null}
         </div>
-    );
+    )
 }
 
 export {

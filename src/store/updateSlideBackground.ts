@@ -1,19 +1,19 @@
-import {BackgroundType, EditorType, Slide} from './presentationTypes.ts';
+import {BackgroundType, EditorType, Slide} from './presentationTypes.ts'
 
 function updateSlideBackground(editor: EditorType,  newBackground: BackgroundType): EditorType {
-    const slideIdToEdit = editor.selection.selectedSlidesIds[0];
-    const slideToEdit = editor.presentation.slides.find(slide => slide.id === slideIdToEdit);
+    const slideIdToEdit = editor.selection.selectedSlidesIds[0]
+    const slideToEdit = editor.presentation.slides.find(slide => slide.id === slideIdToEdit)
 
     if (!slideToEdit) {
-        return editor;
+        return editor
     }
 
     const updatedSlide: Slide = {
         ...slideToEdit,
         background: newBackground,
-    };
+    }
 
-    const updatedSlides: Slide[] = editor.presentation.slides.map(slide => slide.id === slideIdToEdit ? updatedSlide : slide);
+    const updatedSlides: Slide[] = editor.presentation.slides.map(slide => slide.id === slideIdToEdit ? updatedSlide : slide)
 
     return {
         presentation: {
@@ -21,21 +21,21 @@ function updateSlideBackground(editor: EditorType,  newBackground: BackgroundTyp
             slides: updatedSlides,
         },
         selection: editor.selection
-    };
+    }
 }
 
 function updateBackgroundColor(editor: EditorType, newColor: string): EditorType {
     return updateSlideBackground(editor, {
         type: 'color',
         color: newColor,
-    });
+    })
 }
 
 function updateBackgroundImage(editor: EditorType, image: HTMLImageElement): EditorType {
     return updateSlideBackground(editor, {
         type: 'image',
         imageUrl: image.src,
-    });
+    })
 }
 
 function updateBackgroundGradient(editor: EditorType, newFirstColor: string, newSecondColor: string): EditorType {
@@ -43,7 +43,7 @@ function updateBackgroundGradient(editor: EditorType, newFirstColor: string, new
         type: 'gradient',
         firstColor: newFirstColor,
         secondColor: newSecondColor,
-    });
+    })
 }
 
 export {

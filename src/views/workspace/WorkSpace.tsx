@@ -1,12 +1,11 @@
-import {Slide} from '../../store/presentationTypes.ts';
-import {SlideComponent} from '../../components/SlideComponent.tsx';
-import style from './Workspace.module.css';
-import {useAppSelector} from '../hooks/useAppSelector.tsx';
+import {Slide} from '../../store/presentationTypes.ts'
+import {SlideComponent} from '../../components/SlideComponent.tsx'
+import style from './Workspace.module.css'
+import {useAppSelector} from '../hooks/useAppSelector.tsx'
 
 function WorkSpace() {
-    const editor = useAppSelector((editor => editor))
-    const slides = editor.presentation.slides
-    const selection = editor.selection
+    const slides = useAppSelector(editor => editor.presentation.slides)
+    const selection = useAppSelector(editor => editor.selection)
     const selectedSlide: Slide = slides.find(slide => slide.id === selection?.selectedSlidesIds[0]) || slides[0]
 
     return (
@@ -24,7 +23,7 @@ function WorkSpace() {
                 </div>
             )}
         </div>
-    );
+    )
 }
 
 export {

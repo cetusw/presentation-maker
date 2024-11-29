@@ -1,24 +1,24 @@
-import {Slide} from '../store/presentationTypes.ts';
-import {useDragAndDrop} from '../views/hooks/useDragAndDrop.tsx';
-import {SlideComponent} from './SlideComponent.tsx';
-import {slideCollectionScale} from '../store/data/editorData.ts';
-import style from './DraggableSlideComponent.module.css';
-import {useEffect} from 'react';
+import {Slide} from '../store/presentationTypes.ts'
+import {useDragAndDrop} from '../views/hooks/useDragAndDrop.tsx'
+import {SlideComponent} from './SlideComponent.tsx'
+import {slideCollectionScale} from '../store/data/editorData.ts'
+import style from './DraggableSlideComponent.module.css'
+import {useEffect} from 'react'
 
 type DraggableSlideComponentProps = {
-    slide: Slide;
-    isSelected: boolean;
-    onClick: () => void;
+    slide: Slide
+    isSelected: boolean
+    onClick: () => void
 };
 
 function DraggableSlideComponent({ slide, isSelected, onClick }: DraggableSlideComponentProps) {
-    const { elementRef, position } = useDragAndDrop();
+    const { elementRef, position } = useDragAndDrop()
 
     useEffect(() => {
         if (isSelected && elementRef.current) {
-            elementRef.current.focus();
+            elementRef.current.focus()
         }
-    }, [isSelected, elementRef]);
+    }, [isSelected, elementRef])
 
     return (
         <div
@@ -35,7 +35,7 @@ function DraggableSlideComponent({ slide, isSelected, onClick }: DraggableSlideC
                 isSelected={isSelected}
             />
         </div>
-    );
+    )
 }
 
 export {

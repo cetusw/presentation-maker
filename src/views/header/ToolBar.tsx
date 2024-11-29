@@ -1,28 +1,28 @@
-import React, {useEffect} from 'react';
-import style from './ToolBar.module.css';
-import Undo from '../../assets/icons/undo.svg';
-import Redo from '../../assets/icons/redo.svg';
-import AddSlide from '../../assets/icons/add-slide.svg';
-import AddText from '../../assets/icons/add-text.svg';
-import AddImage from '../../assets/icons/add-image.svg';
-import DownloadPresentation from '../../assets/icons/download.svg';
-import ImportPresentation from '../../assets/icons/import.svg';
-import {ButtonComponent} from '../../components/ButtonComponent.tsx';
-import {InputComponent} from '../../components/InputComponent.tsx';
-import {loadImage} from '../../store/loadImage.ts';
-import {exportToJson} from '../../store/exportToJson.ts';
-import {useImportPresentation} from '../hooks/useImportPresentation.tsx';
-import {useAppActions} from '../hooks/useAppActions.tsx';
-import {useAppSelector} from '../hooks/useAppSelector.tsx';
-import {store} from '../../store/redux/store.ts';
+import React, {useEffect} from 'react'
+import style from './ToolBar.module.css'
+import Undo from '../../assets/icons/undo.svg'
+import Redo from '../../assets/icons/redo.svg'
+import AddSlide from '../../assets/icons/add-slide.svg'
+import AddText from '../../assets/icons/add-text.svg'
+import AddImage from '../../assets/icons/add-image.svg'
+import DownloadPresentation from '../../assets/icons/download.svg'
+import ImportPresentation from '../../assets/icons/import.svg'
+import {ButtonComponent} from '../../components/ButtonComponent.tsx'
+import {InputComponent} from '../../components/InputComponent.tsx'
+import {loadImage} from '../../store/loadImage.ts'
+import {exportToJson} from '../../store/exportToJson.ts'
+import {useImportPresentation} from '../hooks/useImportPresentation.tsx'
+import {useAppActions} from '../hooks/useAppActions.tsx'
+import {useAppSelector} from '../hooks/useAppSelector.tsx'
+import {store} from '../../store/redux/store.ts'
 
 type ToolBarProps = {
-    setError: (message: string) => void;
+    setError: (message: string) => void
 }
 
 function ToolBar({ setError } : ToolBarProps) {
-    const { onImportPresentation } = useImportPresentation({ setError });
-    const editor = useAppSelector((editor => editor));
+    const { onImportPresentation } = useImportPresentation({ setError })
+    const editor = useAppSelector((editor => editor))
 
     const {
         addSlide,
@@ -32,52 +32,52 @@ function ToolBar({ setError } : ToolBarProps) {
         updateBackgroundColor,
         removeObjectFromSlide,
         removeSlide,
-    } = useAppActions();
+    } = useAppActions()
 
     useEffect(() => {
-        window.addEventListener('keydown', handleKeyPress);
+        window.addEventListener('keydown', handleKeyPress)
         return () => {
-            window.removeEventListener('keydown', handleKeyPress);
-        };
-    }, [editor.selection]);
+            window.removeEventListener('keydown', handleKeyPress)
+        }
+    }, [editor.selection])
 
     function onRemoveObject() {
-        removeObjectFromSlide();
+        removeObjectFromSlide()
     }
 
     function onRemoveSlide() {
-        removeSlide();
+        removeSlide()
     }
 
     function handleKeyPress(event: KeyboardEvent) {
         if (event.key === 'Delete') {
-            const state = store.getState();
-            const hasSelectedObjects = state.selection.selectedObjectsIds?.length !== 0;
-            const hasSelectedSlides = state.selection.selectedSlidesIds?.length !== 0;
+            const state = store.getState()
+            const hasSelectedObjects = state.selection.selectedObjectsIds?.length !== 0
+            const hasSelectedSlides = state.selection.selectedSlidesIds?.length !== 0
 
             if (hasSelectedObjects && hasSelectedSlides) {
-                onRemoveObject();
+                onRemoveObject()
             } else if (!hasSelectedObjects && hasSelectedSlides) {
-                onRemoveSlide();
+                onRemoveSlide()
             }
         }
     }
 
     function onAddSlide() {
-        addSlide();
+        addSlide()
     }
 
     function onAddText() {
-        addTextToSlide();
+        addTextToSlide()
     }
 
     function onAddImage(imageUrl: string) {
         loadImage(imageUrl)
             .then((image) => {
-                addImageToSlide(image);
+                addImageToSlide(image)
             })
             .catch((error) => {
-                console.error(error);
+                console.error(error)
             })
     }
 
@@ -87,14 +87,14 @@ function ToolBar({ setError } : ToolBarProps) {
                 updateBackgroundImage(image)
             })
             .catch((error) => {
-                console.error(error);
+                console.error(error)
             })
     }
 
     function handleImageUpload(event: React.ChangeEvent<HTMLInputElement>) {
-        const file = event.target.files?.[0];
+        const file = event.target.files?.[0]
         if (file) {
-            const imageUrl = URL.createObjectURL(file);
+            const imageUrl = URL.createObjectURL(file)
             if (event.target.id === 'add-image') {
                 onAddImage(imageUrl)
             } else if (event.target.id === 'change-background-image') {
@@ -103,12 +103,12 @@ function ToolBar({ setError } : ToolBarProps) {
         }
     }
 
-    function onDownloadPresentation() {   // TODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODO
-        exportToJson(editor, editor?.presentation.title);
+    function onDownloadEditor() {
+        exportToJson(editor, editor.presentation.title)
     }
 
     function onChangeBackgroundColor(event: React.ChangeEvent<HTMLInputElement>) {
-        updateBackgroundColor(event.target.value);
+        updateBackgroundColor(event.target.value)
     }
 
     return (
@@ -173,7 +173,7 @@ function ToolBar({ setError } : ToolBarProps) {
                 icon={DownloadPresentation}
                 alt={'download presentation'}
                 className={style.downloadButton}
-                onClick={onDownloadPresentation}
+                onClick={onDownloadEditor}
             >
             </ButtonComponent>
             <InputComponent

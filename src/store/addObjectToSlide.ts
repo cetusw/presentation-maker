@@ -1,21 +1,21 @@
-import {EditorType, ImageObject, Slide, SlideObject, TextObject} from './presentationTypes.ts';
-import {v4 as generateUuid} from 'uuid';
-import {defaultFontFamily, defaultFontSize, defaultPosition, defaultSize, defaultText} from './data/editorData.ts';
+import {EditorType, ImageObject, Slide, SlideObject, TextObject} from './presentationTypes.ts'
+import {v4 as generateUuid} from 'uuid'
+import {defaultFontFamily, defaultFontSize, defaultPosition, defaultSize, defaultText} from './data/editorData.ts'
 
 function addObjectToSlide(editor: EditorType, editSlideId: string, object: SlideObject) {
-    const editSlide = editor.presentation.slides.find(slide => slide.id === editSlideId);
+    const editSlide = editor.presentation.slides.find(slide => slide.id === editSlideId)
     if (!editSlide) {
-        return editor;
+        return editor
     }
 
-    const updatedObjects: SlideObject[] = [...editSlide.objects, object];
+    const updatedObjects: SlideObject[] = [...editSlide.objects, object]
 
     const updatedSlide: Slide = {
         ...editSlide,
         objects: updatedObjects,
     }
 
-    const updatedSlides: Slide[] = editor.presentation.slides.map(slide => slide.id === editSlide.id ? updatedSlide : slide);
+    const updatedSlides: Slide[] = editor.presentation.slides.map(slide => slide.id === editSlide.id ? updatedSlide : slide)
 
     return {
         presentation: {
@@ -27,7 +27,7 @@ function addObjectToSlide(editor: EditorType, editSlideId: string, object: Slide
 }
 
 function addTextToSlide(editor: EditorType) {
-    const editSlideId: string = editor.selection.selectedSlidesIds[0];
+    const editSlideId: string = editor.selection.selectedSlidesIds[0]
 
     const textForSlide: TextObject = {
         id: `text-${generateUuid()}`,
@@ -39,11 +39,11 @@ function addTextToSlide(editor: EditorType) {
         size: defaultSize,
     }
 
-    return addObjectToSlide(editor, editSlideId, textForSlide);
+    return addObjectToSlide(editor, editSlideId, textForSlide)
 }
 
 function addImageToSlide(editor: EditorType, image: HTMLImageElement) {
-    const editSlideId: string = editor.selection.selectedSlidesIds[0];
+    const editSlideId: string = editor.selection.selectedSlidesIds[0]
 
     const imageForSlide: ImageObject = {
         id: `image-${generateUuid()}`,
@@ -54,9 +54,9 @@ function addImageToSlide(editor: EditorType, image: HTMLImageElement) {
             width: image.naturalWidth,
             height: image.naturalHeight,
         },
-    };
+    }
 
-    return addObjectToSlide(editor, editSlideId, imageForSlide);
+    return addObjectToSlide(editor, editSlideId, imageForSlide)
 }
 
 export {

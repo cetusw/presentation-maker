@@ -1,14 +1,14 @@
-import { legacy_createStore as createStore } from 'redux';
-import { editorReducer } from './editorReducer.ts';
-import {loadFromLocalStorage, saveToLocalStorage} from '../localStorage.ts';
+import { legacy_createStore as createStore } from 'redux'
+import { editorReducer } from './editorReducer.ts'
+import {loadFromLocalStorage, saveToLocalStorage} from '../localStorage.ts'
 
-const persistedState = loadFromLocalStorage();
+const rootState = loadFromLocalStorage()
 
-const store = createStore(editorReducer, persistedState || undefined);
+const store = createStore(editorReducer, rootState || undefined)
 
 store.subscribe(() => {
-    saveToLocalStorage(store.getState());
-});
+    saveToLocalStorage(store.getState())
+})
 
 export {
     store

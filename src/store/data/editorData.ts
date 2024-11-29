@@ -1,13 +1,13 @@
-import {EditorType, Position, Presentation, Size} from '../presentationTypes.ts';
+import {EditorType, Position, Presentation, Size} from '../presentationTypes.ts'
 
-const defaultPosition: Position = {x: 225, y: 270};
-const defaultSize: Size = {width: 500, height: 100};
-const defaultFontFamily: string = 'Roboto';
-const defaultFontSize: number = 24;
-const defaultColor: string = '#FFFFFF';
-const defaultText: string = 'Добавьте текст';
-const defaultTitle: string = 'Презентация без названия';
-const slideCollectionScale: number = 5;
+const defaultPosition: Position = {x: 225, y: 270}
+const defaultSize: Size = {width: 500, height: 100}
+const defaultFontFamily: string = 'Roboto'
+const defaultFontSize: number = 24
+const defaultColor: string = '#FFFFFF'
+const defaultText: string = 'Добавьте текст'
+const defaultTitle: string = 'Презентация без названия'
+const slideCollectionScale: number = 5
 
 const defaultPresentation: Presentation = {
     'id': 'presentation-1',
@@ -244,7 +244,7 @@ const defaultPresentation: Presentation = {
             ]
         }
     ]
-};
+}
 
 const defaultEditor: EditorType = {
     presentation: defaultPresentation,
