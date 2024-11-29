@@ -6,8 +6,14 @@ import {ToolBar} from './views/header/ToolBar.tsx'
 import {useEffect, useState} from 'react'
 import {Toast} from './views/utils/Toast.tsx'
 import {loadFromLocalStorage} from './store/localStorage.ts'
+import {HistoryType} from './utils/history.ts'
+import {HistoryContext} from './views/hooks/historyContext.ts'
 
-export default function App() {
+type AppProps = {
+    history: HistoryType,
+}
+
+export default function App({ history }: AppProps) {
     const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
@@ -18,14 +24,16 @@ export default function App() {
     }, [])
 
     return (
-        <div className={styles.app}>
-            <PresentationTitle/>
-            <ToolBar setError={setError}/>
-            <div className={styles.presentationPreview}>
-                <SlideCollection/>
-                <WorkSpace/>
+        <HistoryContext.Provider value={history}>
+            <div className={styles.app}>
+                <PresentationTitle/>
+                <ToolBar setError={setError}/>
+                <div className={styles.presentationPreview}>
+                    <SlideCollection/>
+                    <WorkSpace/>
+                </div>
+                {error && <Toast message={error} onClose={() => setError(null)}/>}
             </div>
-            {error && <Toast message={error} onClose={() => setError(null)} />}
-        </div>
+        </HistoryContext.Provider>
     )
 }

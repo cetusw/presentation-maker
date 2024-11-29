@@ -15,6 +15,7 @@ import {useImportPresentation} from '../hooks/useImportPresentation.tsx'
 import {useAppActions} from '../hooks/useAppActions.tsx'
 import {useAppSelector} from '../hooks/useAppSelector.tsx'
 import {store} from '../../store/redux/store.ts'
+import {HistoryContext} from '../hooks/historyContext.ts'
 
 type ToolBarProps = {
     setError: (message: string) => void
@@ -23,8 +24,10 @@ type ToolBarProps = {
 function ToolBar({ setError } : ToolBarProps) {
     const { onImportPresentation } = useImportPresentation({ setError })
     const editor = useAppSelector((editor => editor))
+    const history = React.useContext(HistoryContext)
 
     const {
+        setEditor,
         addSlide,
         addTextToSlide,
         addImageToSlide,
@@ -60,6 +63,16 @@ function ToolBar({ setError } : ToolBarProps) {
             } else if (!hasSelectedObjects && hasSelectedSlides) {
                 onRemoveSlide()
             }
+        }
+
+        if ((event.ctrlKey || event.metaKey) && event.key === 'z') {
+            event.preventDefault()
+            onUndo()
+        }
+
+        if ((event.ctrlKey || event.metaKey) && event.key === 'y') {
+            event.preventDefault()
+            onRedo()
         }
     }
 
@@ -111,18 +124,34 @@ function ToolBar({ setError } : ToolBarProps) {
         updateBackgroundColor(event.target.value)
     }
 
+    function onUndo() {
+        const newEditor = history.undo()
+        if (newEditor) {
+            setEditor(newEditor)
+        }
+    }
+
+    function onRedo() {
+        const newEditor = history.redo()
+        if (newEditor) {
+            setEditor(newEditor)
+        }
+    }
+
     return (
         <div className={style.toolBar}>
             <ButtonComponent
                 icon={Undo}
                 alt={'undo'}
                 className={style.undoButton}
+                onClick={onUndo}
             >
             </ButtonComponent>
             <ButtonComponent
                 icon={Redo}
                 alt={'redo'}
                 className={style.redoButton}
+                onClick={onRedo}
             >
             </ButtonComponent>
             <div className={style.divider}></div>
