@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import style from './ToolBar.module.css'
 import Undo from '../../assets/icons/undo.svg'
 import Redo from '../../assets/icons/redo.svg'
-import AddSlide from '../../assets/icons/add-slide.svg'
+import Add from '../../assets/icons/add.svg'
 import AddText from '../../assets/icons/add-text.svg'
-import AddImage from '../../assets/icons/add-image.svg'
+import HandleImage from '../../assets/icons/add-image.svg'
 import DownloadPresentation from '../../assets/icons/download.svg'
 import ImportPresentation from '../../assets/icons/import.svg'
 import ExportPresentationInPDF from '../../assets/icons/exportInPDF.svg'
@@ -18,6 +18,8 @@ import {useAppSelector} from '../hooks/useAppSelector.tsx'
 import {store} from '../../store/redux/store.ts'
 import {HistoryContext} from '../hooks/historyContext.ts'
 import {exportSlidesToPDF} from '../../utils/exportSlidesToPDF.tsx'
+import {Popup} from '../../components/Popup.tsx'
+import {Popover} from '../../components/Popover.tsx'
 
 type ToolBarProps = {
     setError: (message: string) => void
@@ -26,7 +28,8 @@ type ToolBarProps = {
 function ToolBar({ setError } : ToolBarProps) {
     const { onImportPresentation } = useImportPresentation({ setError })
     const editor = useAppSelector((editor => editor))
-    const history = React.useContext(HistoryContext)
+    const history = useContext(HistoryContext)
+    const [isImportImagePopupOpen, setIsImportImagePopupOpen] = useState(false)
 
     const {
         setEditor,
@@ -148,6 +151,14 @@ function ToolBar({ setError } : ToolBarProps) {
         }
     }
 
+    function onOpenImportImage() {
+        setIsImportImagePopupOpen(true)
+    }
+
+    function onCloseImportImage() {
+        setIsImportImagePopupOpen(false)
+    }
+
     return (
         <div className={style.toolBar}>
             <ButtonComponent
@@ -166,7 +177,7 @@ function ToolBar({ setError } : ToolBarProps) {
             </ButtonComponent>
             <div className={style.divider}></div>
             <ButtonComponent
-                icon={AddSlide}
+                icon={Add}
                 alt={'add slide'}
                 className={style.addSlideButton}
                 textClassName={style.buttonContent}
@@ -182,32 +193,61 @@ function ToolBar({ setError } : ToolBarProps) {
                 onClick={onAddText}
             >
             </ButtonComponent>
-            <InputComponent
-                inputId={'add-image'}
-                type={'file'}
-                icon={AddImage}
-                alt={'add image'}
-                className={style.addImageButton}
-                onChange={handleImageUpload}
-            >
-            </InputComponent>
-            <InputComponent
-                inputId={'change-background-color'}
-                type={'color'}
-                className={style.addTextButton}
-                textClassName={style.addTextButtonContent}
-                text={'Цвет фона'}
-                onChange={onChangeBackgroundColor}
-            >
-            </InputComponent>
-            <InputComponent
-                inputId={'change-background-image'}
-                type={'file'}
-                text={'Картинка фона'}
-                className={style.addImageButton}
-                onChange={handleImageUpload}
-            >
-            </InputComponent>
+            <Popover content={
+                <ButtonComponent
+                    icon={HandleImage}
+                    alt={'handle image'}
+                    className={style.handleImage}
+                >
+                </ButtonComponent>
+            }>
+                <InputComponent
+                    inputId={'add-image'}
+                    type={'file'}
+                    icon={Add}
+                    alt={'add image'}
+                    text={'Загрузить'}
+                    textClassName={style.buttonContent}
+                    className={style.addImageButton}
+                    onChange={handleImageUpload}
+                >
+                </InputComponent>
+                <ButtonComponent
+                    icon={ImportPresentation}
+                    alt={'import image'}
+                    text={'Импортировать'}
+                    textClassName={style.buttonContent}
+                    className={style.importImageButton}
+                    onClick={onOpenImportImage}
+                >
+                </ButtonComponent>
+            </Popover>
+            <div className={style.divider}></div>
+            <Popover content={
+                <ButtonComponent
+                    text={'Фон слайда'}
+                    className={style.slideBackgroundButton}
+                >
+                </ButtonComponent>
+            }>
+                <InputComponent
+                    inputId={'change-background-color'}
+                    type={'color'}
+                    className={style.changeBackgroundColorButton}
+                    text={'Цвет фона'}
+                    onChange={onChangeBackgroundColor}
+                >
+                </InputComponent>
+                <InputComponent
+                    inputId={'change-background-image'}
+                    type={'file'}
+                    text={'Картинка фона'}
+                    className={style.changeImageBackgroundButton}
+                    onChange={handleImageUpload}
+                >
+                </InputComponent>
+            </Popover>
+            <div className={style.divider}></div>
             <ButtonComponent
                 icon={DownloadPresentation}
                 alt={'download presentation'}
@@ -230,6 +270,12 @@ function ToolBar({ setError } : ToolBarProps) {
                 onClick={onExportPresentation}
             >
             </ButtonComponent>
+            <Popup
+                isOpen={isImportImagePopupOpen}
+                onClose={onCloseImportImage}
+            >
+                <div>Имортировать</div>
+            </Popup>
         </div>
     )
 }

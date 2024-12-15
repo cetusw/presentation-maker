@@ -13,11 +13,6 @@
     background-color: rgba(204, 204, 204, 0.8);
 }
 
-.buttonText {
-    font: 14px/18px 'Roboto', sans-serif;
-    margin: auto 0;
-}
-
 .buttonIcon {
     margin: auto;
     width: 18px;

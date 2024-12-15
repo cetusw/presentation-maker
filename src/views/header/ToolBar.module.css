@@ -13,6 +13,17 @@
     margin: auto 0 auto 10px;
 }
 
+.addImageButton,
+.importImageButton,
+.changeBackgroundColorButton,
+.changeImageBackgroundButton {
+    margin: 0 0 5px 0 !important;
+}
+
+.slideBackgroundButton {
+    font: 14px/18px 'Roboto', sans-serif;
+}
+
 .divider {
     width: 1px;
     height: 14px;
