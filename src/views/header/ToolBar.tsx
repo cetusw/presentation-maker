@@ -7,6 +7,7 @@ import AddText from '../../assets/icons/add-text.svg'
 import AddImage from '../../assets/icons/add-image.svg'
 import DownloadPresentation from '../../assets/icons/download.svg'
 import ImportPresentation from '../../assets/icons/import.svg'
+import ExportPresentationInPDF from '../../assets/icons/exportInPDF.svg'
 import {ButtonComponent} from '../../components/ButtonComponent.tsx'
 import {InputComponent} from '../../components/InputComponent.tsx'
 import {loadImage} from '../../store/loadImage.ts'
@@ -16,6 +17,7 @@ import {useAppActions} from '../hooks/useAppActions.tsx'
 import {useAppSelector} from '../hooks/useAppSelector.tsx'
 import {store} from '../../store/redux/store.ts'
 import {HistoryContext} from '../hooks/historyContext.ts'
+import {exportSlidesToPDF} from '../../utils/exportSlidesToPDF.tsx'
 
 type ToolBarProps = {
     setError: (message: string) => void
@@ -138,6 +140,14 @@ function ToolBar({ setError } : ToolBarProps) {
         }
     }
 
+    async function onExportPresentation() {
+        try {
+            await exportSlidesToPDF(editor.presentation.slides, editor.presentation.title)
+        } catch (error) {
+            console.error('Ошибка при экспорте:', error)
+        }
+    }
+
     return (
         <div className={style.toolBar}>
             <ButtonComponent
@@ -213,6 +223,13 @@ function ToolBar({ setError } : ToolBarProps) {
                 onChange={onImportPresentation}
             >
             </InputComponent>
+            <ButtonComponent
+                icon={ExportPresentationInPDF}
+                alt={'export presentation in pdf'}
+                className={style.exportButton}
+                onClick={onExportPresentation}
+            >
+            </ButtonComponent>
         </div>
     )
 }

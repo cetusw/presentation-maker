@@ -1,8 +1,9 @@
 import {SlideObject} from '../store/presentationTypes.ts'
 import style from './ObjectComponent.module.css'
 import {defaultText} from '../store/data/editorData.ts'
-import React from 'react'
 import {useDragAndDrop} from '../views/hooks/useDragAndDrop.tsx'
+import React from 'react'
+// import {useAppActions} from '../views/hooks/useAppActions.tsx'
 
 type ObjectComponentProps = {
     objectId: string
@@ -11,8 +12,18 @@ type ObjectComponentProps = {
     scale: number
 };
 
-function ObjectComponent({objectId, object, isSelected, scale}: ObjectComponentProps) {
-    const { elementRef, position } = useDragAndDrop()
+function ObjectComponent({ objectId, object, isSelected, scale }: ObjectComponentProps) {
+    // const {updateObjectPosition} = useAppActions()
+
+    const {elementRef, position} = useDragAndDrop({
+        currentPosition: object.position,
+        // onPositionChange: (newPosition) => {
+        //     updateObjectPosition({
+        //         x: newPosition.x / scale,
+        //         y: newPosition.y / scale
+        //     })
+        // },
+    })
 
     const selectedObject = isSelected
         ? `${style.selectedObject}`
@@ -40,7 +51,7 @@ function ObjectComponent({objectId, object, isSelected, scale}: ObjectComponentP
             id={objectId}
             ref={elementRef}
             className={selectedObject}
-            style={{ ...objectStyles, transform: `translate(${position.x}px, ${position.y}px)` }}
+            style={{...objectStyles, transform: `translate(${position.x}px, ${position.y}px)`}}
             tabIndex={0}
         >
             {object.type === 'text' ? (
