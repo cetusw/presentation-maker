@@ -8,6 +8,7 @@ import {Toast} from './views/utils/Toast.tsx'
 import {loadFromLocalStorage} from './store/localStorage.ts'
 import {HistoryType} from './utils/history.ts'
 import {HistoryContext} from './views/hooks/historyContext.ts'
+import {BrowserRouter, Route, Routes} from 'react-router'
 
 type AppProps = {
     history: HistoryType,
@@ -24,16 +25,29 @@ export default function App({ history }: AppProps) {
     }, [])
 
     return (
-        <HistoryContext.Provider value={history}>
-            <div className={styles.app}>
-                <PresentationTitle/>
-                <ToolBar setError={setError}/>
-                <div className={styles.presentationPreview}>
-                    <SlideCollection/>
-                    <WorkSpace/>
-                </div>
-                {error && <Toast message={error} onClose={() => setError(null)}/>}
-            </div>
-        </HistoryContext.Provider>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/presentation" element={
+                    <HistoryContext.Provider value={history}>
+                        <div className={styles.app}>
+                            <PresentationTitle/>
+                            <ToolBar setError={setError}/>
+                            <div className={styles.presentationPreview}>
+                                <SlideCollection/>
+                                <WorkSpace
+                                    isSlideshow={false}
+                                />
+                            </div>
+                            {error && <Toast message={error} onClose={() => setError(null)}/>}
+                        </div>
+                    </HistoryContext.Provider>
+                }/>
+                <Route path="/slideshow" element={
+                    <WorkSpace
+                        isSlideshow={true}
+                    />
+                }/>
+            </Routes>
+        </BrowserRouter>
     )
 }

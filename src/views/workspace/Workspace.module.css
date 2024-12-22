@@ -7,6 +7,10 @@
     margin: 5vh 0 0 5vw;
 }
 
+.slideComponentSlideshow {
+    margin: auto 0;
+}
+
 .placeholderSlide {
     width: 960px;
     height: 540px;

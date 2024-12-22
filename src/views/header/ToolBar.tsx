@@ -144,6 +144,7 @@ function ToolBar({ setError } : ToolBarProps) {
     }
 
     async function onExportPresentation() {
+        editor.selection.selectedObjectsIds = []
         try {
             await exportSlidesToPDF(editor.presentation.slides, editor.presentation.title)
         } catch (error) {

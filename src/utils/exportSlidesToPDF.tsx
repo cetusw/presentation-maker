@@ -1,8 +1,8 @@
-import { jsPDF } from 'jspdf'
+import {jsPDF} from 'jspdf'
 import html2canvas from 'html2canvas'
-import { SlideComponent } from '../components/SlideComponent'
-import { Slide } from '../store/presentationTypes'
-import { createRoot } from 'react-dom/client'
+import {SlideComponent} from '../components/SlideComponent'
+import {Slide} from '../store/presentationTypes'
+import {createRoot} from 'react-dom/client'
 import {Provider} from 'react-redux'
 import {store} from '../store/redux/store.ts'
 import {flushSync} from 'react-dom'
@@ -35,7 +35,7 @@ async function exportSlidesToPDF(slides: Slide[], fileName: string) {
             flushSync(() => {
                 root.render(
                     <Provider store={store}>
-                        <SlideComponent slide={slide} />
+                        <SlideComponent slide={slide}/>
                     </Provider>
                 )
             })
@@ -44,6 +44,8 @@ async function exportSlidesToPDF(slides: Slide[], fileName: string) {
                 width: 960,
                 height: 540,
                 scale: 2,
+                allowTaint: true,
+                backgroundColor: null
             })
 
             const imgData = canvas.toDataURL('image/png')
