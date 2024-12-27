@@ -27,7 +27,7 @@ export default function App({ history }: AppProps) {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/presentation" element={
+                <Route path="/" element={
                     <HistoryContext.Provider value={history}>
                         <div className={styles.app}>
                             <PresentationTitle/>

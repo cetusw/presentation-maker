@@ -21,8 +21,9 @@ function ObjectComponent({ objectId, object, isSelected, scale }: ObjectComponen
         // },
     })
 
-
-    const [textContent, setTextContent] = useState<string>()
+    const [textContent, setTextContent] = useState<string>(
+        object.type === 'text' ? object.content : ''
+    )
 
     useEffect(() => {
         if (object.type === 'text') {
