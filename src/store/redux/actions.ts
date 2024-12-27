@@ -11,6 +11,8 @@ enum ActionType {
     UPDATE_BACKGROUND_COLOR = 'updateBackgroundColor',
     REMOVE_OBJECT_FROM_SLIDE = 'removeObjectFromSlide',
     UPDATE_PRESENTATION_TITLE = 'updatePresentationTitle',
+    UPDATE_TEXT_FONT_FAMILY = 'updateTextFont',
+    UPDATE_TEXT_FONT_STYLE = 'updateTextFontStyle',
 }
 
 type AddSlideAction = {
@@ -59,6 +61,16 @@ type UpdatePresentationTitleAction = {
     payload: string
 }
 
+type UpdateTextFontFamilyAction = {
+    type: ActionType.UPDATE_TEXT_FONT_FAMILY,
+    payload: string
+}
+
+type UpdateTextFontStyleAction = {
+    type: ActionType.UPDATE_TEXT_FONT_STYLE,
+    payload: string
+}
+
 type EditorAction =
     AddSlideAction |
     RemoveSlideAction |
@@ -69,7 +81,9 @@ type EditorAction =
     UpdateBackgroundImageAction |
     UpdateBackgroundColorAction |
     RemoveObjectFromSlideAction |
-    UpdatePresentationTitleAction
+    UpdatePresentationTitleAction |
+    UpdateTextFontFamilyAction |
+    UpdateTextFontStyleAction
 
 export {
     ActionType,

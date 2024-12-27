@@ -52,6 +52,20 @@ function updatePresentationTitle(newTitle: string) {
     }
 }
 
+function updateTextFontFamily(newFontFamily: string) {
+    return {
+        type: ActionType.UPDATE_TEXT_FONT_FAMILY,
+        payload: newFontFamily,
+    }
+}
+
+function updateTextFontStyle(newFontStyle: string) {
+    return {
+        type: ActionType.UPDATE_TEXT_FONT_STYLE,
+        payload: newFontStyle,
+    }
+}
+
 export {
     addSlide,
     removeSlide,
@@ -61,4 +75,6 @@ export {
     updateBackgroundColor,
     removeObjectFromSlide,
     updatePresentationTitle,
+    updateTextFontFamily,
+    updateTextFontStyle,
 }

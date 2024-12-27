@@ -1,6 +1,6 @@
 import {EditorType, Position, Presentation, Size} from '../presentationTypes.ts'
 
-const defaultPosition: Position = {x: 300, y: 100}
+const defaultPosition: Position = {x: 450, y: 100}
 const defaultSize: Size = {width: 500, height: 100}
 const defaultFontFamily: string = 'Times New Roman'
 const defaultFontSize: number = 24
@@ -8,6 +8,12 @@ const defaultColor: string = '#FFFFFF'
 const defaultText: string = 'текст презентации'
 const defaultTitle: string = 'Презентация без названия'
 const slideCollectionScale: number = 5
+
+const availableFonts: string[] = [
+    'Times New Roman',
+    'Roboto',
+    'Arial',
+]
 
 const defaultPresentation: Presentation = {
     'id': 'presentation-1',
@@ -29,6 +35,8 @@ const defaultPresentation: Presentation = {
                     'content': 'Text on slide 1',
                     'fontFamily': 'Arial',
                     'fontSize': 24,
+                    'fontStyle': 'italic',
+                    'fontColor': '#000000',
                     'position': {'x': 0, 'y': 0},
                     'size': {'width': 500, 'height': 80}
                 },
@@ -54,6 +62,8 @@ const defaultPresentation: Presentation = {
                     'content': 'Text on slide 2',
                     'fontFamily': 'Times New Roman',
                     'fontSize': 60,
+                    'fontStyle': 'italic',
+                    'fontColor': '#000000',
                     'position': {'x': 200, 'y': 100},
                     'size': {'width': 1600, 'height': 90}
                 },
@@ -79,6 +89,8 @@ const defaultPresentation: Presentation = {
                     'content': 'Text on slide 3',
                     'fontFamily': 'Times New Roman',
                     'fontSize': 60,
+                    'fontStyle': 'italic',
+                    'fontColor': '#000000',
                     'position': {'x': 0, 'y': 100},
                     'size': {'width': 1600, 'height': 90}
                 },
@@ -104,6 +116,8 @@ const defaultPresentation: Presentation = {
                     'content': 'Text on slide 4',
                     'fontFamily': 'Arial',
                     'fontSize': 72,
+                    'fontStyle': 'italic',
+                    'fontColor': '#000000',
                     'position': {'x': 0, 'y': 0},
                     'size': {'width': 1920, 'height': 100}
                 },
@@ -129,6 +143,8 @@ const defaultPresentation: Presentation = {
                     'content': 'Text on slide 5',
                     'fontFamily': 'Arial',
                     'fontSize': 72,
+                    'fontStyle': 'italic',
+                    'fontColor': '#000000',
                     'position': {'x': 0, 'y': 0},
                     'size': {'width': 1920, 'height': 100}
                 },
@@ -154,6 +170,8 @@ const defaultPresentation: Presentation = {
                     'content': 'Text on slide 6',
                     'fontFamily': 'Times New Roman',
                     'fontSize': 60,
+                    'fontStyle': 'italic',
+                    'fontColor': '#000000',
                     'position': {'x': 200, 'y': 100},
                     'size': {'width': 1600, 'height': 90}
                 },
@@ -180,6 +198,8 @@ const defaultPresentation: Presentation = {
                     'content': 'Text on slide 7',
                     'fontFamily': 'Arial',
                     'fontSize': 72,
+                    'fontStyle': 'italic',
+                    'fontColor': '#000000',
                     'position': {'x': 0, 'y': 0},
                     'size': {'width': 1920, 'height': 100}
                 },
@@ -206,6 +226,8 @@ const defaultPresentation: Presentation = {
                     'content': 'Text on slide 8',
                     'fontFamily': 'Arial',
                     'fontSize': 72,
+                    'fontStyle': 'italic',
+                    'fontColor': '#000000',
                     'position': {'x': 0, 'y': 0},
                     'size': {'width': 1920, 'height': 100}
                 },
@@ -231,6 +253,8 @@ const defaultPresentation: Presentation = {
                     'content': 'Text on slide 9',
                     'fontFamily': 'Arial',
                     'fontSize': 72,
+                    'fontStyle': 'italic',
+                    'fontColor': '#000000',
                     'position': {'x': 0, 'y': 0},
                     'size': {'width': 1920, 'height': 100}
                 },
@@ -265,4 +289,5 @@ export {
     defaultTitle,
     slideCollectionScale,
     defaultEditor,
+    availableFonts,
 }

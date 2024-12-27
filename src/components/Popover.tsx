@@ -22,7 +22,13 @@ const Popover = ({ content, children }: PopoverProps) => {
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [])
 
-    const togglePopover = () => setIsVisible((prev) => !prev)
+    function closePopover() {
+        setIsVisible(false)
+    }
+
+    function togglePopover() {
+        setIsVisible(!isVisible)
+    }
 
     return (
         <div className={style.popoverContainer} ref={popoverRef}>
@@ -30,7 +36,7 @@ const Popover = ({ content, children }: PopoverProps) => {
                 {content}
             </div>
             {isVisible && (
-                <div className={style.popoverContent}>
+                <div className={style.popoverContent} onClick={closePopover}>
                     {children}
                 </div>
             )}

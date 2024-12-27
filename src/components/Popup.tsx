@@ -1,5 +1,6 @@
 import style from './Popup.module.css'
 import {ReactNode} from 'react'
+import closeButton from '../assets/icons/close.svg'
 
 type PopupProps = {
     isOpen: boolean
@@ -8,15 +9,19 @@ type PopupProps = {
 }
 
 const Popup = ({ isOpen, onClose, children }: PopupProps) => {
-    if (!isOpen) return null
+    if (!isOpen) {
+        return null
+    }
 
     return (
         <div className={style.popupOverlay} onClick={onClose}>
-            <div className={style.popupContent} onClick={(e) => e.stopPropagation()}>
+            <div className={style.popupContainer}>
+                <div className={style.popupContent} onClick={(e) => e.stopPropagation()}>
+                    {children}
+                </div>
                 <button className={style.popupClose} onClick={onClose}>
-                    &times;
+                    <img src={closeButton} alt={'close'}/>
                 </button>
-                {children}
             </div>
         </div>
     )

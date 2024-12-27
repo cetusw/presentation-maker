@@ -1,0 +1,9 @@
+.select {
+    background-color: transparent;
+    border-radius: 5px;
+    border: none;
+}
+
+.select:hover {
+    background-color: rgba(204, 204, 204, 0.8);
+}

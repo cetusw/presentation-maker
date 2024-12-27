@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import style from './ToolBar.module.css'
 import Undo from '../../assets/icons/undo.svg'
 import Redo from '../../assets/icons/redo.svg'
@@ -8,6 +8,7 @@ import HandleImage from '../../assets/icons/add-image.svg'
 import DownloadPresentation from '../../assets/icons/download.svg'
 import ImportPresentation from '../../assets/icons/import.svg'
 import ExportPresentationInPDF from '../../assets/icons/exportInPDF.svg'
+import Italic from '../../assets/icons/italic.svg'
 import {ButtonComponent} from '../../components/ButtonComponent.tsx'
 import {InputComponent} from '../../components/InputComponent.tsx'
 import {loadImage} from '../../store/loadImage.ts'
@@ -20,6 +21,9 @@ import {HistoryContext} from '../hooks/historyContext.ts'
 import {exportSlidesToPDF} from '../../utils/exportSlidesToPDF.tsx'
 import {Popup} from '../../components/Popup.tsx'
 import {Popover} from '../../components/Popover.tsx'
+import {SelectComponent} from '../../components/SelectComponent.tsx'
+import {availableFonts} from '../../store/data/editorData.ts'
+import {ImportPhotosPopup} from './ImportPhotosPopup.tsx'
 
 type ToolBarProps = {
     setError: (message: string) => void
@@ -30,6 +34,26 @@ function ToolBar({ setError } : ToolBarProps) {
     const editor = useAppSelector((editor => editor))
     const history = useContext(HistoryContext)
     const [isImportImagePopupOpen, setIsImportImagePopupOpen] = useState(false)
+    const [italic, setItalic] = useState<boolean>(false)
+
+    useEffect(() => {
+        const slideToEditId = editor.selection.selectedSlidesIds[0]
+        const slideToEdit = editor.presentation.slides.find(slide => slide.id === slideToEditId)
+
+        if (!slideToEdit) {
+            return
+        }
+
+        const objectToEditId = editor.selection.selectedObjectsIds[0]
+        const objectToEdit = slideToEdit.objects.find(object => object.id === objectToEditId)
+
+        if (!objectToEdit || objectToEdit.type !== 'text') {
+            return
+        }
+
+        setItalic(objectToEdit.fontStyle === 'italic')
+
+    }, [editor.selection])
 
     const {
         setEditor,
@@ -40,6 +64,8 @@ function ToolBar({ setError } : ToolBarProps) {
         updateBackgroundColor,
         removeObjectFromSlide,
         removeSlide,
+        updateTextFontFamily,
+        updateTextFontStyle,
     } = useAppActions()
 
     useEffect(() => {
@@ -160,6 +186,18 @@ function ToolBar({ setError } : ToolBarProps) {
         setIsImportImagePopupOpen(false)
     }
 
+    function onChangeFontFamily(event: React.ChangeEvent<HTMLSelectElement>){
+        updateTextFontFamily(event.target.value)
+    }
+
+    function onItalic() {
+        if (italic) {
+            updateTextFontStyle('')
+        } else {
+            updateTextFontStyle('italic')
+        }
+    }
+
     return (
         <div className={style.toolBar}>
             <ButtonComponent
@@ -224,6 +262,18 @@ function ToolBar({ setError } : ToolBarProps) {
                 </ButtonComponent>
             </Popover>
             <div className={style.divider}></div>
+            <SelectComponent
+                options={availableFonts}
+                onChange={onChangeFontFamily}
+            >
+            </SelectComponent>
+            <ButtonComponent
+                icon={Italic}
+                alt={'bold'}
+                className={style.boldButton}
+                onClick={onItalic}
+            >
+            </ButtonComponent>
             <Popover content={
                 <ButtonComponent
                     text={'Фон слайда'}
@@ -275,7 +325,7 @@ function ToolBar({ setError } : ToolBarProps) {
                 isOpen={isImportImagePopupOpen}
                 onClose={onCloseImportImage}
             >
-                <div>Имортировать</div>
+                {ImportPhotosPopup()}
             </Popup>
         </div>
     )

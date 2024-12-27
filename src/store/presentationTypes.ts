@@ -42,6 +42,8 @@ type TextObject = SlideItem & {
     type: 'text';
     content: string;
     fontFamily: string;
+    fontColor: string;
+    fontStyle: string;
     fontSize: number;
 };
 

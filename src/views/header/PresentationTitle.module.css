@@ -22,5 +22,13 @@
 }
 
 .slideshowButton {
-    margin: 0 10px 0 auto;
+    font: 16px/24px 'Roboto', sans-serif;
+    margin: 0 30px 0 auto !important;
+    border: 1px solid rgb(0, 0, 0) !important;
+    border-radius: 20px !important;
+
+}
+
+.buttonContent {
+    margin: auto 10px;
 }

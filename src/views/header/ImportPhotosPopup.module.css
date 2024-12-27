@@ -1,0 +1,60 @@
+.popupTitle {
+    font: 24px/28px 'Roboto', sans-serif;
+    font-weight: 800;
+    margin: 0 0 20px 0;
+}
+
+.searchInput {
+    width: 550px;
+    border-radius: 5px;
+    border: 1px solid rgba(204, 204, 204, 0.8);
+    background-color: transparent;
+    padding: 10px;
+}
+
+.searchButton {
+    width: 40px;
+}
+
+.searchBlock {
+    display: flex;
+}
+
+.searchInput:hover {
+    background-color: rgba(204, 204, 204, 0.8);
+}
+
+.searchInput:focus {
+    background-color: transparent;
+}
+
+.importImagePopup {
+    height: 600px;
+}
+
+.imageList {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+}
+
+.imageWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    margin: 5px;
+}
+
+.imageBlock {
+    width: 100%;
+}
+
+.imageWrapper:hover {
+    outline: 1px solid rgb(0, 0, 0);
+}
+
+.placeholder {
+    font: 16px/20px 'Roboto', sans-serif;
+    margin: 20px 0 0 0;
+}

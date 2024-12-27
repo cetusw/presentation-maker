@@ -15,7 +15,6 @@ function updateSlideObject(editor: EditorType, slideToEdit: Slide, newObject: Sl
     const updatedSlides: Slide[] = editor.presentation.slides.map(slide =>
         slide.id === slideToEdit.id ? updatedSlide : slide
     )
-
     return {
         presentation: {
             ...editor.presentation,
@@ -27,17 +26,40 @@ function updateSlideObject(editor: EditorType, slideToEdit: Slide, newObject: Sl
     }
 }
 
-export function updateObjectPosition(editor: EditorType, newPosition: Position) {
+function findSlideToEdit(editor: EditorType){
     const slideIdToEdit: string = editor.selection.selectedSlidesIds[0]
     const slideToEdit = editor.presentation.slides.find(slide => slide.id === slideIdToEdit)
+    return slideToEdit
+}
 
+function findObjectToEdit(editor: EditorType, slideToEdit: Slide) {
+    const objectIdToEdit = editor.selection.selectedObjectsIds[0]
+    const objectToEdit = slideToEdit.objects.find(object => object.id === objectIdToEdit)
+    return objectToEdit
+}
+
+function updateTextFontFamily(editor: EditorType, newFontFamily: string): EditorType {
+    const slideToEdit = findSlideToEdit(editor)
     if (!slideToEdit) {
         return editor
     }
+    const objectToEdit = findObjectToEdit(editor, slideToEdit)
+    if (!objectToEdit || objectToEdit.type !== 'text') {
+        return editor
+    }
 
-    const objectIdToEdit = editor.selection.selectedObjectsIds[0]
-    const objectToEdit = slideToEdit.objects.find(object => object.id === objectIdToEdit)
+    return updateSlideObject(editor, slideToEdit, {
+        ...objectToEdit,
+        fontFamily: newFontFamily,
+    })
+}
 
+function updateObjectPosition(editor: EditorType, newPosition: Position) {
+    const slideToEdit = findSlideToEdit(editor)
+    if (!slideToEdit) {
+        return editor
+    }
+    const objectToEdit = findObjectToEdit(editor, slideToEdit)
     if (!objectToEdit) {
         return editor
     }
@@ -46,6 +68,45 @@ export function updateObjectPosition(editor: EditorType, newPosition: Position) 
         ...objectToEdit,
         position: newPosition,
     })
+}
+
+function updateTextFontSize(editor: EditorType, newFontSize: number) {
+    const slideToEdit = findSlideToEdit(editor)
+    if (!slideToEdit) {
+        return editor
+    }
+    const objectToEdit = findObjectToEdit(editor, slideToEdit)
+    if (!objectToEdit || objectToEdit.type !== 'text') {
+        return editor
+    }
+
+    return updateSlideObject(editor, slideToEdit, {
+        ...objectToEdit,
+        fontSize: newFontSize,
+    })
+}
+
+function updateTextFontStyle(editor: EditorType, newFontStyle: string) {
+    const slideToEdit = findSlideToEdit(editor)
+    if (!slideToEdit) {
+        return editor
+    }
+    const objectToEdit = findObjectToEdit(editor, slideToEdit)
+    if (!objectToEdit || objectToEdit.type !== 'text') {
+        return editor
+    }
+
+    return updateSlideObject(editor, slideToEdit, {
+        ...objectToEdit,
+        fontStyle: newFontStyle,
+    })
+}
+
+export {
+    updateTextFontFamily,
+    updateObjectPosition,
+    updateTextFontSize,
+    updateTextFontStyle,
 }
 
 // export function updateObjectSize(presentation: Presentation, items: ItemSelection, newSize: Size) {
@@ -76,30 +137,3 @@ export function updateObjectPosition(editor: EditorType, newPosition: Position) 
 //     });
 // }
 //
-// export function updateTextFontSize(presentation: Presentation, items: ItemSelection, newFontSize: number) {
-//     const slideIdToEdit: string = items.selectedSlidesIds[0];
-//     const objectToEdit = findSelectedObject(presentation, items);
-//
-//     if (!objectToEdit) {
-//         return presentation
-//     }
-//
-//     return updateSlideObject(presentation, slideIdToEdit, {
-//         ...objectToEdit,
-//         fontSize: newFontSize,
-//     });
-// }
-//
-// export function updateTextFontFamily(presentation: Presentation, items: ItemSelection, newFontFamily: string) {
-//     const slideIdToEdit: string = items.selectedSlidesIds[0];
-//     const objectToEdit = findSelectedObject(presentation, items);
-//
-//     if (!objectToEdit) {
-//         return presentation
-//     }
-//
-//     return updateSlideObject(presentation, slideIdToEdit, {
-//         ...objectToEdit,
-//         fontFamily: newFontFamily,
-//     });
-// }

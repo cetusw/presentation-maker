@@ -4,12 +4,14 @@ import style from './Workspace.module.css'
 import {useAppSelector} from '../hooks/useAppSelector.tsx'
 import {useEffect, useState} from 'react'
 import {useAppActions} from '../hooks/useAppActions.tsx'
+import {useNavigate} from 'react-router'
 
 type WorkSpaceProps = {
     isSlideshow: boolean
 }
 
 function WorkSpace({ isSlideshow }: WorkSpaceProps) {
+    const navigate = useNavigate()
     const slides = useAppSelector(editor => editor.presentation.slides)
     const selection = useAppSelector(editor => editor.selection)
     const {setSelection} = useAppActions()
@@ -21,12 +23,16 @@ function WorkSpace({ isSlideshow }: WorkSpaceProps) {
     const selectedSlide: Slide = slides[currentSlideIndex] || slides[0]
 
     let className
+    let workspaceWrapper = ''
+    let workspace
     let scale
     if (isSlideshow) {
-        className = style.slideComponentSlideshow
-        scale = 0.6
+        workspaceWrapper = style.workspaceWrapper
+        workspace = style.workspaceSlideshow
+        scale = 2 / 3
     } else {
         className = style.slideComponent
+        workspace = style.workspace
         scale = 1
     }
 
@@ -60,6 +66,8 @@ function WorkSpace({ isSlideshow }: WorkSpaceProps) {
             goToNextSlide()
         } else if (event.key === 'ArrowLeft') {
             goToPreviousSlide()
+        } else if (event.key === 'Escape' && isSlideshow) {
+            navigate('/presentation')
         }
     }
 
@@ -79,20 +87,22 @@ function WorkSpace({ isSlideshow }: WorkSpaceProps) {
     }, [selection, slides])
 
     return (
-        <div className={style.workspace}>
-            {selectedSlide && slides.length > 0 ? (
-                <div className={style.slide}>
-                    <SlideComponent
-                        className={className}
-                        scale={scale}
-                        slide={selectedSlide}
-                    />
-                </div>
-            ) : (
-                <div className={style.placeholderSlide}>
-                    <span className={style.placeholderSlideText}>Добавьте первый слайд</span>
-                </div>
-            )}
+        <div className={workspaceWrapper}>
+            <div className={workspace}>
+                {selectedSlide && slides.length > 0 ? (
+                    <div className={style.slide}>
+                        <SlideComponent
+                            className={className}
+                            scale={scale}
+                            slide={selectedSlide}
+                        />
+                    </div>
+                ) : (
+                    <div className={style.placeholderSlide}>
+                        <span className={style.placeholderSlideText}>Добавьте первый слайд</span>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

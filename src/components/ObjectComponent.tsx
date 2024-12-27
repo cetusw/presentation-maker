@@ -21,7 +21,8 @@ function ObjectComponent({ objectId, object, isSelected, scale }: ObjectComponen
         // },
     })
 
-    const [textContent, setTextContent] = useState(object.content)
+
+    const [textContent, setTextContent] = useState<string>()
 
     useEffect(() => {
         if (object.type === 'text') {
@@ -45,7 +46,7 @@ function ObjectComponent({ objectId, object, isSelected, scale }: ObjectComponen
             id={objectId}
             ref={elementRef}
             className={selectedObject}
-            style={{ ...objectStyles, transform: `translate(${position.x}px, ${position.y}px)` }}
+            style={{ ...objectStyles, transform: `translate(${position.x / scale}px, ${position.y / scale}px)` }}
             tabIndex={0}
         >
             {object.type === 'text' ? (
@@ -55,6 +56,8 @@ function ObjectComponent({ objectId, object, isSelected, scale }: ObjectComponen
                     style={{
                         fontSize: object.fontSize / scale,
                         fontFamily: object.fontFamily,
+                        color: object.fontColor,
+                        fontStyle: object.fontStyle,
                     }}
                     onInput={handleTextChange} 
                     suppressContentEditableWarning={true}

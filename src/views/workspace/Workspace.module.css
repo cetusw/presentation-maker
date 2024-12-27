@@ -1,3 +1,19 @@
+html {
+    overflow: hidden;
+}
+
+.workspaceWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(0, 0, 0);
+}
+
+.workspaceSlideshow {
+    background-color: rgb(0, 0, 0);
+}
+
 .workspace {
     background-color: rgb(249, 251, 253);
 }
