@@ -2,6 +2,7 @@ import { SlideObject } from '../store/presentationTypes.ts'
 import style from './ObjectComponent.module.css'
 import { useDragAndDrop } from '../views/hooks/useDragAndDrop.tsx'
 import React, {useEffect, useState} from 'react'
+import {useAppActions} from '../views/hooks/useAppActions.tsx'
 
 type ObjectComponentProps = {
     objectId: string;
@@ -11,14 +12,15 @@ type ObjectComponentProps = {
 };
 
 function ObjectComponent({ objectId, object, isSelected, scale }: ObjectComponentProps) {
+    const { updateObjectPosition } = useAppActions()
     const { elementRef, position } = useDragAndDrop({
         currentPosition: object.position,
-        // onPositionChange: (newPosition) => {
-        //     updateObjectPosition({
-        //         x: newPosition.x / scale,
-        //         y: newPosition.y / scale
-        //     });
-        // },
+        onPositionChange: (newPosition) => {
+            updateObjectPosition({
+                x: newPosition.x / scale,
+                y: newPosition.y / scale
+            })
+        },
     })
 
     const [textContent, setTextContent] = useState<string>(

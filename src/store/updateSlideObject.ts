@@ -55,6 +55,7 @@ function updateTextFontFamily(editor: EditorType, newFontFamily: string): Editor
 }
 
 function updateObjectPosition(editor: EditorType, newPosition: Position) {
+    console.log(newPosition)
     const slideToEdit = findSlideToEdit(editor)
     if (!slideToEdit) {
         return editor

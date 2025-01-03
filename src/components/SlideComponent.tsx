@@ -58,7 +58,7 @@ function SlideComponent({className, slide, scale, isSelected}: SlideComponentPro
             {slide.objects.map((object) => (
                 <div
                     key={object.id}
-                    onClick={() => onObjectClick(object.id)}
+                    onMouseDown={() => onObjectClick(object.id)}
                 >
                     <ObjectComponent
                         objectId={object.id}

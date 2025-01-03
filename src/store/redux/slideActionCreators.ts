@@ -1,4 +1,5 @@
 import { ActionType } from './actions'
+import {Position} from '../presentationTypes.ts'
 
 function addSlide() {
     return {
@@ -66,6 +67,13 @@ function updateTextFontStyle(newFontStyle: string) {
     }
 }
 
+function updateObjectPosition(newPosition: Position) {
+    return {
+        type: ActionType.UPDATE_OBJECT_POSITION,
+        payload: newPosition,
+    }
+}
+
 export {
     addSlide,
     removeSlide,
@@ -77,4 +85,5 @@ export {
     updatePresentationTitle,
     updateTextFontFamily,
     updateTextFontStyle,
+    updateObjectPosition,
 }
