@@ -23,7 +23,7 @@ function WorkSpace({ isSlideshow }: WorkSpaceProps) {
     const selectedSlide: Slide = slides[currentSlideIndex] || slides[0]
 
     let className
-    let workspaceWrapper = ''
+    let workspaceWrapper
     let workspace
     let scale
     if (isSlideshow) {
@@ -46,7 +46,6 @@ function WorkSpace({ isSlideshow }: WorkSpaceProps) {
     function goToNextSlide() {
         if (slides.length > 0) {
             const nextIndex = (currentSlideIndex + 1) % slides.length
-            console.log(nextIndex)
             setCurrentSlideIndex(nextIndex)
             updateSelectedSlides(slides[nextIndex].id)
         }
@@ -55,27 +54,34 @@ function WorkSpace({ isSlideshow }: WorkSpaceProps) {
     function goToPreviousSlide() {
         if (slides.length > 0) {
             const previousIndex = (currentSlideIndex - 1 + slides.length) % slides.length
-            console.log(previousIndex)
             setCurrentSlideIndex(previousIndex)
             updateSelectedSlides(slides[previousIndex].id)
         }
     }
 
-    function handleKeyDown(event: KeyboardEvent) {
+    async function handleKeyDown(event: KeyboardEvent) {
         if (event.key === 'ArrowRight') {
             goToNextSlide()
         } else if (event.key === 'ArrowLeft') {
             goToPreviousSlide()
-        } else if (event.key === 'Escape' && isSlideshow) {
-            navigate('/presentation')
+        }
+    }
+
+    function handleFullscreenChange() {
+        if (!document.fullscreenElement) {
+            if (isSlideshow) {
+                navigate('/')
+            }
         }
     }
 
     useEffect(() => {
-        window.addEventListener('keydown', handleKeyDown)
+        document.addEventListener('keydown', handleKeyDown)
+        document.addEventListener('fullscreenchange', handleFullscreenChange)
 
         return () => {
-            window.removeEventListener('keydown', handleKeyDown)
+            document.removeEventListener('keydown', handleKeyDown)
+            document.removeEventListener('fullscreenchange', handleFullscreenChange)
         }
     }, [selection])
 
