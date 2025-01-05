@@ -1,9 +1,19 @@
 .slide {
     position: relative;
+    margin: 10px 0 10px 20px;
+    outline: 1px solid rgb(169, 169, 169);
+}
+
+.slideHover:hover {
+    outline: 3px solid rgb(169, 169, 169);
 }
 
 .selectedSlide {
     position: relative;
-    margin: 0;
     outline: 3px solid rgb(11, 87, 208);
+    margin: 10px 0 10px 20px;
+}
+
+.slideWrapper {
+    pointer-events: none;
 }

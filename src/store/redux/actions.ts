@@ -14,6 +14,8 @@ enum ActionType {
     UPDATE_TEXT_FONT_FAMILY = 'updateTextFont',
     UPDATE_TEXT_FONT_STYLE = 'updateTextFontStyle',
     UPDATE_OBJECT_POSITION = 'updateObjectPosition',
+    UPDATE_TEXT_CONTENT = 'updateTextContent',
+    UPDATE_SLIDE_INDEX = 'updateSlideIndex',
 }
 
 type AddSlideAction = {
@@ -77,6 +79,16 @@ type UpdateObjectPositionAction = {
     payload: Position
 }
 
+type UpdateTextContent = {
+    type: ActionType.UPDATE_TEXT_CONTENT,
+    payload: string
+}
+
+type UpdateSlideIndex = {
+    type: ActionType.UPDATE_SLIDE_INDEX,
+    payload: number
+}
+
 type EditorAction =
     AddSlideAction |
     RemoveSlideAction |
@@ -90,7 +102,9 @@ type EditorAction =
     UpdatePresentationTitleAction |
     UpdateTextFontFamilyAction |
     UpdateTextFontStyleAction |
-    UpdateObjectPositionAction
+    UpdateObjectPositionAction |
+    UpdateTextContent |
+    UpdateSlideIndex
 
 export {
     ActionType,

@@ -4,20 +4,25 @@ import {type Slide} from '../store/presentationTypes.ts'
 import {useDragAndDrop} from '../views/hooks/useDragAndDrop.tsx'
 import style from './DraggableSlideComponent.module.css'
 import {SlideComponent} from './SlideComponent.tsx'
+import {useAppActions} from '../views/hooks/useAppActions.tsx'
+import {useAppSelector} from '../views/hooks/useAppSelector.tsx'
 
 type DraggableSlideComponentProps = {
-	slide: Slide,
-	isSelected: boolean,
-	onClick: () => void,
+	slide: Slide
+	isSelected: boolean
+	onClick: () => void
+	index: number
 }
 
-function DraggableSlideComponent({ slide, isSelected, onClick }: DraggableSlideComponentProps) {
-	const {elementRef, position} = useDragAndDrop({
-		currentPosition: {
-			x: 0,
-			y: 0,
-		},
-	})
+function DraggableSlideComponent({ slide, isSelected, onClick, index }: DraggableSlideComponentProps) {
+	const slides = useAppSelector((editor => editor.presentation.slides))
+	// const { updateSlideIndex } = useAppActions()
+	// const { elementRef, position } = useDragAndDrop({
+	// 	currentPosition: { x: 0, y: 0 },
+	// 	onPositionChange: (newPosition) => {
+	// 		console.log(newPosition)
+	// 	},
+	// })
 
 	useEffect(() => {
 		if (isSelected && elementRef.current) {
@@ -28,8 +33,8 @@ function DraggableSlideComponent({ slide, isSelected, onClick }: DraggableSlideC
 	return (
 		<div
 			ref={elementRef}
-			onClick={onClick}
-			style={{transform: `translate(0, ${position.y}px)`}}
+			onMouseDown={onClick}
+			style={{transform: `translate(${position.x}px, ${position.y}px)`}}
 			className={style.slideCollectionElement}
 			tabIndex={0}
 		>

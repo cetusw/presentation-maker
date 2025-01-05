@@ -12,7 +12,7 @@ type ObjectComponentProps = {
 };
 
 function ObjectComponent({ objectId, object, isSelected, scale }: ObjectComponentProps) {
-    const { updateObjectPosition } = useAppActions()
+    const { updateObjectPosition, updateTextContent } = useAppActions()
     const { elementRef, position } = useDragAndDrop({
         currentPosition: object.position,
         onPositionChange: (newPosition) => {
@@ -31,7 +31,7 @@ function ObjectComponent({ objectId, object, isSelected, scale }: ObjectComponen
         if (object.type === 'text') {
             setTextContent(object.content || '')
         }
-    }, [object])
+    }, [isSelected])
 
     const selectedObject = isSelected ? `${style.selectedObject}` : `${style.object}`
 
@@ -41,7 +41,7 @@ function ObjectComponent({ objectId, object, isSelected, scale }: ObjectComponen
     }
 
     function handleTextChange(event: React.ChangeEvent<HTMLDivElement>) {
-        setTextContent(event.currentTarget.textContent || '')
+        updateTextContent(event.currentTarget.textContent || '')
     }
 
     return (

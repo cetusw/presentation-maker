@@ -8,7 +8,8 @@ import {addImageToSlide, addTextToSlide} from '../addObjectToSlide.ts'
 import {updateBackgroundColor, updateBackgroundImage} from '../updateSlideBackground.ts'
 import {removeObjectFromSlide} from '../removeObjectFromSlide.ts'
 import {updatePresentationTitle} from '../updatePresentationTitle.ts'
-import {updateObjectPosition, updateTextFontFamily, updateTextFontStyle} from '../updateSlideObject.ts'
+import {updateObjectPosition, updateTextContent, updateTextFontFamily, updateTextFontStyle} from '../updateSlideObject.ts'
+import {updateSlideIndex} from '../updateSlideIndex.ts'
 
 function editorReducer(editor: EditorType = defaultEditor, action: EditorAction): EditorType {
     switch (action.type) {
@@ -38,6 +39,10 @@ function editorReducer(editor: EditorType = defaultEditor, action: EditorAction)
             return updateTextFontStyle(editor, action.payload)
         case ActionType.UPDATE_OBJECT_POSITION:
             return updateObjectPosition(editor, action.payload)
+        case ActionType.UPDATE_TEXT_CONTENT:
+            return updateTextContent(editor, action.payload)
+        case ActionType.UPDATE_SLIDE_INDEX:
+            return updateSlideIndex(editor, action.payload)
         default:
             return editor
     }

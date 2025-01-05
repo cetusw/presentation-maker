@@ -1,7 +1,8 @@
 import style from './SlideCollection.module.css'
-import {DraggableSlideComponent} from '../../components/DraggableSlideComponent.tsx'
 import {useAppActions} from '../hooks/useAppActions.tsx'
 import {useAppSelector} from '../hooks/useAppSelector.tsx'
+import {SlideComponent} from '../../components/SlideComponent.tsx'
+import {slideCollectionScale} from '../../store/data/editorData.ts'
 
 
 function SlideCollection() {
@@ -20,14 +21,16 @@ function SlideCollection() {
         <div>
             {slides.length > 0 ? (
                 <div className={style.slideCollection}>
-                    {slides.map((slide) => (
-                        <DraggableSlideComponent
+                    {slides.map((slide, index) => (
+                        <SlideComponent
                             key={slide.id}
                             slide={slide}
+                            scale={slideCollectionScale}
                             isSelected={slide.id == selection.selectedSlidesIds[0]}
                             onClick={() => onSlideClick(slide.id)}
+                            index={index}
                         >
-                        </DraggableSlideComponent>
+                        </SlideComponent>
                     ))}
                 </div>
             ) : (

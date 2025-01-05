@@ -74,6 +74,20 @@ function updateObjectPosition(newPosition: Position) {
     }
 }
 
+function updateTextContent(newContent: string) {
+    return {
+        type: ActionType.UPDATE_TEXT_CONTENT,
+        payload: newContent,
+    }
+}
+
+function updateSlideIndex(newIndex: number) {
+    return {
+        type: ActionType.UPDATE_SLIDE_INDEX,
+        payload: newIndex,
+    }
+}
+
 export {
     addSlide,
     removeSlide,
@@ -86,4 +100,6 @@ export {
     updateTextFontFamily,
     updateTextFontStyle,
     updateObjectPosition,
+    updateTextContent,
+    updateSlideIndex,
 }

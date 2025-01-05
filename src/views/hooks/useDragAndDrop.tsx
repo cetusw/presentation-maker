@@ -14,49 +14,36 @@ type DragAndDropResult = {
 	setPosition: React.Dispatch<React.SetStateAction<Position>>,
 }
 
-function useDragAndDrop({onPositionChange, currentPosition}: DragAndDropProps): DragAndDropResult {
+function useDragAndDrop({ onPositionChange, currentPosition }: DragAndDropProps): DragAndDropResult {
 	const [position, setPosition] = useState<Position>(currentPosition)
-    const positionRef = useRef<Position>(currentPosition)
+	const positionRef = useRef<Position>(currentPosition)
 	const elementRef = useRef<HTMLDivElement | null>(null)
-	const startPos = useRef<Position>({
-		x: 0,
-		y: 0,
-	})
+	const startPos = useRef<Position>({ x: 0, y: 0 })
 
-    useEffect(() => {
-        if (position.x !== currentPosition.x || position.y !== currentPosition.y) {
-            setPosition(currentPosition)
-            positionRef.current = currentPosition
-        }
-    }, [currentPosition])
+	useEffect(() => {
+		if (position.x !== currentPosition.x || position.y !== currentPosition.y) {
+			setPosition(currentPosition)
+			positionRef.current = currentPosition
+		}
+	}, [currentPosition])
 
 	useEffect(() => {
 		function handleMouseDown(e: MouseEvent) {
 			startPos.current = {
-				x: e.pageX,
-				y: e.pageY,
+				x: e.pageX - positionRef.current.x,
+				y: e.pageY - positionRef.current.y,
 			}
 			document.addEventListener('mousemove', handleMouseMove)
 			document.addEventListener('mouseup', handleMouseUp)
 		}
 
 		function handleMouseMove(e: MouseEvent) {
-			const delta = {
+			const newPos = {
 				x: e.pageX - startPos.current.x,
 				y: e.pageY - startPos.current.y,
 			}
-            setPosition((prevPos) => {
-                const newPos = {
-                    x: prevPos.x + delta.x,
-                    y: prevPos.y + delta.y,
-                }
-                positionRef.current = newPos
-                return newPos
-            })
-			startPos.current = {
-				x: e.pageX,
-				y: e.pageY,
-			}
+			setPosition(newPos)
+			positionRef.current = newPos
 		}
 
 		function handleMouseUp() {

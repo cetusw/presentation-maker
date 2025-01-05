@@ -60,6 +60,9 @@ function WorkSpace({ isSlideshow }: WorkSpaceProps) {
     }
 
     async function handleKeyDown(event: KeyboardEvent) {
+        if (selection.selectedObjectsIds.length > 0) {
+            return
+        }
         if (event.key === 'ArrowRight') {
             goToNextSlide()
         } else if (event.key === 'ArrowLeft') {

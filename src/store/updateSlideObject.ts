@@ -55,7 +55,6 @@ function updateTextFontFamily(editor: EditorType, newFontFamily: string): Editor
 }
 
 function updateObjectPosition(editor: EditorType, newPosition: Position) {
-    console.log(newPosition)
     const slideToEdit = findSlideToEdit(editor)
     if (!slideToEdit) {
         return editor
@@ -103,11 +102,28 @@ function updateTextFontStyle(editor: EditorType, newFontStyle: string) {
     })
 }
 
+function updateTextContent(editor: EditorType, newText: string) {
+    const slideToEdit = findSlideToEdit(editor)
+    if (!slideToEdit) {
+        return editor
+    }
+    const objectToEdit = findObjectToEdit(editor, slideToEdit)
+    if (!objectToEdit || objectToEdit.type !== 'text') {
+        return editor
+    }
+
+    return updateSlideObject(editor, slideToEdit, {
+        ...objectToEdit,
+        content: newText,
+    })
+}
+
 export {
     updateTextFontFamily,
     updateObjectPosition,
     updateTextFontSize,
     updateTextFontStyle,
+    updateTextContent,
 }
 
 // export function updateObjectSize(presentation: Presentation, items: ItemSelection, newSize: Size) {
@@ -124,17 +140,4 @@ export {
 //     });
 // }
 //
-// export function updateTextContent(presentation: Presentation, items: ItemSelection, newText: string) {
-//     const slideIdToEdit: string = items.selectedSlidesIds[0];
-//     const objectToEdit = findSelectedObject(presentation, items);
-//
-//     if (!objectToEdit) {
-//         return presentation
-//     }
-//
-//     return updateSlideObject(presentation, slideIdToEdit, {
-//         ...objectToEdit,
-//         content: newText,
-//     });
-// }
 //

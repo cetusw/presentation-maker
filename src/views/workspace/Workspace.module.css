@@ -19,7 +19,7 @@ html {
 }
 
 .slideComponent {
-    border: 1px solid rgb(169, 169, 169);
+    outline: 1px solid rgb(169, 169, 169);
     margin: 5vh 0 0 5vw;
 }
 
