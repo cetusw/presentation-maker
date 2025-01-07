@@ -8,7 +8,9 @@ import HandleImage from '../../assets/icons/add-image.svg'
 import DownloadPresentation from '../../assets/icons/download.svg'
 import ImportPresentation from '../../assets/icons/import.svg'
 import ExportPresentationInPDF from '../../assets/icons/exportInPDF.svg'
+import Bold from '../../assets/icons/bold.svg'
 import Italic from '../../assets/icons/italic.svg'
+import Underline from '../../assets/icons/underline.svg'
 import {ButtonComponent} from '../../components/ButtonComponent.tsx'
 import {InputComponent} from '../../components/InputComponent.tsx'
 import {loadImage} from '../../store/loadImage.ts'
@@ -35,23 +37,27 @@ function ToolBar({ setError } : ToolBarProps) {
     const history = useContext(HistoryContext)
     const [isImportImagePopupOpen, setIsImportImagePopupOpen] = useState(false)
     const [italic, setItalic] = useState<boolean>(false)
+    const [underline, setUnderline] = useState<boolean>(false)
+    const [bold, setBold] = useState<boolean>(false)
 
     useEffect(() => {
-        const slideToEditId = editor.selection.selectedSlidesIds[0]
-        const slideToEdit = editor.presentation.slides.find(slide => slide.id === slideToEditId)
+        const slideId = editor.selection.selectedSlidesIds[0]
+        const currentSlide = editor.presentation.slides.find(slide => slide.id === slideId)
 
-        if (!slideToEdit) {
+        if (!currentSlide) {
             return
         }
 
-        const objectToEditId = editor.selection.selectedObjectsIds[0]
-        const objectToEdit = slideToEdit.objects.find(object => object.id === objectToEditId)
+        const objectId = editor.selection.selectedObjectsIds[0]
+        const currentObject = currentSlide.objects.find(object => object.id === objectId)
 
-        if (!objectToEdit || objectToEdit.type !== 'text') {
+        if (!currentObject || currentObject.type !== 'text') {
             return
         }
 
-        setItalic(objectToEdit.fontStyle === 'italic')
+        setItalic(currentObject.fontStyle === 'italic')
+        setUnderline(currentObject.textDecoration === 'underline')
+        setBold(currentObject.fontWeight === 800)
 
     }, [editor.selection])
 
@@ -66,6 +72,8 @@ function ToolBar({ setError } : ToolBarProps) {
         removeSlide,
         updateTextFontFamily,
         updateTextFontStyle,
+        updateTextDecoration,
+        updateTextFontWeight,
     } = useAppActions()
 
     useEffect(() => {
@@ -198,6 +206,22 @@ function ToolBar({ setError } : ToolBarProps) {
         }
     }
 
+    function onUnderline() {
+        if (underline){
+            updateTextDecoration('')
+        } else {
+            updateTextDecoration('underline')
+        }
+    }
+
+    function onBold() {
+        if (bold){
+            updateTextFontWeight(200)
+        } else {
+            updateTextFontWeight(800)
+        }
+    }
+
     return (
         <div className={style.toolBar}>
             <ButtonComponent
@@ -268,10 +292,24 @@ function ToolBar({ setError } : ToolBarProps) {
             >
             </SelectComponent>
             <ButtonComponent
-                icon={Italic}
+                icon={Bold}
                 alt={'bold'}
                 className={style.boldButton}
+                onClick={onBold}
+            >
+            </ButtonComponent>
+            <ButtonComponent
+                icon={Italic}
+                alt={'italic'}
+                className={style.boldButton}
                 onClick={onItalic}
+            >
+            </ButtonComponent>
+            <ButtonComponent
+                icon={Underline}
+                alt={'underline'}
+                className={style.boldButton}
+                onClick={onUnderline}
             >
             </ButtonComponent>
             <Popover content={

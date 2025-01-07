@@ -2,8 +2,8 @@ import {ReactNode, useEffect, useRef, useState} from 'react'
 import style from './Popover.module.css'
 
 type PopoverProps = {
-    content: ReactNode;
-    children: ReactNode;
+    content: ReactNode
+    children: ReactNode
 };
 
 const Popover = ({ content, children }: PopoverProps) => {
@@ -22,10 +22,6 @@ const Popover = ({ content, children }: PopoverProps) => {
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [])
 
-    function closePopover() {
-        setIsVisible(false)
-    }
-
     function togglePopover() {
         setIsVisible(!isVisible)
     }
@@ -36,7 +32,7 @@ const Popover = ({ content, children }: PopoverProps) => {
                 {content}
             </div>
             {isVisible && (
-                <div className={style.popoverContent} onClick={closePopover}>
+                <div className={style.popoverContent}>
                     {children}
                 </div>
             )}

@@ -24,7 +24,7 @@ html {
 }
 
 .slideComponentSlideshow {
-    margin: auto 0;
+    outline: none;
 }
 
 .placeholderSlide {

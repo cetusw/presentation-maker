@@ -61,6 +61,8 @@ function ObjectComponent({ objectId, object, isSelected, scale }: ObjectComponen
                         fontFamily: object.fontFamily,
                         color: object.fontColor,
                         fontStyle: object.fontStyle,
+                        textDecoration: object.textDecoration,
+                        fontWeight: object.fontWeight,
                     }}
                     onInput={handleTextChange} 
                     suppressContentEditableWarning={true}

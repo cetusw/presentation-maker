@@ -16,6 +16,8 @@ enum ActionType {
     UPDATE_OBJECT_POSITION = 'updateObjectPosition',
     UPDATE_TEXT_CONTENT = 'updateTextContent',
     UPDATE_SLIDE_INDEX = 'updateSlideIndex',
+    UPDATE_TEXT_DECORATION = 'updateTextDecoration',
+    UPDATE_TEXT_FONT_WEIGHT = 'updateTextFontWeight',
 }
 
 type AddSlideAction = {
@@ -75,18 +77,28 @@ type UpdateTextFontStyleAction = {
 }
 
 type UpdateObjectPositionAction = {
-    type: ActionType.UPDATE_OBJECT_POSITION,
+    type: ActionType.UPDATE_OBJECT_POSITION
     payload: Position
 }
 
 type UpdateTextContent = {
     type: ActionType.UPDATE_TEXT_CONTENT,
-    payload: string
+    payload: string,
 }
 
 type UpdateSlideIndex = {
     type: ActionType.UPDATE_SLIDE_INDEX,
-    payload: number
+    payload: number,
+}
+
+type UpdateTextDecoration = {
+    type: ActionType.UPDATE_TEXT_DECORATION,
+    payload: string,
+}
+
+type UpdateTextFontWeight = {
+    type: ActionType.UPDATE_TEXT_FONT_WEIGHT,
+    payload: number,
 }
 
 type EditorAction =
@@ -104,7 +116,9 @@ type EditorAction =
     UpdateTextFontStyleAction |
     UpdateObjectPositionAction |
     UpdateTextContent |
-    UpdateSlideIndex
+    UpdateSlideIndex |
+    UpdateTextDecoration |
+    UpdateTextFontWeight
 
 export {
     ActionType,

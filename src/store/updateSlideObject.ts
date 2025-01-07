@@ -102,6 +102,38 @@ function updateTextFontStyle(editor: EditorType, newFontStyle: string) {
     })
 }
 
+function updateTextDecoration(editor: EditorType, newTextDecoration: string) {
+    const slideToEdit = findSlideToEdit(editor)
+    if (!slideToEdit) {
+        return editor
+    }
+    const objectToEdit = findObjectToEdit(editor, slideToEdit)
+    if (!objectToEdit || objectToEdit.type !== 'text') {
+        return editor
+    }
+
+    return updateSlideObject(editor, slideToEdit, {
+        ...objectToEdit,
+        textDecoration: newTextDecoration,
+    })
+}
+
+function updateTextFontWeight(editor: EditorType, newFontWeight: number) {
+    const slideToEdit = findSlideToEdit(editor)
+    if (!slideToEdit) {
+        return editor
+    }
+    const objectToEdit = findObjectToEdit(editor, slideToEdit)
+    if (!objectToEdit || objectToEdit.type !== 'text') {
+        return editor
+    }
+
+    return updateSlideObject(editor, slideToEdit, {
+        ...objectToEdit,
+        fontWeight: newFontWeight,
+    })
+}
+
 function updateTextContent(editor: EditorType, newText: string) {
     const slideToEdit = findSlideToEdit(editor)
     if (!slideToEdit) {
@@ -124,6 +156,8 @@ export {
     updateTextFontSize,
     updateTextFontStyle,
     updateTextContent,
+    updateTextDecoration,
+    updateTextFontWeight,
 }
 
 // export function updateObjectSize(presentation: Presentation, items: ItemSelection, newSize: Size) {

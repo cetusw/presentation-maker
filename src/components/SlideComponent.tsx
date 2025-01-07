@@ -4,7 +4,7 @@ import {ObjectComponent} from './ObjectComponent.tsx'
 import {useAppSelector} from '../views/hooks/useAppSelector.tsx'
 import {useAppActions} from '../views/hooks/useAppActions.tsx'
 import {useDragAndDrop} from '../views/hooks/useDragAndDrop.tsx'
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 
 type SlideComponentProps = {
     className?: string
@@ -13,9 +13,10 @@ type SlideComponentProps = {
     onClick?: () => void
     isSelected?: boolean
     index?: number
+    inSlideCollection: boolean
 };
 
-function SlideComponent({className, slide, scale, isSelected, onClick, index}: SlideComponentProps) {
+function SlideComponent({className, slide, scale, isSelected, onClick, index, inSlideCollection}: SlideComponentProps) {
     const selection = useAppSelector(editor => editor.selection)
     const slides = useAppSelector((editor => editor.presentation.slides))
     const [slidePosition, setSlidePosition] = useState({ x: 0, y: 0 })
@@ -24,6 +25,9 @@ function SlideComponent({className, slide, scale, isSelected, onClick, index}: S
     const { elementRef, position } = useDragAndDrop({
         currentPosition: slidePosition,
         onPositionChange: (newPosition) => {
+            if (!inSlideCollection) {
+                return
+            }
             let newIndex = Math.round(newPosition.y / 125)
             if (index) {
                 newIndex += index
@@ -35,13 +39,6 @@ function SlideComponent({className, slide, scale, isSelected, onClick, index}: S
         },
     })
 
-    useEffect(() => {
-        const element = elementRef.current
-        if (element) {
-            setSlidePosition({ x: 0, y: 0})
-        }
-    }, [elementRef])
-
     const newScale = scale ?? 1
 
     let draggableSlide
@@ -49,7 +46,7 @@ function SlideComponent({className, slide, scale, isSelected, onClick, index}: S
         ? `${style.selectedSlide} ${className || ''}`
         : `${style.slide} ${className || ''}`
 
-    if (newScale !== 1) {
+    if (inSlideCollection) {
         slideClass += `${style.slideHover}`
         draggableSlide = {transform: `translate(0, ${position.y}px)`}
     }

@@ -45,6 +45,8 @@ type TextObject = SlideItem & {
     fontColor: string;
     fontStyle: string;
     fontSize: number;
+    textDecoration: string;
+    fontWeight: string | number
 };
 
 type ImageObject = SlideItem & {

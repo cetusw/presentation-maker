@@ -88,6 +88,20 @@ function updateSlideIndex(newIndex: number) {
     }
 }
 
+function updateTextDecoration(newTextDecoration: string) {
+    return {
+        type: ActionType.UPDATE_TEXT_DECORATION,
+        payload: newTextDecoration,
+    }
+}
+
+function updateTextFontWeight(newFontWeight: number) {
+    return {
+        type: ActionType.UPDATE_TEXT_FONT_WEIGHT,
+        payload: newFontWeight,
+    }
+}
+
 export {
     addSlide,
     removeSlide,
@@ -102,4 +116,6 @@ export {
     updateObjectPosition,
     updateTextContent,
     updateSlideIndex,
+    updateTextDecoration,
+    updateTextFontWeight,
 }

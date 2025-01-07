@@ -12,6 +12,7 @@
     position: relative;
     outline: 3px solid rgb(11, 87, 208);
     margin: 10px 0 10px 20px;
+    z-index: 1000;
 }
 
 .slideWrapper {

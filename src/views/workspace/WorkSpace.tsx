@@ -29,6 +29,7 @@ function WorkSpace({ isSlideshow }: WorkSpaceProps) {
     if (isSlideshow) {
         workspaceWrapper = style.workspaceWrapper
         workspace = style.workspaceSlideshow
+        className = style.slideComponentSlideshow
         scale = 2 / 3
     } else {
         className = style.slideComponent
@@ -104,6 +105,7 @@ function WorkSpace({ isSlideshow }: WorkSpaceProps) {
                             className={className}
                             scale={scale}
                             slide={selectedSlide}
+                            inSlideCollection={false}
                         />
                     </div>
                 ) : (

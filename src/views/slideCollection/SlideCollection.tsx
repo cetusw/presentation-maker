@@ -29,6 +29,7 @@ function SlideCollection() {
                             isSelected={slide.id == selection.selectedSlidesIds[0]}
                             onClick={() => onSlideClick(slide.id)}
                             index={index}
+                            inSlideCollection={true}
                         >
                         </SlideComponent>
                     ))}
