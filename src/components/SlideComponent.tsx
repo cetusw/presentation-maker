@@ -47,8 +47,14 @@ function SlideComponent({className, slide, scale, isSelected, onClick, index, in
         : `${style.slide} ${className || ''}`
 
     if (inSlideCollection) {
-        slideClass += `${style.slideHover}`
         draggableSlide = {transform: `translate(0, ${position.y}px)`}
+    }
+
+    if (inSlideCollection && isSelected) {
+        slideClass = `${style.selectedSlide} ${className || ''}`
+    }
+    if (inSlideCollection && !isSelected) {
+        slideClass = `${style.slideInCollection} ${className || ''}`
     }
 
     const { setSelection } = useAppActions()
