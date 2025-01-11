@@ -70,7 +70,7 @@ function updateObjectPosition(editor: EditorType, newPosition: Position) {
     })
 }
 
-function updateTextFontSize(editor: EditorType, newFontSize: number) {
+function updateTextFontSize(editor: EditorType, newFontSize: string) {
     const slideToEdit = findSlideToEdit(editor)
     if (!slideToEdit) {
         return editor
@@ -82,7 +82,7 @@ function updateTextFontSize(editor: EditorType, newFontSize: number) {
 
     return updateSlideObject(editor, slideToEdit, {
         ...objectToEdit,
-        fontSize: newFontSize,
+        fontSize: Number(newFontSize),
     })
 }
 

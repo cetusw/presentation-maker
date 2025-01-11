@@ -24,7 +24,7 @@ import {exportSlidesToPDF} from '../../utils/exportSlidesToPDF.tsx'
 import {Popup} from '../../components/Popup.tsx'
 import {Popover} from '../../components/Popover.tsx'
 import {SelectComponent} from '../../components/SelectComponent.tsx'
-import {availableFonts} from '../../store/data/editorData.ts'
+import {availableFontFamilies, availableFontSizes} from '../../store/data/editorData.ts'
 import {ImportPhotosPopup} from './ImportPhotosPopup.tsx'
 
 type ToolBarProps = {
@@ -39,6 +39,8 @@ function ToolBar({ setError } : ToolBarProps) {
     const [italic, setItalic] = useState<boolean>(false)
     const [underline, setUnderline] = useState<boolean>(false)
     const [bold, setBold] = useState<boolean>(false)
+    const [fontFamily, setFontFamily] = useState<string>('Roboto')
+    const [fontSize, setFontSize] = useState<string>('14')
 
     useEffect(() => {
         const slideId = editor.selection.selectedSlidesIds[0]
@@ -58,6 +60,9 @@ function ToolBar({ setError } : ToolBarProps) {
         setItalic(currentObject.fontStyle === 'italic')
         setUnderline(currentObject.textDecoration === 'underline')
         setBold(currentObject.fontWeight === 800)
+        setFontFamily(currentObject.fontFamily)
+        setFontSize(currentObject.fontSize.toString())
+
 
     }, [editor.selection])
 
@@ -74,6 +79,7 @@ function ToolBar({ setError } : ToolBarProps) {
         updateTextFontStyle,
         updateTextDecoration,
         updateTextFontWeight,
+        updateTextFontSize,
     } = useAppActions()
 
     useEffect(() => {
@@ -198,6 +204,10 @@ function ToolBar({ setError } : ToolBarProps) {
         updateTextFontFamily(event.target.value)
     }
 
+    function onChangeFontSize(event: React.ChangeEvent<HTMLSelectElement>) {
+        updateTextFontSize(event.target.value)
+    }
+
     function onItalic() {
         if (italic) {
             updateTextFontStyle('')
@@ -287,8 +297,15 @@ function ToolBar({ setError } : ToolBarProps) {
             </Popover>
             <div className={style.divider}></div>
             <SelectComponent
-                options={availableFonts}
+                options={availableFontFamilies}
                 onChange={onChangeFontFamily}
+                startValue={fontFamily}
+            >
+            </SelectComponent>
+            <SelectComponent
+                options={availableFontSizes}
+                onChange={onChangeFontSize}
+                startValue={fontSize}
             >
             </SelectComponent>
             <ButtonComponent

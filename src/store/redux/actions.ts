@@ -18,6 +18,7 @@ enum ActionType {
     UPDATE_SLIDE_INDEX = 'updateSlideIndex',
     UPDATE_TEXT_DECORATION = 'updateTextDecoration',
     UPDATE_TEXT_FONT_WEIGHT = 'updateTextFontWeight',
+    UPDATE_TEXT_FONT_SIZE = 'updateTextFontSize',
 }
 
 type AddSlideAction = {
@@ -101,6 +102,11 @@ type UpdateTextFontWeight = {
     payload: number,
 }
 
+type UpdateTextFontSize = {
+    type: ActionType.UPDATE_TEXT_FONT_SIZE,
+    payload: string,
+}
+
 type EditorAction =
     AddSlideAction |
     RemoveSlideAction |
@@ -118,7 +124,8 @@ type EditorAction =
     UpdateTextContent |
     UpdateSlideIndex |
     UpdateTextDecoration |
-    UpdateTextFontWeight
+    UpdateTextFontWeight |
+    UpdateTextFontSize
 
 export {
     ActionType,

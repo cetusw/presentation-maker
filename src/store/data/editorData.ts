@@ -9,11 +9,13 @@ const defaultText: string = 'текст презентации'
 const defaultTitle: string = 'Презентация без названия'
 const slideCollectionScale: number = 5
 
-const availableFonts: string[] = [
+const availableFontFamilies: string[] = [
     'Times New Roman',
     'Roboto',
     'Arial',
 ]
+
+const availableFontSizes: string[] = ['6', '7', '8', '9', '10', '11', '12', '14', '18', '24', '30', '36', '48', '60', '72', '96']
 
 const defaultPresentation: Presentation = {
     'id': 'presentation-1',
@@ -37,6 +39,8 @@ const defaultPresentation: Presentation = {
                     'fontSize': 24,
                     'fontStyle': 'italic',
                     'fontColor': '#000000',
+                    'textDecoration': 'none',
+                    'fontWeight': '200',
                     'position': {'x': 0, 'y': 0},
                     'size': {'width': 500, 'height': 80}
                 },
@@ -64,6 +68,8 @@ const defaultPresentation: Presentation = {
                     'fontSize': 60,
                     'fontStyle': 'italic',
                     'fontColor': '#000000',
+                    'textDecoration': 'none',
+                    'fontWeight': '200',
                     'position': {'x': 200, 'y': 100},
                     'size': {'width': 1600, 'height': 90}
                 },
@@ -91,6 +97,8 @@ const defaultPresentation: Presentation = {
                     'fontSize': 60,
                     'fontStyle': 'italic',
                     'fontColor': '#000000',
+                    'textDecoration': 'none',
+                    'fontWeight': '200',
                     'position': {'x': 0, 'y': 100},
                     'size': {'width': 1600, 'height': 90}
                 },
@@ -118,6 +126,8 @@ const defaultPresentation: Presentation = {
                     'fontSize': 72,
                     'fontStyle': 'italic',
                     'fontColor': '#000000',
+                    'textDecoration': 'none',
+                    'fontWeight': '200',
                     'position': {'x': 0, 'y': 0},
                     'size': {'width': 1920, 'height': 100}
                 },
@@ -145,6 +155,8 @@ const defaultPresentation: Presentation = {
                     'fontSize': 72,
                     'fontStyle': 'italic',
                     'fontColor': '#000000',
+                    'textDecoration': 'none',
+                    'fontWeight': '200',
                     'position': {'x': 0, 'y': 0},
                     'size': {'width': 1920, 'height': 100}
                 },
@@ -172,6 +184,8 @@ const defaultPresentation: Presentation = {
                     'fontSize': 60,
                     'fontStyle': 'italic',
                     'fontColor': '#000000',
+                    'textDecoration': 'none',
+                    'fontWeight': '200',
                     'position': {'x': 200, 'y': 100},
                     'size': {'width': 1600, 'height': 90}
                 },
@@ -200,6 +214,8 @@ const defaultPresentation: Presentation = {
                     'fontSize': 72,
                     'fontStyle': 'italic',
                     'fontColor': '#000000',
+                    'textDecoration': 'none',
+                    'fontWeight': '200',
                     'position': {'x': 0, 'y': 0},
                     'size': {'width': 1920, 'height': 100}
                 },
@@ -228,6 +244,8 @@ const defaultPresentation: Presentation = {
                     'fontSize': 72,
                     'fontStyle': 'italic',
                     'fontColor': '#000000',
+                    'textDecoration': 'none',
+                    'fontWeight': '200',
                     'position': {'x': 0, 'y': 0},
                     'size': {'width': 1920, 'height': 100}
                 },
@@ -255,6 +273,8 @@ const defaultPresentation: Presentation = {
                     'fontSize': 72,
                     'fontStyle': 'italic',
                     'fontColor': '#000000',
+                    'textDecoration': 'none',
+                    'fontWeight': '200',
                     'position': {'x': 0, 'y': 0},
                     'size': {'width': 1920, 'height': 100}
                 },
@@ -289,5 +309,6 @@ export {
     defaultTitle,
     slideCollectionScale,
     defaultEditor,
-    availableFonts,
+    availableFontFamilies,
+    availableFontSizes,
 }

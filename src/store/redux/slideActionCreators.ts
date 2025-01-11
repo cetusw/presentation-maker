@@ -102,6 +102,13 @@ function updateTextFontWeight(newFontWeight: number) {
     }
 }
 
+function updateTextFontSize(newFontSize: string) {
+    return {
+        type: ActionType.UPDATE_TEXT_FONT_SIZE,
+        payload: newFontSize,
+    }
+}
+
 export {
     addSlide,
     removeSlide,
@@ -118,4 +125,5 @@ export {
     updateSlideIndex,
     updateTextDecoration,
     updateTextFontWeight,
+    updateTextFontSize,
 }

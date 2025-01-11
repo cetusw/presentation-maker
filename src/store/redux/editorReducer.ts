@@ -12,7 +12,7 @@ import {
     updateObjectPosition,
     updateTextContent,
     updateTextDecoration,
-    updateTextFontFamily,
+    updateTextFontFamily, updateTextFontSize,
     updateTextFontStyle,
     updateTextFontWeight
 } from '../updateSlideObject.ts'
@@ -54,6 +54,8 @@ function editorReducer(editor: EditorType = defaultEditor, action: EditorAction)
             return updateTextDecoration(editor, action.payload)
         case ActionType.UPDATE_TEXT_FONT_WEIGHT:
             return updateTextFontWeight(editor, action.payload)
+        case ActionType.UPDATE_TEXT_FONT_SIZE:
+            return updateTextFontSize(editor, action.payload)
         default:
             return editor
     }
