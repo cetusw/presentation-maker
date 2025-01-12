@@ -166,6 +166,22 @@ function updateTextContent(editor: EditorType, newText: string) {
     })
 }
 
+function updateTextFontColor(editor: EditorType, newColor: string) {
+    const slideToEdit = findSlideToEdit(editor)
+    if (!slideToEdit) {
+        return editor
+    }
+    const objectToEdit = findObjectToEdit(editor, slideToEdit)
+    if (!objectToEdit || objectToEdit.type !== 'text') {
+        return editor
+    }
+
+    return updateSlideObject(editor, slideToEdit, {
+        ...objectToEdit,
+        fontColor: newColor,
+    })
+}
+
 export {
     updateTextFontFamily,
     updateObjectPosition,
@@ -175,4 +191,5 @@ export {
     updateTextDecoration,
     updateTextFontWeight,
     updateObjectSize,
+    updateTextFontColor,
 }

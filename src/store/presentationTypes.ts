@@ -30,6 +30,11 @@ type BackgroundGradient = {
     secondColor: string;
 };
 
+type Gradient = {
+    firstColor: string;
+    secondColor: string;
+}
+
 type SlideObject = TextObject | ImageObject;
 
 type SlideItem = {
@@ -89,4 +94,5 @@ export type {
     BackgroundColor,
     BackgroundGradient,
     EditorType,
+    Gradient,
 }

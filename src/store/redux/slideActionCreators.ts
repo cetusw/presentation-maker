@@ -1,5 +1,5 @@
 import { ActionType } from './actions'
-import {Position, Size} from '../presentationTypes.ts'
+import {Gradient, Position, Size} from '../presentationTypes.ts'
 
 function addSlide() {
     return {
@@ -116,6 +116,20 @@ function updateObjectSize(newObjectSize: Size) {
     }
 }
 
+function updateTextFontColor(newFontColor: string) {
+    return {
+        type: ActionType.UPDATE_TEXT_FONT_COLOR,
+        payload: newFontColor,
+    }
+}
+
+function updateBackgroundGradient(newGradient: Gradient) {
+    return {
+        type: ActionType.UPDATE_BACKGROUND_GRADIENT,
+        payload: newGradient,
+    }
+}
+
 export {
     addSlide,
     removeSlide,
@@ -134,4 +148,6 @@ export {
     updateTextFontWeight,
     updateTextFontSize,
     updateObjectSize,
+    updateTextFontColor,
+    updateBackgroundGradient,
 }

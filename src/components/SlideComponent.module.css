@@ -2,7 +2,7 @@
     position: relative;
     outline: 1px solid rgb(169, 169, 169);
     margin: 10px 0 10px 20px;
-    z-index: 1000;
+    z-index: 2;
     border-radius: 10px;
     user-select: none;
     overflow: hidden;
@@ -16,7 +16,7 @@
     position: relative;
     outline: 3px solid rgb(11, 87, 208);
     margin: 10px 0 10px 20px;
-    z-index: 1000;
+    z-index: 3;
     border-radius: 10px;
 }
 

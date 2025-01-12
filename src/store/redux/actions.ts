@@ -1,4 +1,4 @@
-import {EditorType, ItemSelection, Position, Size} from '../presentationTypes.ts'
+import {EditorType, Gradient, ItemSelection, Position, Size} from '../presentationTypes.ts'
 
 enum ActionType {
     ADD_SLIDE = 'addSlide',
@@ -20,6 +20,8 @@ enum ActionType {
     UPDATE_TEXT_FONT_WEIGHT = 'updateTextFontWeight',
     UPDATE_TEXT_FONT_SIZE = 'updateTextFontSize',
     UPDATE_OBJECT_SIZE = 'updateObjectSize',
+    UPDATE_TEXT_FONT_COLOR = 'updateTextFontColor',
+    UPDATE_BACKGROUND_GRADIENT = 'updateBackgroundGradient',
 }
 
 type AddSlideAction = {
@@ -113,6 +115,16 @@ type UpdateObjectSize = {
     payload: Size,
 }
 
+type UpdateTextFontColor = {
+    type: ActionType.UPDATE_TEXT_FONT_COLOR,
+    payload: string,
+}
+
+type UpdateBackgroundGradient = {
+    type: ActionType.UPDATE_BACKGROUND_GRADIENT,
+    payload: Gradient,
+}
+
 type EditorAction =
     AddSlideAction |
     RemoveSlideAction |
@@ -132,7 +144,9 @@ type EditorAction =
     UpdateTextDecoration |
     UpdateTextFontWeight |
     UpdateTextFontSize |
-    UpdateObjectSize
+    UpdateObjectSize |
+    UpdateTextFontColor |
+    UpdateBackgroundGradient
 
 export {
     ActionType,

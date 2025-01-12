@@ -5,13 +5,13 @@ import {ActionType, EditorAction} from './actions'
 import {defaultEditor} from '../data/editorData.ts'
 import {removeSlide} from '../removeSlide.ts'
 import {addImageToSlide, addTextToSlide} from '../addObjectToSlide.ts'
-import {updateBackgroundColor, updateBackgroundImage} from '../updateSlideBackground.ts'
+import {updateBackgroundColor, updateBackgroundGradient, updateBackgroundImage} from '../updateSlideBackground.ts'
 import {removeObjectFromSlide} from '../removeObjectFromSlide.ts'
 import {updatePresentationTitle} from '../updatePresentationTitle.ts'
 import {
     updateObjectPosition, updateObjectSize,
     updateTextContent,
-    updateTextDecoration,
+    updateTextDecoration, updateTextFontColor,
     updateTextFontFamily,
     updateTextFontSize,
     updateTextFontStyle,
@@ -59,6 +59,10 @@ function editorReducer(editor: EditorType = defaultEditor, action: EditorAction)
             return updateTextFontSize(editor, action.payload)
         case ActionType.UPDATE_OBJECT_SIZE:
             return updateObjectSize(editor, action.payload)
+        case ActionType.UPDATE_TEXT_FONT_COLOR:
+            return updateTextFontColor(editor, action.payload)
+        case ActionType.UPDATE_BACKGROUND_GRADIENT:
+            return updateBackgroundGradient(editor, action.payload)
         default:
             return editor
     }

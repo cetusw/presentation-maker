@@ -24,8 +24,9 @@ import {exportSlidesToPDF} from '../../utils/exportSlidesToPDF.tsx'
 import {Popup} from '../../components/Popup.tsx'
 import {Popover} from '../../components/Popover.tsx'
 import {SelectComponent} from '../../components/SelectComponent.tsx'
-import {availableFontFamilies, availableFontSizes} from '../../store/data/editorData.ts'
+import {availableFontFamilies, availableFontSizes, defaultFontFamily, defaultFontSize} from '../../store/data/editorData.ts'
 import {ImportPhotosPopup} from './ImportPhotosPopup.tsx'
+import {GradientPopup} from './GradientPopup.tsx'
 
 type ToolBarProps = {
     setError: (message: string) => void
@@ -35,12 +36,13 @@ function ToolBar({ setError } : ToolBarProps) {
     const { onImportPresentation } = useImportPresentation({ setError })
     const editor = useAppSelector((editor => editor))
     const history = useContext(HistoryContext)
-    const [isImportImagePopupOpen, setIsImportImagePopupOpen] = useState(false)
+    const [isImportImagePopupOpen, setIsImportImagePopupOpen] = useState<boolean>(false)
+    const [isGradientPopupOpen, setIsGradientPopupOpen] = useState<boolean>(false)
     const [italic, setItalic] = useState<boolean>(false)
     const [underline, setUnderline] = useState<boolean>(false)
     const [bold, setBold] = useState<boolean>(false)
-    const [fontFamily, setFontFamily] = useState<string>('Roboto')
-    const [fontSize, setFontSize] = useState<string>('14')
+    const [fontFamily, setFontFamily] = useState<string>(defaultFontFamily)
+    const [fontSize, setFontSize] = useState<string>(String(defaultFontSize))
 
     useEffect(() => {
         const slideId = editor.selection.selectedSlidesIds[0]
@@ -80,6 +82,7 @@ function ToolBar({ setError } : ToolBarProps) {
         updateTextDecoration,
         updateTextFontWeight,
         updateTextFontSize,
+        updateTextFontColor,
     } = useAppActions()
 
     useEffect(() => {
@@ -200,6 +203,14 @@ function ToolBar({ setError } : ToolBarProps) {
         setIsImportImagePopupOpen(false)
     }
 
+    function onOpenGradientPopup() {
+        setIsGradientPopupOpen(true)
+    }
+
+    function onCloseGradientPopup() {
+        setIsGradientPopupOpen(false)
+    }
+
     function onChangeFontFamily(event: React.ChangeEvent<HTMLSelectElement>){
         updateTextFontFamily(event.target.value)
     }
@@ -230,6 +241,10 @@ function ToolBar({ setError } : ToolBarProps) {
         } else {
             updateTextFontWeight(800)
         }
+    }
+
+    function onUpdateTextFontColor(event: React.ChangeEvent<HTMLInputElement>) {
+        updateTextFontColor(event.target.value)
     }
 
     return (
@@ -308,6 +323,14 @@ function ToolBar({ setError } : ToolBarProps) {
                 startValue={fontSize}
             >
             </SelectComponent>
+            <InputComponent
+                inputId={'change-background-color'}
+                type={'color'}
+                className={style.updateTextFontColor}
+                text={'Цвет текста'}
+                onChange={onUpdateTextFontColor}
+            >
+            </InputComponent>
             <ButtonComponent
                 icon={Bold}
                 alt={'bold'}
@@ -352,6 +375,13 @@ function ToolBar({ setError } : ToolBarProps) {
                     onChange={handleImageUpload}
                 >
                 </InputComponent>
+                <ButtonComponent
+                    alt={'import image'}
+                    text={'Градиент'}
+                    className={style.importImageButton}
+                    onClick={onOpenGradientPopup}
+                >
+                </ButtonComponent>
             </Popover>
             <div className={style.divider}></div>
             <ButtonComponent
@@ -381,6 +411,12 @@ function ToolBar({ setError } : ToolBarProps) {
                 onClose={onCloseImportImage}
             >
                 {ImportPhotosPopup()}
+            </Popup>
+            <Popup
+                isOpen={isGradientPopupOpen}
+                onClose={onCloseGradientPopup}
+            >
+                {GradientPopup()}
             </Popup>
         </div>
     )

@@ -1,4 +1,4 @@
-import {BackgroundType, EditorType, Slide} from './presentationTypes.ts'
+import {BackgroundType, EditorType, Gradient, Slide} from './presentationTypes.ts'
 
 function updateSlideBackground(editor: EditorType,  newBackground: BackgroundType): EditorType {
     const slideIdToEdit = editor.selection.selectedSlidesIds[0]
@@ -38,11 +38,11 @@ function updateBackgroundImage(editor: EditorType, image: HTMLImageElement): Edi
     })
 }
 
-function updateBackgroundGradient(editor: EditorType, newFirstColor: string, newSecondColor: string): EditorType {
+function updateBackgroundGradient(editor: EditorType, { firstColor, secondColor }: Gradient): EditorType {
     return updateSlideBackground(editor, {
         type: 'gradient',
-        firstColor: newFirstColor,
-        secondColor: newSecondColor,
+        firstColor: firstColor,
+        secondColor: secondColor,
     })
 }
 

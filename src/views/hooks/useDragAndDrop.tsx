@@ -5,7 +5,7 @@ import {type Position} from '../../store/presentationTypes.ts'
 
 type DragAndDropProps = {
 	currentPosition: Position,
-	onPositionChange?: (position: Position) => void,
+	onPositionChange: (position: Position) => void,
 }
 
 type DragAndDropResult = {

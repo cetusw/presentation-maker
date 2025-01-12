@@ -5,7 +5,7 @@ import {type Position, Size} from '../../store/presentationTypes.ts'
 
 type ResizeProps = {
     currentSize: Size,
-    onSizeChange?: (size: Size) => void,
+    onSizeChange: (size: Size) => void,
     elementRef?: React.RefObject<HTMLDivElement>,
 }
 
@@ -24,6 +24,12 @@ function useResize({ currentSize, onSizeChange, elementRef }: ResizeProps): Resi
 
     const ref = elementRef || internalRef
 
+    useEffect(() => {
+        if (size.width !== currentSize.width || size.height !== currentSize.height) {
+            setSize(currentSize)
+            sizeRef.current = currentSize
+        }
+    }, [currentSize])
 
     useEffect(() => {
         function handleMouseDown(e: MouseEvent) {
