@@ -1,5 +1,5 @@
 import { ActionType } from './actions'
-import {Position} from '../presentationTypes.ts'
+import {Position, Size} from '../presentationTypes.ts'
 
 function addSlide() {
     return {
@@ -109,6 +109,13 @@ function updateTextFontSize(newFontSize: string) {
     }
 }
 
+function updateObjectSize(newObjectSize: Size) {
+    return {
+        type: ActionType.UPDATE_OBJECT_SIZE,
+        payload: newObjectSize,
+    }
+}
+
 export {
     addSlide,
     removeSlide,
@@ -126,4 +133,5 @@ export {
     updateTextDecoration,
     updateTextFontWeight,
     updateTextFontSize,
+    updateObjectSize,
 }

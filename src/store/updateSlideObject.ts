@@ -1,4 +1,4 @@
-import {EditorType, Position, Slide, SlideObject} from './presentationTypes.ts'
+import {EditorType, Position, Size, Slide, SlideObject} from './presentationTypes.ts'
 
 function updateSlideObject(editor: EditorType, slideToEdit: Slide, newObject: SlideObject) {
     const updatedObjects: SlideObject[] = slideToEdit.objects.map((obj) => {
@@ -67,6 +67,22 @@ function updateObjectPosition(editor: EditorType, newPosition: Position) {
     return updateSlideObject(editor, slideToEdit, {
         ...objectToEdit,
         position: newPosition,
+    })
+}
+
+function updateObjectSize(editor: EditorType, newObjectSize: Size) {
+    const slideToEdit = findSlideToEdit(editor)
+    if (!slideToEdit) {
+        return editor
+    }
+    const objectToEdit = findObjectToEdit(editor, slideToEdit)
+    if (!objectToEdit) {
+        return editor
+    }
+
+    return updateSlideObject(editor, slideToEdit, {
+        ...objectToEdit,
+        size: newObjectSize,
     })
 }
 
@@ -158,20 +174,5 @@ export {
     updateTextContent,
     updateTextDecoration,
     updateTextFontWeight,
+    updateObjectSize,
 }
-
-// export function updateObjectSize(presentation: Presentation, items: ItemSelection, newSize: Size) {
-//     const slideIdToEdit: string = items.selectedSlidesIds[0];
-//     const objectToEdit = findSelectedObject(presentation, items);
-//
-//     if (!objectToEdit) {
-//         return presentation
-//     }
-//
-//     return updateSlideObject(presentation, slideIdToEdit, {
-//         ...objectToEdit,
-//         size: newSize,
-//     });
-// }
-//
-//

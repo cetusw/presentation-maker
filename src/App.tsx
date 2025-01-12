@@ -34,9 +34,11 @@ export default function App({ history }: AppProps) {
                             <ToolBar setError={setError}/>
                             <div className={styles.presentationPreview}>
                                 <SlideCollection/>
-                                <WorkSpace
-                                    isSlideshow={false}
-                                />
+                                <div className={styles.workspaseField}>
+                                    <WorkSpace
+                                        isSlideshow={false}
+                                    />
+                                </div>
                             </div>
                             {error && <Toast message={error} onClose={() => setError(null)}/>}
                         </div>

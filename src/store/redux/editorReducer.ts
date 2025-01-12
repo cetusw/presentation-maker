@@ -9,10 +9,11 @@ import {updateBackgroundColor, updateBackgroundImage} from '../updateSlideBackgr
 import {removeObjectFromSlide} from '../removeObjectFromSlide.ts'
 import {updatePresentationTitle} from '../updatePresentationTitle.ts'
 import {
-    updateObjectPosition,
+    updateObjectPosition, updateObjectSize,
     updateTextContent,
     updateTextDecoration,
-    updateTextFontFamily, updateTextFontSize,
+    updateTextFontFamily,
+    updateTextFontSize,
     updateTextFontStyle,
     updateTextFontWeight
 } from '../updateSlideObject.ts'
@@ -56,6 +57,8 @@ function editorReducer(editor: EditorType = defaultEditor, action: EditorAction)
             return updateTextFontWeight(editor, action.payload)
         case ActionType.UPDATE_TEXT_FONT_SIZE:
             return updateTextFontSize(editor, action.payload)
+        case ActionType.UPDATE_OBJECT_SIZE:
+            return updateObjectSize(editor, action.payload)
         default:
             return editor
     }

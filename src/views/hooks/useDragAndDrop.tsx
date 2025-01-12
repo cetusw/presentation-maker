@@ -29,6 +29,10 @@ function useDragAndDrop({ onPositionChange, currentPosition }: DragAndDropProps)
 
 	useEffect(() => {
 		function handleMouseDown(e: MouseEvent) {
+			const target = e.target as HTMLElement
+			const resizeDirection = target.dataset.resizeDirection
+			if (resizeDirection) return
+
 			startPos.current = {
 				x: e.pageX - positionRef.current.x,
 				y: e.pageY - positionRef.current.y,

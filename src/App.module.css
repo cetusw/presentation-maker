@@ -18,3 +18,7 @@ html {
 .presentationPreview {
     display: flex;
 }
+
+.workspaceField {
+    overflow: hidden;
+}
