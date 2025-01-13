@@ -20,6 +20,7 @@ function useResize({ currentSize, onSizeChange, elementRef }: ResizeProps): Resi
     const sizeRef = useRef<Size>(currentSize)
     const startSize = useRef<Size>({ width: 0, height: 0 })
     const startMousePosition = useRef<Position>({ x: 0, y: 0 })
+    const resizeDirectionRef = useRef<string | null>(null)
     const internalRef = useRef<HTMLDivElement | null>(null)
 
     const ref = elementRef || internalRef
@@ -39,6 +40,8 @@ function useResize({ currentSize, onSizeChange, elementRef }: ResizeProps): Resi
 
             startSize.current = sizeRef.current
             startMousePosition.current = { x: e.pageX, y: e.pageY }
+            resizeDirectionRef.current = resizeDirection
+
             document.addEventListener('mousemove', handleMouseMove)
             document.addEventListener('mouseup', handleMouseUp)
         }
@@ -47,9 +50,39 @@ function useResize({ currentSize, onSizeChange, elementRef }: ResizeProps): Resi
             const deltaX = e.pageX - startMousePosition.current.x
             const deltaY = e.pageY - startMousePosition.current.y
 
-            const newSize = {
-                width: startSize.current.width + deltaX,
-                height: startSize.current.height + deltaY,
+            const newSize = { ...startSize.current }
+
+            switch (resizeDirectionRef.current) {
+                case 'right':
+                    newSize.width = startSize.current.width + deltaX
+                    break
+                case 'bottom':
+                    newSize.height = startSize.current.height + deltaY
+                    break
+                case 'bottom-right':
+                    newSize.width = startSize.current.width + deltaX
+                    newSize.height = startSize.current.height + deltaY
+                    break
+                case 'left':
+                    newSize.width = startSize.current.width - deltaX
+                    break
+                case 'top':
+                    newSize.height = startSize.current.height - deltaY
+                    break
+                case 'top-left':
+                    newSize.width = startSize.current.width - deltaX
+                    newSize.height = startSize.current.height - deltaY
+                    break
+                case 'top-right':
+                    newSize.width = startSize.current.width + deltaX
+                    newSize.height = startSize.current.height - deltaY
+                    break
+                case 'bottom-left':
+                    newSize.width = startSize.current.width - deltaX
+                    newSize.height = startSize.current.height + deltaY
+                    break
+                default:
+                    break
             }
 
             setSize(newSize)
@@ -78,6 +111,7 @@ function useResize({ currentSize, onSizeChange, elementRef }: ResizeProps): Resi
         setSize,
     }
 }
+
 
 export {
     useResize,

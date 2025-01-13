@@ -19,6 +19,7 @@ function useDragAndDrop({ onPositionChange, currentPosition }: DragAndDropProps)
 	const positionRef = useRef<Position>(currentPosition)
 	const elementRef = useRef<HTMLDivElement | null>(null)
 	const startPos = useRef<Position>({ x: 0, y: 0 })
+	const resizeDirectionRef = useRef<string | null>(null)
 
 	useEffect(() => {
 		if (position.x !== currentPosition.x || position.y !== currentPosition.y) {
@@ -31,7 +32,10 @@ function useDragAndDrop({ onPositionChange, currentPosition }: DragAndDropProps)
 		function handleMouseDown(e: MouseEvent) {
 			const target = e.target as HTMLElement
 			const resizeDirection = target.dataset.resizeDirection
-			if (resizeDirection) return
+			if (resizeDirection === 'right' || resizeDirection === 'bottom-right' || resizeDirection === 'bottom') return
+			if (resizeDirection) {
+				resizeDirectionRef.current = resizeDirection
+			}
 
 			startPos.current = {
 				x: e.pageX - positionRef.current.x,
@@ -42,15 +46,34 @@ function useDragAndDrop({ onPositionChange, currentPosition }: DragAndDropProps)
 		}
 
 		function handleMouseMove(e: MouseEvent) {
-			const newPos = {
-				x: e.pageX - startPos.current.x,
-				y: e.pageY - startPos.current.y,
+			const newPos = {...currentPosition}
+			if (resizeDirectionRef.current === 'top') {
+				newPos.y = e.pageY - startPos.current.y
 			}
+			if (resizeDirectionRef.current === 'top-right') {
+				newPos.y = e.pageY - startPos.current.y
+			}
+			if (resizeDirectionRef.current === 'bottom-left') {
+				newPos.x = e.pageX - startPos.current.x
+			}
+			if (resizeDirectionRef.current === 'left') {
+				newPos.x = e.pageX - startPos.current.x
+			}
+			if (resizeDirectionRef.current === 'top-left') {
+				newPos.x = e.pageX - startPos.current.x
+				newPos.y = e.pageY - startPos.current.y
+			}
+			if (resizeDirectionRef.current === null) {
+				newPos.x = e.pageX - startPos.current.x
+				newPos.y = e.pageY - startPos.current.y
+			}
+
 			setPosition(newPos)
 			positionRef.current = newPos
 		}
 
 		function handleMouseUp() {
+			resizeDirectionRef.current = null
 			if (onPositionChange) {
 				onPositionChange(positionRef.current)
 			}
