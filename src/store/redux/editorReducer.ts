@@ -9,9 +9,11 @@ import {updateBackgroundColor, updateBackgroundGradient, updateBackgroundImage} 
 import {removeObjectFromSlide} from '../removeObjectFromSlide.ts'
 import {updatePresentationTitle} from '../updatePresentationTitle.ts'
 import {
-    updateObjectPosition, updateObjectSize,
+    updateObjectPosition,
+    updateObjectSize,
     updateTextContent,
-    updateTextDecoration, updateTextFontColor,
+    updateTextDecoration,
+    updateTextFontColor,
     updateTextFontFamily,
     updateTextFontSize,
     updateTextFontStyle,

@@ -130,6 +130,13 @@ function updateBackgroundGradient(newGradient: Gradient) {
     }
 }
 
+function fetchUnsplashImages(newQuery: string) {
+    return {
+        type: ActionType.FETCH_UNSPLASH_IMAGES,
+        payload: newQuery,
+    }
+}
+
 export {
     addSlide,
     removeSlide,
@@ -150,4 +157,5 @@ export {
     updateObjectSize,
     updateTextFontColor,
     updateBackgroundGradient,
+    fetchUnsplashImages,
 }

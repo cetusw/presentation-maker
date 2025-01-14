@@ -1,6 +1,14 @@
 import {EditorType, ImageObject, Slide, SlideObject, TextObject} from './presentationTypes.ts'
 import {v4 as generateUuid} from 'uuid'
-import {defaultFontFamily, defaultFontSize, defaultPosition, defaultSize, defaultText} from './data/editorData.ts'
+import {
+    defaultFontColor,
+    defaultFontFamily,
+    defaultFontSize, defaultFontStyle,
+    defaultFontWeight,
+    defaultPosition,
+    defaultSize,
+    defaultText, defaultTextDecoration
+} from './data/editorData.ts'
 
 function addObjectToSlide(editor: EditorType, editSlideId: string, object: SlideObject) {
     const editSlide = editor.presentation.slides.find(slide => slide.id === editSlideId)
@@ -35,6 +43,10 @@ function addTextToSlide(editor: EditorType) {
         content: defaultText,
         fontFamily: defaultFontFamily,
         fontSize: defaultFontSize,
+        fontColor: defaultFontColor,
+        fontWeight: defaultFontWeight,
+        fontStyle: defaultFontStyle,
+        textDecoration: defaultTextDecoration,
         position: defaultPosition,
         size: defaultSize,
     }

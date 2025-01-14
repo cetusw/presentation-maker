@@ -8,6 +8,8 @@ import HandleImage from '../../assets/icons/add-image.svg'
 import DownloadPresentation from '../../assets/icons/download.svg'
 import ImportPresentation from '../../assets/icons/import.svg'
 import ExportPresentationInPDF from '../../assets/icons/exportInPDF.svg'
+import Star from '../../assets/icons/star.svg'
+import Settings from '../../assets/icons/settings.svg'
 import Bold from '../../assets/icons/bold.svg'
 import Italic from '../../assets/icons/italic.svg'
 import Underline from '../../assets/icons/underline.svg'
@@ -25,8 +27,9 @@ import {Popup} from '../../components/Popup.tsx'
 import {Popover} from '../../components/Popover.tsx'
 import {SelectComponent} from '../../components/SelectComponent.tsx'
 import {availableFontFamilies, availableFontSizes, defaultFontFamily, defaultFontSize} from '../../store/data/editorData.ts'
-import {ImportPhotosPopup} from './ImportPhotosPopup.tsx'
+import {ImportImagePopup} from './ImportImagePopup.tsx'
 import {GradientPopup} from './GradientPopup.tsx'
+import { importImageType } from '../../utils/customTypes.ts'
 
 type ToolBarProps = {
     setError: (message: string) => void
@@ -37,6 +40,7 @@ function ToolBar({ setError } : ToolBarProps) {
     const editor = useAppSelector((editor => editor))
     const history = useContext(HistoryContext)
     const [isImportImagePopupOpen, setIsImportImagePopupOpen] = useState<boolean>(false)
+    const [importImageType, setImportImageType] = useState<importImageType>(null)
     const [isGradientPopupOpen, setIsGradientPopupOpen] = useState<boolean>(false)
     const [italic, setItalic] = useState<boolean>(false)
     const [underline, setUnderline] = useState<boolean>(false)
@@ -113,12 +117,12 @@ function ToolBar({ setError } : ToolBarProps) {
             }
         }
 
-        if ((event.ctrlKey || event.metaKey) && event.key === 'z') {
+        if ((event.ctrlKey || event.metaKey) && (event.key === 'z' || event.key === 'я')) {
             event.preventDefault()
             onUndo()
         }
 
-        if ((event.ctrlKey || event.metaKey) && event.key === 'y') {
+        if ((event.ctrlKey || event.metaKey) && (event.key === 'y' || event.key === 'н')) {
             event.preventDefault()
             onRedo()
         }
@@ -195,11 +199,13 @@ function ToolBar({ setError } : ToolBarProps) {
         }
     }
 
-    function onOpenImportImage() {
+    function onOpenImportImage(imageType: importImageType) {
+        setImportImageType(imageType)
         setIsImportImagePopupOpen(true)
     }
 
     function onCloseImportImage() {
+        setImportImageType(null)
         setIsImportImagePopupOpen(false)
     }
 
@@ -306,7 +312,7 @@ function ToolBar({ setError } : ToolBarProps) {
                     text={'Импортировать'}
                     textClassName={style.buttonContent}
                     className={style.importImageButton}
-                    onClick={onOpenImportImage}
+                    onClick={() => onOpenImportImage('slide-image')}
                 >
                 </ButtonComponent>
             </Popover>
@@ -360,24 +366,39 @@ function ToolBar({ setError } : ToolBarProps) {
                 </ButtonComponent>
             }>
                 <InputComponent
+                    icon={Star}
                     inputId={'change-background-color'}
                     type={'color'}
                     className={style.changeBackgroundColorButton}
-                    text={'Цвет фона'}
+                    text={'Цвет'}
+                    textClassName={style.buttonContent}
                     onChange={onChangeBackgroundColor}
                 >
                 </InputComponent>
                 <InputComponent
+                    icon={HandleImage}
                     inputId={'change-background-image'}
                     type={'file'}
-                    text={'Картинка фона'}
+                    text={'Картинка'}
+                    textClassName={style.buttonContent}
                     className={style.changeImageBackgroundButton}
                     onChange={handleImageUpload}
                 >
                 </InputComponent>
                 <ButtonComponent
+                    icon={ImportPresentation}
+                    alt={'import image'}
+                    text={'Импортировать'}
+                    textClassName={style.buttonContent}
+                    className={style.importImageButton}
+                    onClick={() => onOpenImportImage('background-image')}
+                >
+                </ButtonComponent>
+                <ButtonComponent
+                    icon={Settings}
                     alt={'import image'}
                     text={'Градиент'}
+                    textClassName={style.buttonContent}
                     className={style.importImageButton}
                     onClick={onOpenGradientPopup}
                 >
@@ -410,7 +431,7 @@ function ToolBar({ setError } : ToolBarProps) {
                 isOpen={isImportImagePopupOpen}
                 onClose={onCloseImportImage}
             >
-                {ImportPhotosPopup()}
+                {ImportImagePopup({ imageType: importImageType, isClosed: isImportImagePopupOpen })}
             </Popup>
             <Popup
                 isOpen={isGradientPopupOpen}

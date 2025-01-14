@@ -3,7 +3,11 @@ import {EditorType, Position, Presentation, Size} from '../presentationTypes.ts'
 const defaultPosition: Position = {x: 450, y: 100}
 const defaultSize: Size = {width: 500, height: 100}
 const defaultFontFamily: string = 'Times New Roman'
+const defaultFontColor: string = '#000000'
 const defaultFontSize: number = 24
+const defaultFontWeight: number = 200
+const defaultFontStyle: string = 'none'
+const defaultTextDecoration: string = 'none'
 const defaultColor: string = '#FFFFFF'
 const defaultText: string = 'текст презентации'
 const defaultTitle: string = 'Презентация без названия'
@@ -305,6 +309,10 @@ export {
     defaultPresentation,
     defaultFontSize,
     defaultFontFamily,
+    defaultFontWeight,
+    defaultFontColor,
+    defaultFontStyle,
+    defaultTextDecoration,
     defaultColor,
     defaultTitle,
     slideCollectionScale,

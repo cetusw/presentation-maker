@@ -4,7 +4,7 @@
     left: 50vw;
     transform: translate(-50%, -50%);
     font: 14px/18px 'Roboto', sans-serif;
-    background-color: #f44336;
+    background-color: rgb(255, 255, 255);
     color: white;
     padding: 10px 20px;
     border-radius: 10px;
@@ -12,6 +12,14 @@
     align-items: center;
     gap: 10px;
     animation: fadeIn 0.3s ease-out;
+}
+
+.positiveToast {
+    background-color: rgb(76, 175, 80);
+}
+
+.negativeToast {
+    background-color: rgb(244, 67, 54);
 }
 
 .toast button {

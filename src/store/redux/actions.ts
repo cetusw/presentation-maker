@@ -22,6 +22,8 @@ enum ActionType {
     UPDATE_OBJECT_SIZE = 'updateObjectSize',
     UPDATE_TEXT_FONT_COLOR = 'updateTextFontColor',
     UPDATE_BACKGROUND_GRADIENT = 'updateBackgroundGradient',
+    FETCH_UNSPLASH_IMAGES = 'fetchUnsplashImages',
+    FETCH_UNSPLASH_ERROR = 'fetchUnsplashError',
 }
 
 type AddSlideAction = {
@@ -125,6 +127,18 @@ type UpdateBackgroundGradient = {
     payload: Gradient,
 }
 
+type FetchUnsplashImagesAction = {
+    type: ActionType.FETCH_UNSPLASH_IMAGES,
+    payload: string,
+}
+
+type FetchUnsplashErrorAction = {
+    type: ActionType.FETCH_UNSPLASH_ERROR,
+    payload: string,
+}
+
+type UnsplashAction = FetchUnsplashImagesAction | FetchUnsplashErrorAction
+
 type EditorAction =
     AddSlideAction |
     RemoveSlideAction |
@@ -146,7 +160,10 @@ type EditorAction =
     UpdateTextFontSize |
     UpdateObjectSize |
     UpdateTextFontColor |
-    UpdateBackgroundGradient
+    UpdateBackgroundGradient |
+    FetchUnsplashImagesAction |
+    FetchUnsplashErrorAction |
+    UnsplashAction
 
 export {
     ActionType,
