@@ -30,7 +30,8 @@ type ImportImagePopupProps = {
 function ImportImagePopup({imageType, isClosed}: ImportImagePopupProps) {
     const [query, setQuery] = useState('')
     const [images, setImages] = useState<ImageType[]>([])
-    const [loading, setLoading] = useState(false)
+    const [searchLoading, setSearchLoading] = useState(false)
+    const [imageToastLoading, setImageToastLoading] = useState<string | null>(null)
     const [positiveToastMessage, setPositiveToastMessage] = useState<string | null>(null)
     const [negativeToastMessage, setNegativeToastMessage] = useState<string | null>(null)
     type AppDispatch = ThunkDispatch<typeof editorReducer, unknown, AnyAction>
@@ -39,17 +40,18 @@ function ImportImagePopup({imageType, isClosed}: ImportImagePopupProps) {
     useEffect(() => {
         setQuery('')
         setImages([])
-        setLoading(false)
+        setSearchLoading(false)
+        setImageToastLoading(null)
         setPositiveToastMessage(null)
         setNegativeToastMessage(null)
     }, [isClosed])
 
     function handleSearch() {
-        setLoading(true)
+        setSearchLoading(true)
         fetchUnsplashImages(query)
             .then((images) => {
                 setImages(images)
-                setLoading(false)
+                setSearchLoading(false)
             })
             .catch((error) => {
                 console.error(error)
@@ -57,9 +59,11 @@ function ImportImagePopup({imageType, isClosed}: ImportImagePopupProps) {
     }
 
     function handleAddImage(imageURL: string) {
+        setImageToastLoading('Загрузка...')
         loadImage(imageURL)
             .then((image) => {
                 dispatch(fetchUnsplashImage(image, imageType))
+                setImageToastLoading(null)
                 setPositiveToastMessage('Какртинка добавлена успешно')
             })
             .catch((error) => {
@@ -90,13 +94,15 @@ function ImportImagePopup({imageType, isClosed}: ImportImagePopupProps) {
             <div className={style.imageList}>
                 {!images.length
                     ? <p className={style.placeholder}>По запросу ничего не нашлось</p>
-                    : (loading
+                    : (searchLoading
                             ? <p className={style.loading}>Загрузка...</p>
                             : images.map((image) => (
-                                <div className={style.imageWrapper}>
+                                <div
+                                    key={image.id}
+                                    className={style.imageWrapper}
+                                >
                                     <img
                                         className={style.imageBlock}
-                                        key={image.id}
                                         src={image.urls.thumb}
                                         alt={image.alt_description}
                                         onClick={() => handleAddImage(imageType === 'slide-image' ? image.urls.small : image.urls.full)}
@@ -106,6 +112,7 @@ function ImportImagePopup({imageType, isClosed}: ImportImagePopupProps) {
                     )
                 }
             </div>
+            {imageToastLoading && <Toast message={imageToastLoading} onClose={() => setImageToastLoading(null)} toastType={'positive'}/>}
             {positiveToastMessage && <Toast message={positiveToastMessage} onClose={() => setPositiveToastMessage(null)} toastType={'positive'}/>}
             {negativeToastMessage && <Toast message={negativeToastMessage} onClose={() => setNegativeToastMessage(null)} toastType={'negative'}/>}
         </div>
