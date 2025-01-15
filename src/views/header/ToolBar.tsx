@@ -340,7 +340,7 @@ function ToolBar({ setError } : ToolBarProps) {
             >
             </SelectComponent>
             <InputComponent
-                inputId={'change-background-color'}
+                inputId={'change-font-color'}
                 type={'color'}
                 className={style.updateTextFontColor}
                 text={'Цвет текста'}
