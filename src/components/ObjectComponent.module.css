@@ -4,6 +4,7 @@
 }
 
 .object {
+    outline: 1px solid transparent;
     position: absolute;
     user-select: none;
 }

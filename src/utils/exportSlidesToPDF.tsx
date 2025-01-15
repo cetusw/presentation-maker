@@ -35,7 +35,10 @@ async function exportSlidesToPDF(slides: Slide[], fileName: string) {
             flushSync(() => {
                 root.render(
                     <Provider store={store}>
-                        <SlideComponent slide={slide}/>
+                        <SlideComponent
+                            slide={slide}
+                            inSlideCollection={false}
+                        />
                     </Provider>
                 )
             })

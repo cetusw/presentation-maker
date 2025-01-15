@@ -87,7 +87,7 @@ function useDragAndDrop({ onPositionChange, currentPosition }: DragAndDropProps)
 		return () => {
 			currentElement?.removeEventListener('mousedown', handleMouseDown)
 		}
-	}, [onPositionChange])
+	}, [currentPosition, onPositionChange])
 
 	return {
 		elementRef,

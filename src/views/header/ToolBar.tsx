@@ -26,9 +26,9 @@ import {exportSlidesToPDF} from '../../utils/exportSlidesToPDF.tsx'
 import {Popup} from '../../components/Popup.tsx'
 import {Popover} from '../../components/Popover.tsx'
 import {SelectComponent} from '../../components/SelectComponent.tsx'
-import {availableFontFamilies, availableFontSizes, defaultFontFamily, defaultFontSize} from '../../store/data/editorData.ts'
-import {ImportImagePopup} from './ImportImagePopup.tsx'
-import {GradientPopup} from './GradientPopup.tsx'
+import {availableFontFamilies, availableFontSizes, defaultFontFamily, defaultFontSize, defaultFontWeight} from '../../store/data/editorData.ts'
+import {ImportImagePopup} from '../popup/ImportImagePopup.tsx'
+import {GradientPopup} from '../popup/GradientPopup.tsx'
 import { importImageType } from '../../utils/customTypes.ts'
 
 type ToolBarProps = {
@@ -38,6 +38,7 @@ type ToolBarProps = {
 function ToolBar({ setError } : ToolBarProps) {
     const { onImportPresentation } = useImportPresentation({ setError })
     const editor = useAppSelector((editor => editor))
+    const selection = useAppSelector((editor => editor.selection))
     const history = useContext(HistoryContext)
     const [isImportImagePopupOpen, setIsImportImagePopupOpen] = useState<boolean>(false)
     const [importImageType, setImportImageType] = useState<importImageType>(null)
@@ -70,9 +71,10 @@ function ToolBar({ setError } : ToolBarProps) {
         setFontSize(currentObject.fontSize.toString())
 
 
-    }, [editor.selection])
+    }, [editor.presentation.slides, editor.selection])
 
     const {
+        setSelection,
         setEditor,
         addSlide,
         addTextToSlide,
@@ -125,6 +127,14 @@ function ToolBar({ setError } : ToolBarProps) {
         if ((event.ctrlKey || event.metaKey) && (event.key === 'y' || event.key === 'н')) {
             event.preventDefault()
             onRedo()
+        }
+
+        if (event.key === 'Escape') {
+            event.preventDefault()
+            setSelection({
+                selectedSlidesIds: selection.selectedSlidesIds,
+                selectedObjectsIds: [],
+            })
         }
     }
 
@@ -243,7 +253,7 @@ function ToolBar({ setError } : ToolBarProps) {
 
     function onBold() {
         if (bold){
-            updateTextFontWeight(200)
+            updateTextFontWeight(defaultFontWeight)
         } else {
             updateTextFontWeight(800)
         }

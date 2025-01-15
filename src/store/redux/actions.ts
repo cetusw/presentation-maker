@@ -22,8 +22,6 @@ enum ActionType {
     UPDATE_OBJECT_SIZE = 'updateObjectSize',
     UPDATE_TEXT_FONT_COLOR = 'updateTextFontColor',
     UPDATE_BACKGROUND_GRADIENT = 'updateBackgroundGradient',
-    FETCH_UNSPLASH_IMAGES = 'fetchUnsplashImages',
-    FETCH_UNSPLASH_ERROR = 'fetchUnsplashError',
 }
 
 type AddSlideAction = {
@@ -87,57 +85,45 @@ type UpdateObjectPositionAction = {
     payload: Position
 }
 
-type UpdateTextContent = {
+type UpdateTextContentAction = {
     type: ActionType.UPDATE_TEXT_CONTENT,
     payload: string,
 }
 
-type UpdateSlideIndex = {
+type UpdateSlideIndexAction = {
     type: ActionType.UPDATE_SLIDE_INDEX,
     payload: number,
 }
 
-type UpdateTextDecoration = {
+type UpdateTextDecorationAction = {
     type: ActionType.UPDATE_TEXT_DECORATION,
     payload: string,
 }
 
-type UpdateTextFontWeight = {
+type UpdateTextFontWeightAction = {
     type: ActionType.UPDATE_TEXT_FONT_WEIGHT,
     payload: number,
 }
 
-type UpdateTextFontSize = {
+type UpdateTextFontSizeAction = {
     type: ActionType.UPDATE_TEXT_FONT_SIZE,
     payload: string,
 }
 
-type UpdateObjectSize = {
+type UpdateObjectSizeAction = {
     type: ActionType.UPDATE_OBJECT_SIZE,
     payload: Size,
 }
 
-type UpdateTextFontColor = {
+type UpdateTextFontColorAction = {
     type: ActionType.UPDATE_TEXT_FONT_COLOR,
     payload: string,
 }
 
-type UpdateBackgroundGradient = {
+type UpdateBackgroundGradientAction = {
     type: ActionType.UPDATE_BACKGROUND_GRADIENT,
     payload: Gradient,
 }
-
-type FetchUnsplashImagesAction = {
-    type: ActionType.FETCH_UNSPLASH_IMAGES,
-    payload: string,
-}
-
-type FetchUnsplashErrorAction = {
-    type: ActionType.FETCH_UNSPLASH_ERROR,
-    payload: string,
-}
-
-type UnsplashAction = FetchUnsplashImagesAction | FetchUnsplashErrorAction
 
 type EditorAction =
     AddSlideAction |
@@ -153,17 +139,14 @@ type EditorAction =
     UpdateTextFontFamilyAction |
     UpdateTextFontStyleAction |
     UpdateObjectPositionAction |
-    UpdateTextContent |
-    UpdateSlideIndex |
-    UpdateTextDecoration |
-    UpdateTextFontWeight |
-    UpdateTextFontSize |
-    UpdateObjectSize |
-    UpdateTextFontColor |
-    UpdateBackgroundGradient |
-    FetchUnsplashImagesAction |
-    FetchUnsplashErrorAction |
-    UnsplashAction
+    UpdateTextContentAction |
+    UpdateSlideIndexAction |
+    UpdateTextDecorationAction |
+    UpdateTextFontWeightAction |
+    UpdateTextFontSizeAction |
+    UpdateObjectSizeAction |
+    UpdateTextFontColorAction |
+    UpdateBackgroundGradientAction
 
 export {
     ActionType,

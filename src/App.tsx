@@ -40,7 +40,7 @@ export default function App({ history }: AppProps) {
                                     />
                                 </div>
                             </div>
-                            {error && <Toast message={error} onClose={() => setError(null)}/>}
+                            {error && <Toast message={error} onClose={() => setError(null)} toastType={'negative'}/>}
                         </div>
                     </HistoryContext.Provider>
                 }/>

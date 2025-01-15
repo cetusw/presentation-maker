@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import style from './ImportPhotosPopup.module.css'
+import style from './ImportImagePopup.module.css'
 import {ButtonComponent} from '../../components/ButtonComponent.tsx'
 import Search from '../../assets/icons/search.svg'
 import {fetchUnsplashImages} from '../../store/fetchUnsplashImages.ts'

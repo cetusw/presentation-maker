@@ -3,7 +3,6 @@ import Logo from '../../assets/icons/logo.svg'
 import React from 'react'
 import {useAppActions} from '../hooks/useAppActions.tsx'
 import {useAppSelector} from '../hooks/useAppSelector.tsx'
-import {ButtonComponent} from '../../components/ButtonComponent.tsx'
 import { useNavigate } from 'react-router'
 
 function PresentationTitle() {
@@ -17,10 +16,14 @@ function PresentationTitle() {
 
     function enterFullScreen() {
         const docElement = document.documentElement
-        docElement.requestFullscreen().then()
+        docElement.requestFullscreen()
+            .catch((error) => {
+                console.error('Не удалось войти в полноэкранный режим', error)
+            })
     }
 
     function handleSlideshowClick() {
+        selection.selectedSlidesIds = [presentation.slides[0].id]
         selection.selectedObjectsIds = []
         enterFullScreen()
         navigate('/slideshow')
@@ -36,13 +39,11 @@ function PresentationTitle() {
                 onChange={onTitleChange}
             >
             </input>
-            <ButtonComponent
-                text={'Слайд-шоу'}
+            <button
                 className={style.slideshowButton}
-                textClassName={style.buttonContent}
                 onClick={handleSlideshowClick}
-            >
-            </ButtonComponent>
+            >Слайд-шоу
+            </button>
         </div>
     )
 }

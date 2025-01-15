@@ -37,57 +37,57 @@ function WorkSpace({ isSlideshow }: WorkSpaceProps) {
         scale = 1
     }
 
-    function updateSelectedSlides(slideId: string) {
-        setSelection({
-            selectedSlidesIds: [slideId],
-            selectedObjectsIds: [],
-        })
-    }
-
-    function goToNextSlide() {
-        if (slides.length > 0) {
-            const nextIndex = (currentSlideIndex + 1) % slides.length
-            setCurrentSlideIndex(nextIndex)
-            updateSelectedSlides(slides[nextIndex].id)
+    useEffect(() => {
+        function updateSelectedSlides(slideId: string) {
+            setSelection({
+                selectedSlidesIds: [slideId],
+                selectedObjectsIds: [],
+            })
         }
-    }
 
-    function goToPreviousSlide() {
-        if (slides.length > 0) {
-            const previousIndex = (currentSlideIndex - 1 + slides.length) % slides.length
-            setCurrentSlideIndex(previousIndex)
-            updateSelectedSlides(slides[previousIndex].id)
-        }
-    }
-
-    async function handleKeyDown(event: KeyboardEvent) {
-        if (selection.selectedObjectsIds.length > 0) {
-            return
-        }
-        if (event.key === 'ArrowRight') {
-            goToNextSlide()
-        } else if (event.key === 'ArrowLeft') {
-            goToPreviousSlide()
-        }
-    }
-
-    function handleFullscreenChange() {
-        if (!document.fullscreenElement) {
-            if (isSlideshow) {
-                navigate('/')
+        function goToNextSlide() {
+            if (slides.length > 0) {
+                const nextIndex = (currentSlideIndex + 1) % slides.length
+                setCurrentSlideIndex(nextIndex)
+                updateSelectedSlides(slides[nextIndex].id)
             }
         }
-    }
 
-    useEffect(() => {
-        document.addEventListener('keydown', handleKeyDown)
+        function goToPreviousSlide() {
+            if (slides.length > 0) {
+                const previousIndex = (currentSlideIndex - 1 + slides.length) % slides.length
+                setCurrentSlideIndex(previousIndex)
+                updateSelectedSlides(slides[previousIndex].id)
+            }
+        }
+
+        async function handleKeyDown(event: KeyboardEvent) {
+            if (selection.selectedObjectsIds.length > 0) {
+                return
+            }
+            if (event.key === 'ArrowRight') {
+                goToNextSlide()
+            } else if (event.key === 'ArrowLeft') {
+                goToPreviousSlide()
+            }
+        }
+
+        function handleFullscreenChange() {
+            if (!document.fullscreenElement) {
+                if (isSlideshow) {
+                    navigate('/')
+                }
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
         document.addEventListener('fullscreenchange', handleFullscreenChange)
 
         return () => {
-            document.removeEventListener('keydown', handleKeyDown)
+            window.removeEventListener('keydown', handleKeyDown)
             document.removeEventListener('fullscreenchange', handleFullscreenChange)
         }
-    }, [selection])
+    }, [currentSlideIndex, isSlideshow, navigate, selection, setSelection, slides])
 
     useEffect(() => {
         if (selection?.selectedSlidesIds.length > 0) {
@@ -100,7 +100,9 @@ function WorkSpace({ isSlideshow }: WorkSpaceProps) {
         <div className={workspaceWrapper}>
             <div className={workspace}>
                 {selectedSlide && slides.length > 0 ? (
-                    <div className={style.slide}>
+                    <div
+                        className={style.slide}
+                    >
                         <SlideComponent
                             className={className}
                             scale={scale}

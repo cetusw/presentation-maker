@@ -7,8 +7,8 @@ function loadImage(url: string): Promise<HTMLImageElement> {
             resolve(image)
         }
 
-        image.onerror = (err) => {
-            reject(`Failed to load image: ${err}`)
+        image.onerror = (error) => {
+            reject(`Ошибка при загрузке картинки ${error}`)
         }
     })
 }

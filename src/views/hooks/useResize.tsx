@@ -103,7 +103,7 @@ function useResize({ currentSize, onSizeChange, elementRef }: ResizeProps): Resi
         return () => {
             currentElement?.removeEventListener('mousedown', handleMouseDown)
         }
-    }, [onSizeChange])
+    }, [onSizeChange, ref])
 
     return {
         ref,

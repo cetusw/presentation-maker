@@ -5,7 +5,7 @@ const defaultSize: Size = {width: 500, height: 100}
 const defaultFontFamily: string = 'Times New Roman'
 const defaultFontColor: string = '#000000'
 const defaultFontSize: number = 24
-const defaultFontWeight: number = 200
+const defaultFontWeight: number = 400
 const defaultFontStyle: string = 'none'
 const defaultTextDecoration: string = 'none'
 const defaultColor: string = '#FFFFFF'
@@ -17,6 +17,10 @@ const availableFontFamilies: string[] = [
     'Times New Roman',
     'Roboto',
     'Arial',
+    'Inter',
+    'Space Mono',
+    'Raleway',
+    'Open Sans',
 ]
 
 const availableFontSizes: string[] = ['6', '7', '8', '9', '10', '11', '12', '14', '18', '24', '30', '36', '48', '60', '72', '96']

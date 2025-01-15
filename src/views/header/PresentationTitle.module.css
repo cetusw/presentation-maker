@@ -23,10 +23,15 @@
 
 .slideshowButton {
     font: 16px/24px 'Roboto', sans-serif;
-    margin: 0 30px 0 auto !important;
-    border: 1px solid rgb(0, 0, 0) !important;
-    border-radius: 20px !important;
+    margin: 0 30px 0 auto;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 20px;
+    width: 100px;
+    background-color: transparent;
+}
 
+.slideshowButton:hover {
+    background-color: rgba(204, 204, 204, 0.8);
 }
 
 .buttonContent {

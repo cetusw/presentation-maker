@@ -1,9 +1,10 @@
 import style from './SelectComponent.module.css'
+import {ChangeEvent} from 'react'
 
 type SelectComponentProps = {
     options: string[]
     className?: string
-    onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
+    onChange: (event: ChangeEvent<HTMLSelectElement>) => void
     startValue: string | number
 }
 
