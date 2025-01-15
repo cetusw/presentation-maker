@@ -4,7 +4,6 @@ import { thunk } from 'redux-thunk'
 import {loadFromLocalStorage, saveToLocalStorage} from '../localStorage.ts'
 
 const rootState = loadFromLocalStorage()
-
 const store = createStore(editorReducer, rootState || undefined, applyMiddleware(thunk))
 
 store.subscribe(() => {
@@ -12,5 +11,5 @@ store.subscribe(() => {
 })
 
 export {
-    store
+    store,
 }
