@@ -4,7 +4,7 @@ import {ObjectComponent} from './ObjectComponent.tsx'
 import {useAppSelector} from '../views/hooks/useAppSelector.tsx'
 import {useAppActions} from '../views/hooks/useAppActions.tsx'
 import {useDragAndDrop} from '../views/hooks/useDragAndDrop.tsx'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 
 type SlideComponentProps = {
     className?: string
@@ -38,6 +38,45 @@ function SlideComponent({className, slide, scale, isSelected, onClick, index, in
             setSlidePosition({ x: 0, y: 0 })
         },
     })
+
+    useEffect(() => {
+        function handleMouseDown() {
+            document.addEventListener('mousemove', handleMouseMove)
+        }
+
+        function handleMouseMove(e: MouseEvent) {
+            if (selection.selectedSlidesIds.length > 1) {
+                for (let i = 0; i < selection.selectedSlidesIds.length; i++) {
+                    const slideId = selection.selectedSlidesIds[i]
+                    const slide = document.querySelector(`[data-id="${slideId}"]`) as HTMLElement
+                    const target = e.target as HTMLElement
+                    if (slide && target !== slide) {
+                        slide.style.visibility = 'hidden'
+                    }
+                }
+            }
+        }
+
+        function handleMouseUp() {
+            for (let i = 0; i < selection.selectedSlidesIds.length; i++) {
+                const slideId = selection.selectedSlidesIds[i]
+                const slide = document.querySelector(`[data-id="${slideId}"]`) as HTMLElement
+
+                if (slide) {
+                    slide.style.visibility = 'visible'
+                }
+            }
+            document.removeEventListener('mousemove', handleMouseMove)
+        }
+
+        document.addEventListener('mousedown', handleMouseDown)
+        document.addEventListener('mouseup', handleMouseUp)
+
+        return () => {
+            document.removeEventListener('mousedown', handleMouseDown)
+            document.removeEventListener('mouseup', handleMouseUp)
+        }
+    }, [selection.selectedSlidesIds])
 
     const newScale = scale ?? 1
 
@@ -93,6 +132,7 @@ function SlideComponent({className, slide, scale, isSelected, onClick, index, in
                 ...draggableSlide,
             }}
             onMouseDown={onClick}
+            data-id={slide.id}
             tabIndex={0}
         >
             <div
