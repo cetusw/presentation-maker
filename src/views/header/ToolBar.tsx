@@ -368,6 +368,7 @@ function ToolBar({ setError } : ToolBarProps) {
                 onClick={onUnderline}
             >
             </ButtonComponent>
+            <div className={style.divider}></div>
             <Popover content={
                 <ButtonComponent
                     text={'Фон слайда'}
@@ -441,7 +442,7 @@ function ToolBar({ setError } : ToolBarProps) {
                 isOpen={isImportImagePopupOpen}
                 onClose={onCloseImportImage}
             >
-                {ImportImagePopup({ imageType: importImageType, isClosed: isImportImagePopupOpen })}
+                {ImportImagePopup({imageType: importImageType, isClosed: isImportImagePopupOpen})}
             </Popup>
             <Popup
                 isOpen={isGradientPopupOpen}
